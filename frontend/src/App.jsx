@@ -1,7 +1,14 @@
+import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
+import {Container} from "react-Bootstrap"
+import {Outlet} from "react-router-dom"
+
 const App = () => {
   return (
     <>
-      <h1>Projec</h1>
+      <Header />
+      <HomePage />
+    <COntainer><Outlet /> </Container>
     </>
   );
 };
