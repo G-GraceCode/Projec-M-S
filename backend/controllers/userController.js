@@ -1,17 +1,35 @@
 import asyncHandler from "express-async-handler";
+import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 
 // @des Auth user/set token
-// route POST /api/users/auth
+// route POST /projec/users/auth
 // @access public
 const authUser = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    Message: "authUser here Us",
-  });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    //checking the password in the userModel section
+    let passwordCheck = await user.matchPassword({ password });
+    if (user && passwordCheck) {
+      generateToken(res, username._id);
+      res.status(201).json({
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      });
+    } else {
+      res.status(401);
+      throw new Error(`invalid email or password`);
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
 });
 
 // @des Register a new user
-// route POST /api/users
+// route POST /projec/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
   try {
@@ -30,13 +48,14 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (newUser) {
-      return res.status(201).json({
+      generateToken(res, username._id);
+      res.status(201).json({
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
       });
     } else {
-      res.status(500);
+      res.status(401);
       throw new Error(`newUser not created`);
     }
   } catch (e) {
@@ -45,21 +64,62 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @des LogOut user / clear cookie
-// route POST /api/users/logout
+// route POST /projec/users/logout
 // @access public
 const logOutUser = (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
   res.status(200).json({
-    Message: "authUser here Us",
+    Message: "User Logged out",
   });
 };
 
 // @des get user profile
-// route POST /api/users/profile
+// route POST /projec/users/profile
 // @access private
-const updateUser = (req, res) => {
+const getUserProfile = (req, res) => {
+  console.log(req.user);
   res.status(200).json({
     Message: "authUser here Us",
   });
 };
 
-export { authUser, registerUser, logOutUser, updateUser };
+// @des Get user profile
+// route Get /projec/users/profile
+// @access private
+const updateUserProfile = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      user.username = req.body.username || user.username;
+      user.email = req.body.email || user.email;
+
+      if (user.body.password) {
+        user.password = req.body.password;
+      }
+
+      const updatedUser = await user.save();
+      res.status(200).json({
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        password: updatedUser.password,
+      });
+    } else {
+      res.status(401);
+      throw new Error("User Not Found");
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+export {
+  authUser,
+  registerUser,
+  logOutUser,
+  updateUserProfile,
+  getUserProfile,
+};
