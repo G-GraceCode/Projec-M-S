@@ -1,14 +1,14 @@
 import Header from "./components/Header";
-import HomePage from "./pages/HomePage";
-import {Container} from "react-Bootstrap"
-import {Outlet} from "react-router-dom"
+import { Container } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <>
       <Header />
-      <HomePage />
-    <COntainer><Outlet /> </Container>
+      <Container className="my-2">
+        <Outlet />
+      </Container>
     </>
   );
 };
