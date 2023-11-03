@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 
@@ -10,18 +11,15 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const handleSuccess = (msg) => {
-    toast.success(msg, {
-      position: "top-right",
-    });
+  const handleSuccess = () => {
+    enqueueSnackbar("user Successfully Login", { variant: "success" });
   };
 
   const handleError = (err) => {
-    toast.error(err, {
-      position: "top-right",
-    });
+    enqueueSnackbar("Error Login", { variant: "Error" });
   };
 
   const handleChange = (e) => {
@@ -38,14 +36,14 @@ const LoginPage = () => {
         { withCredentials: true },
       );
 
-      cnsole.log("res", { res });
+      console.log("res", { res });
       const { success, message } = res;
 
-      if (success) {
-        handleSuccess(message);
-        navigate("/");
+      if (res) {
+        handleSuccess();
+        navigate("/app");
       } else {
-        handleError(message);
+        handleError();
       }
 
       console.log(res);
@@ -92,7 +90,6 @@ const LoginPage = () => {
           New User? <Link to="/register">Register</Link>
         </Col>
       </Row>
-      <ToastContainer />
     </form>
   );
 };

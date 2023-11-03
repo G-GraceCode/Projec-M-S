@@ -1,24 +1,40 @@
-import {createContext, useState} from 'react'
-import axios from 'axios'
-import {useNavigate} from "react-router-dom";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
+export const AuthProvider = ({ children }) => {
+  //   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    handleLogin();
+  }, []);
 
-    const contextData = {
-       user 
+  const handleLogin = async () => {
+    try {
+      const { data } = await axios.post(
+        "https://dtv62c-5000.csb.app/projec",
+        {},
+        { withCredentials: true },
+      );
+      console.log("data", data);
+      steUser(data);
+      //   setLoading(false);
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    return(
-        <AuthProvider.Provider value = {contextData}> 
-            {loading ? <p> page Loading</p> : children}
-        </AuthProvider.Provider>
-    )
+  const contextData = {
+    user,
+  };
+
+  return (
+    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+  );
 };
-
 
 export default AuthContext;

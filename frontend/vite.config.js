@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     port: 4000,
     proxy: {
-      "/projec": {
-        target: "https://dtv62c-5000.csb.app/",
+      "/projec/user": {
+        target: "https://dtv62c-5000.csb.app",
         changeOrigin: true,
       },
     },

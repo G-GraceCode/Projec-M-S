@@ -3,7 +3,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
+// import { ToastContainer, toast } from "react-toastify";
 
 const RegisterPage = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -11,6 +12,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { username, email, password } = userCredentail;
 
@@ -20,16 +22,12 @@ const RegisterPage = () => {
   };
 
   const handleSuccess = () => {
-    toast.success("Please Login now", {
-      position: "top-right",
-    });
+    enqueueSnackbar("user Successfully Login", { variant: "success" });
   };
 
-  // const handleError = (err) => {
-  //   toast.error(err, {
-  //     position: "top-right",
-  //   });
-  // };
+  const handleError = (err) => {
+    enqueueSnackbar("Error Login", { variant: "Error" });
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -46,12 +44,11 @@ const RegisterPage = () => {
       if (res.data) {
         handleSuccess();
         setTimeout(() => {
-          navigate("/");
+          navigate("/app");
         }, 1000);
+      } else {
+        handleError(message);
       }
-      // else {
-      //   handleError(message);
-      // }
     } catch (e) {
       console.log("bat", e);
     }
@@ -111,7 +108,6 @@ const RegisterPage = () => {
           Already a User? <Link to="/login">Login</Link>
         </Col>
       </Row>
-      <ToastContainer />
     </form>
   );
 };
