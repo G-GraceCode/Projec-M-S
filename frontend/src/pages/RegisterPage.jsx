@@ -1,58 +1,104 @@
 import { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import FormContainer from "../components/FormContainer";
+import { Link, useNavigate } from "react-router-dom";
+// import FormContainer from "../components/FormContainer";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const RegisterPage = () => {
+  const [userCredentail, setUserCredentail] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const { username, email, password } = userCredentail;
 
-  const submitHandler = (e) => {
-    e.preventdefault();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserCredentail({ ...userCredentail, [name]: value });
   };
+
+  const handleSuccess = () => {
+    toast.success("Please Login now", {
+      position: "top-right",
+    });
+  };
+
+  // const handleError = (err) => {
+  //   toast.error(err, {
+  //     position: "top-right",
+  //   });
+  // };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(
+        "https://dtv62c-5000.csb.app/projec/user/register",
+        { ...userCredentail },
+        { withCredentials: true },
+      );
+
+      console.log("result", res.data);
+
+      if (res.data) {
+        handleSuccess();
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
+      // else {
+      //   handleError(message);
+      // }
+    } catch (e) {
+      console.log("bat", e);
+    }
+    setUserCredentail({
+      ...userCredentail,
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
+
   return (
-    <FormContainer onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
       <h1>Sign Up</h1>
       <Form.Group className="my-2" controlId="username">
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
+          name="username"
           placeholder="Enter Name"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Form.Group className="my-2" controlId="email">
         <Form.Label>Email</Form.Label>
         <Form.Control
           type="email"
+          name="email"
           placeholder="Enter Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Form.Group className="my-2" controlId="password">
         <Form.Label>password</Form.Label>
         <Form.Control
           type="password"
+          name="password"
           placeholder="Enter password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
-      <Form.Group className="my-2" controlId="confirmPassword">
-        <Form.Label>confirmPassword</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Enter confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setconfirmPassword(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
+
       <Button
-        disable={!username || !email || !confirmPassword}
+        disabled={!username || !email || !password}
         type="submit"
         variant="primary"
         className="mt-3"
@@ -65,8 +111,9 @@ const LoginPage = () => {
           Already a User? <Link to="/login">Login</Link>
         </Col>
       </Row>
-    </FormContainer>
+      <ToastContainer />
+    </form>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

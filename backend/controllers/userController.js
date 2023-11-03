@@ -24,7 +24,7 @@ const authUser = asyncHandler(async (req, res) => {
       throw new Error(`invalid email or password`);
     }
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send(e.message);
   }
 });
 
@@ -33,7 +33,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body || req.params;
     const userExist = await User.findOne({ email });
 
     if (userExist) {
