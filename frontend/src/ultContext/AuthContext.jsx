@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogin = async () => {
     try {
       const { data } = await axios.post(
-        "https://dtv62c-5000.csb.app/projec",
+        "https://dtv62c-5000.csb.app/projec/user",
         {},
         { withCredentials: true },
       );
