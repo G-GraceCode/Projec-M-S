@@ -11,12 +11,11 @@ const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    console.log("user", user);
     //checking the password in the userModel section
     // const passwordCheck = await user.matchPassword(password);
     // console.log("pass", passwordCheck);
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
+    console.log("userpass", isPasswordValid);
     if (user && isPasswordValid) {
       generateToken(res, user._id);
       res.status(201).json({
@@ -24,7 +23,6 @@ const authUser = asyncHandler(async (req, res) => {
         username: user.username,
         email: user.email,
       });
-      
     } else {
       res.status(401);
       throw new Error(`invalid email or password`);
@@ -85,12 +83,21 @@ const logOutUser = (req, res) => {
 // @des get user profile
 // route POST /projec/users/profile
 // @access private
-const getUserProfile = (req, res) => {
-  console.log(req.user);
-  res.status(200).json({
-    Message: "authUser here Us",
+const getUserProfile = asyncHandler(async (req, res) => {
+  console.log("loginU", req.user);
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  return res.status(200).json({
+    _id: user._id,
+    username: user.name,
+    email: user.email,
   });
-};
+});
 
 // @des Get user profile
 // route Get /projec/users/profile
@@ -126,6 +133,6 @@ export {
   authUser,
   registerUser,
   logOutUser,
-  updateUserProfile,
   getUserProfile,
+  updateUserProfile,
 };

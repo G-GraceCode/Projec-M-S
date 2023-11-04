@@ -1,18 +1,16 @@
-import { Route, Routes } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import { Container } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./ultContext/AuthContext";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 const App = () => {
   return (
-    <>
+    <Router>
       <AuthProvider>
         <Header />
         <Routes>
@@ -24,7 +22,7 @@ const App = () => {
           </Route>
         </Routes>
       </AuthProvider>
-    </>
+    </Router>
   );
 };
 

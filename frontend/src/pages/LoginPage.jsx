@@ -36,7 +36,6 @@ const LoginPage = () => {
         { withCredentials: true },
       );
 
-      console.log("res", { res });
       const { success, message } = res;
 
       if (res) {
@@ -45,8 +44,6 @@ const LoginPage = () => {
       } else {
         handleError();
       }
-
-      console.log(res);
     } catch (e) {
       console.log("bat", e.message);
     }

@@ -44,7 +44,7 @@ const RegisterPage = () => {
       if (res.data) {
         handleSuccess();
         setTimeout(() => {
-          navigate("/app");
+          navigate("/login");
         }, 1000);
       } else {
         handleError(message);
