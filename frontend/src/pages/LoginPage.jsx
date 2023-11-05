@@ -5,12 +5,15 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
+import { userAuth } from "../ultContext/AuthContext";
+import jsCookie from "js-cookie";
 
 const LoginPage = () => {
   const [userCridential, setUserCridentail] = useState({
     email: "",
     password: "",
   });
+  const { handleLogin } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -29,17 +32,19 @@ const LoginPage = () => {
 
   const Handler = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         "https://dtv62c-5000.csb.app/projec/user/auth",
         { ...userCridential },
         { withCredentials: true },
       );
 
-      const { success, message } = res;
-
-      if (res) {
+      // const { success, message } = res;
+      console.log("data", data);
+      if (data) {
         handleSuccess();
+        await handleLogin();
         navigate("/app");
       } else {
         handleError();

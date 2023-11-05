@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import jsCookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -8,25 +8,22 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   //   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [cookies, removeCookie] = useCookies([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    handleLogin();
-  }, []);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = async () => {
     try {
-      const { data } = await axios.post(
-        "https://dtv62c-5000.csb.app/projec/user/",
-        {},
+      const { data } = await axios.get(
+        "https://dtv62c-5000.csb.app/projec/user/profile",
         { withCredentials: true },
       );
-      const { status } = data;
+
+      // We destructure the data
+      const { status, provedUser } = data;
+      console.log("pro", provedUser);
+      // we check if user is present
       if (status) {
-        console.log("data", data);
-        return setUser(data);
-        // navigate("/app");
+        setUser(provedUser);
+        localStorage.setItem("token", provedUser.token);
       } else {
         return console.log("no User");
       }
@@ -35,8 +32,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleLogout = async () => {
+    const userOut = await axios.post(
+      "https://dtv62c-5000.csb.app/projec/user/logout",
+      {},
+      { withCredentials: true },
+    );
+    console.log("logout", userOut);
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
+  useEffect(() => {
+    handleLogin();
+  }, []);
+
   const contextData = {
     user,
+    isAuthenticated,
+    handleLogin,
+    handleLogout,
   };
 
   return (

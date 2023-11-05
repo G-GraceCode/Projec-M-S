@@ -4,10 +4,11 @@ import User from "../models/userModel.js";
 
 const protect = asyncHandler(async (req, res) => {
   let token;
-  token = req.cookies.jwt;
+  token = req.cookies.jwt
 
   if (token) {
     try {
+      //use respond from the generated token to verify the use
       const decoded = jwt.verify(token, process.env.JWT_SECRETE);
       const user = await User.findById(decoded.userId).select("-password");
       if (!user) {
@@ -16,7 +17,10 @@ const protect = asyncHandler(async (req, res) => {
         req.user = user;
         res.json({
           status: true,
-          user: req.user,
+          provedUser: {
+            user,
+            token: token,
+          },
         });
       }
     } catch (e) {

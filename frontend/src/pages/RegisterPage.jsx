@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-// import { ToastContainer, toast } from "react-toastify";
+import { userAuth } from "../ultContext/AuthContext";
 
 const RegisterPage = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -12,6 +12,8 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+
+  const { user, handleLogin } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { username, email, password } = userCredentail;
@@ -33,15 +35,17 @@ const RegisterPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
+      const data = await axios.post(
         "https://dtv62c-5000.csb.app/projec/user/register",
         { ...userCredentail },
         { withCredentials: true },
       );
 
-      console.log("result", res.data);
+      console.log("result", data);
+      console.log("result", data.user);
 
-      if (res.data) {
+      if (data) {
+        handleLogin(data._id);
         handleSuccess();
         setTimeout(() => {
           navigate("/login");
@@ -50,7 +54,7 @@ const RegisterPage = () => {
         handleError(message);
       }
     } catch (e) {
-      console.log("bat", e);
+      console.log("message Error", e.message);
     }
     setUserCredentail({
       ...userCredentail,

@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (newUser) {
-      generateToken(res, username._id);
+      generateToken(res, newUser._id);
       res.status(201).json({
         _id: newUser._id,
         username: newUser.username,
