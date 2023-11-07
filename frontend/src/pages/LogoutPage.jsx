@@ -27,8 +27,7 @@ const Container = styled.div`
   border-radius: var(--border-radius);
   opacity: 0.7;
   padding: 2%;
-  & .Homecontent {
-    margin-left: 15%;
-    background-color: white;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
