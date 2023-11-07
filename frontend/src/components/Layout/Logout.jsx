@@ -1,15 +1,20 @@
 import styled from "styled-components";
+import { Container, Card, Button } from "react-bootstrap";
 
 const Logout = () => {
   return (
     <Signout>
-      <div> 
+      <div>
         <h3> Sign Out </h3>
         <p> user logout by clicking the link below </p>
         <div>
-
-        </div>p
-
+          <Button variant="primary" href="/" className="me-3">
+            Sign In
+          </Button>
+          <Button variant="secondary" href="/register">
+            Register
+          </Button>
+        </div>
       </div>
     </Signout>
   );
