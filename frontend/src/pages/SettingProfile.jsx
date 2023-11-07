@@ -1,18 +1,16 @@
-// import react from "react";
-import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 
-const Home = () => {
+const SettingfProfile = () => {
   return (
     <Dashboard className="">
       <Container>
-        <div className="Homecontent">Home</div>
+        <div className="Homecontent">Setting Projec</div>
       </Container>
     </Dashboard>
   );
 };
 
-export default Home;
+export default SettingfProfile;
 
 const Dashboard = styled.div`
   background-color: var(--color-bg-2);

@@ -1,5 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
+:root {
+  --color-bg: #7f89b0;
+  --color-bg-2: #1d2537;
+  --color-cart: #666e7e;
+  --natural-bk: #000;
+  --color-sec: #bdacb8;
+  --natural-white: #fefefe;
+
+  /* margin */
+  --mb-0-25: 0.25rem;
+  --mb-0-5: 0.5rem;
+  --mb-0-75: 0.75rem;
+  --mb-1: 1rem;
+  --mb-2: 2rem;
+  --mb-2-5: 2.5rem;
+  --mb-3: 3rem;
+
+  /* z-index */
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 100;
+
+  /* border-radius */
+
+  --border-radius: 15px;
+
+  /* transition */
+  --transition: 400ms ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  transition: all var(--transition);
+  border: none;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
+  color: var(--color-sec);
+  background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/* Circle animation */
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border: 10px solid transparent;
+  border-top: 10px solid #333;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ends */
+
+/* Privated Route style */
+.PrivateRoutes {
 }

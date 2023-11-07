@@ -1,0 +1,107 @@
+/* <=========== Nav controlers ===========> */
+
+.nav-controler {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column nowrap;
+  background-color: var(--color-bg-2);
+  position: fixed;
+  bottom: 4%;
+  top: 4%;
+  left: 2.4%;
+  z-index: var(--z-modal);
+  border-radius: var(--border-radius);
+}
+
+.nav-controler .logo {
+  position: absolute;
+  top: 5%;
+  font-size: 30px;
+  text-align: center;
+  color: var(--natural-white);
+  width: 100%;
+}
+
+@media (width > 768px) {
+  .nav-controlars .bars {
+    display: none;
+    visibility: visible;
+  }
+}
+
+.content_hover {
+  position: relative;
+  color: var(--color-sec);
+}
+
+.content_hover .info::before {
+  content: attr(arial-content);
+  position: absolute;
+  right: 0;
+  color: var(--natural-white);
+  display: flex;
+  /* padding: 0.4rem 0.7rem; */
+  transform: scale(0);
+  transition: var(--transition);
+  font-weight: 400;
+}
+
+.content_hover:hover .info::before {
+  position: absolute;
+  background-color: var(--color-bg-2);
+  right: -46%;
+  z-index: -1;
+  text-transform: capitalize;
+  /* transform: scale(1); */
+  /* transform: translateX(1); */
+  animation: scaleZoo ease;
+  animation-duration: 7s;
+}
+@keyframes scaleZoo {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(1) scale(0);
+  }
+}
+
+.control {
+  padding: var(--mb-1) var(--mb-2-5);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  border-left: 4px solid var(--color-bg-2);
+}
+
+.active-btn {
+  border-left: 4px solid var(--color-sec);
+  transition: border var(--transition);
+  color: var(--color-btn-sec);
+}
+
+.active-btn > .font {
+  color: var(--color-btn-sec);
+}
+
+/* .control:hover {
+    
+   } */
+
+.font {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  text-decoration: none;
+}
+.font p {
+  margin: 0.4rem 0 0 0.7rem;
+}
+
+.content_hover .resume {
+  background-color: var(--color-btn-prim);
+}
