@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import Logout from "../components/Layout/Logout";
 
 const LoginPage = () => {
   return (
     <Dashboard className="">
       <Container>
-        <div className="Homecontent">Logou Page</div>
+        <Logout />
       </Container>
     </Dashboard>
   );
