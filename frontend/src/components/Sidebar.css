@@ -33,6 +33,7 @@
 .content_hover {
   position: relative;
   color: var(--color-sec);
+  width: 100%;
 }
 
 .content_hover .info::before {
@@ -80,6 +81,7 @@
   border-left: 4px solid var(--color-sec);
   transition: border var(--transition);
   color: var(--color-btn-sec);
+  background-color: var(--color-bg);
 }
 
 .active-btn > .font {
@@ -100,6 +102,7 @@
 }
 .font p {
   margin: 0.4rem 0 0 0.7rem;
+  cursor: pointer;
 }
 
 .content_hover .resume {

@@ -25,9 +25,8 @@ const Container = styled.div`
   width: 100%;
   min-height: 100%;
   border-radius: var(--border-radius);
-  opacity: 0.7;
   padding: 2%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  & .content {
+    margin-left: 15%;
+  }
 `;

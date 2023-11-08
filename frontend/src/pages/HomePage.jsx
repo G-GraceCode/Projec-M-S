@@ -13,10 +13,10 @@ const HomePage = () => {
           </p>
           <div className="d-flex">
             <Button variant="primary" href="/login" className="me-3">
-              Cancle
+              Sign in
             </Button>
-            <Button variant="danger" href="/register">
-              Logout
+            <Button variant="secondary" href="/register">
+              Sign Up
             </Button>
           </div>
         </Card>

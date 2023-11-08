@@ -1,16 +1,17 @@
 import styled from "styled-components";
+import Profile from "../components/Layout/Profile";
 
-const SettingfProfile = () => {
+const SettingProfile = () => {
   return (
     <Dashboard className="">
       <Container>
-        <div className="Homecontent">Setting Projec</div>
+        <Profile />
       </Container>
     </Dashboard>
   );
 };
 
-export default SettingfProfile;
+export default SettingProfile;
 
 const Dashboard = styled.div`
   background-color: var(--color-bg-2);
@@ -24,10 +25,8 @@ const Container = styled.div`
   width: 100%;
   min-height: 100%;
   border-radius: var(--border-radius);
-  opacity: 0.7;
   padding: 2%;
-  & .Homecontent {
+  & .content {
     margin-left: 15%;
-    background-color: white;
   }
 `;

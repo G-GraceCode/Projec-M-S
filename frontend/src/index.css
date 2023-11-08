@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-bg: #7f89b0;
+  --color-bg: #34394b;
   --color-bg-2: #1d2537;
   --color-cart: #666e7e;
   --natural-bk: #000;
@@ -59,6 +59,7 @@ a {
 img {
   width: 100%;
   display: block;
+  object-fit: cover;
 }
 
 /* Circle animation */

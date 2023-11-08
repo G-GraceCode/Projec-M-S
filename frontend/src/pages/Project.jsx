@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import Projects from "../components/Layout/Projects";
 
 const Project = () => {
   return (
     <Dashboard className="">
       <Container>
-        <div className="Homecontent">Project</div>
+        <Projects />
       </Container>
     </Dashboard>
   );
@@ -24,10 +25,8 @@ const Container = styled.div`
   width: 100%;
   min-height: 100%;
   border-radius: var(--border-radius);
-  opacity: 0.7;
   padding: 2%;
-  & .Homecontent {
+  & .content {
     margin-left: 15%;
-    background-color: white;
   }
 `;

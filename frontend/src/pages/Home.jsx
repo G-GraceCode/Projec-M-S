@@ -1,20 +1,21 @@
 // import react from "react";
 import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
+import Dashboard from "../components/Layout/Dashboard";
 
 const Home = () => {
   return (
-    <Dashboard className="">
+    <HomeDash className="">
       <Container>
-        <div className="Homecontent">Home</div>
+        <Dashboard />
       </Container>
-    </Dashboard>
+    </HomeDash>
   );
 };
 
 export default Home;
 
-const Dashboard = styled.div`
+const HomeDash = styled.div`
   background-color: var(--color-bg-2);
   height: 100dvh;
   width: 100dvw;
@@ -26,10 +27,8 @@ const Container = styled.div`
   width: 100%;
   min-height: 100%;
   border-radius: var(--border-radius);
-  opacity: 0.7;
   padding: 2%;
-  & .Homecontent {
+  & .content {
     margin-left: 15%;
-    background-color: white;
   }
 `;

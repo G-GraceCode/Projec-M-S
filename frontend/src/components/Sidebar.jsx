@@ -10,6 +10,8 @@ import { FaBriefcase } from "react-icons/fa";
 import { MdContacts } from "react-icons/md";
 import { BsDownload } from "react-icons/bs";
 import "./Sidebar.css";
+import { FaSignOutAlt } from "react-icons/fa";
+
 // import { FaBars } from "react-icons/fa";
 // import { FaTimes } from "react-icons/fa";
 
@@ -66,7 +68,7 @@ const Sidebar = () => {
           className={`control control-1  ${
             splitLocation[1] === "profile" ? "active-btn" : ""
           }`}
-          arial-content="About"
+          arial-content="profile"
         >
           <Link to="/profile" className="font">
             <FaUserAlt />
@@ -79,16 +81,12 @@ const Sidebar = () => {
         <div
           className={`control control-1  ${
             splitLocation[1] === "logout" ? "active-btn" : ""
-          } resume`}
-          arial-content="Resume"
+          }`}
+          arial-content="logout"
         >
-          <Link
-            to="/logout"
-            className="font"
-            href="/images/Vitna.pdf"
-            download={"/images/Vitna.pdf"}
-          >
-            <span className='icon'> <BsDownload /> </span>
+          <Link to="/logout" className="font">
+            <FaSignOutAlt />
+
             <p> Logout </p>
           </Link>
         </div>
