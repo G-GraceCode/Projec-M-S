@@ -1,16 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
-  // const image = require("./image.png");
+  // assigning location variable
+  const location = useLocation();
+  // destructuring pathnamefrom loaction
+  const { pathname } = location;
+  //javascript split method to get name of path in array
+  const splitLocation = pathname.split("/");
+
   return (
     <Nav>
       <Pagetitle>
         <FiMenu className="icon" />
-        <h2> Profile </h2>
+        {splitLocation === "app" || pathname === "/app" ? (
+          <h2>Dashboard</h2>
+        ) : (
+          <h2>{splitLocation}</h2>
+        )}
       </Pagetitle>
 
       <User>
@@ -56,6 +66,9 @@ const Pagetitle = styled.div`
     margin: 0 0.5rem 0.3rem 0;
     font-size: 35px;
     cursor: pointer;
+  }
+  h2 {
+    text-transform: uppercase;
   }
 `;
 
