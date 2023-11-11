@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+import { userAuth } from "../ultContext/AuthContext";
 
 const Navbar = () => {
+  const { user } = userAuth();
+  // const { username } = user;
+  // console.log("user", user);
   // assigning location variable
   const location = useLocation();
   // destructuring pathnamefrom loaction
@@ -24,7 +28,7 @@ const Navbar = () => {
       </Pagetitle>
 
       <User>
-        <div classNamae="userprofile">
+        <div className="userprofile">
           <div className="userimg">
             {/* <img
               className="img"
@@ -33,7 +37,7 @@ const Navbar = () => {
               loading="lazy"
             /> */}
           </div>
-          <h4>Clarinda</h4>
+          <h4>{user.username}</h4>
         </div>
 
         <Link className="link" to="/logout">

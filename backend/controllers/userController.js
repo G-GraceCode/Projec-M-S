@@ -120,6 +120,15 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         email: updatedUser.email,
         password: updatedUser.password,
       });
+      console.log(
+        "updated",
+        res.status(200).json({
+          _id: updatedUser._id,
+          username: updatedUser.username,
+          email: updatedUser.email,
+          password: updatedUser.password,
+        }),
+      );
     } else {
       res.status(401);
       throw new Error("User Not Found");

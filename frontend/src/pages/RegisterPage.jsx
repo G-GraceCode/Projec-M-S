@@ -65,53 +65,55 @@ const RegisterPage = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <h1>Sign Up</h1>
-      <Form.Group className="my-2" controlId="username">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="username"
-          placeholder="Enter Name"
-          value={username}
-          onChange={handleChange}
-        ></Form.Control>
-      </Form.Group>
-      <Form.Group className="my-2" controlId="email">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={handleChange}
-        ></Form.Control>
-      </Form.Group>
-      <Form.Group className="my-2" controlId="password">
-        <Form.Label>password</Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={handleChange}
-        ></Form.Control>
-      </Form.Group>
+    <form onSubmit={submitHandler} className="justify-content-md-center mt-5">
+      <Col xs={12} md={6} className="card p-5">
+        <h1>Sign Up</h1>
+        <Form.Group className="my-2" controlId="username">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+            placeholder="Enter Name"
+            value={username}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="my-2" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className="my-2" controlId="password">
+          <Form.Label>password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
 
-      <Button
-        disabled={!username || !email || !password}
-        type="submit"
-        variant="primary"
-        className="mt-3"
-      >
-        Sign Up
-      </Button>
+        <Button
+          disabled={!username || !email || !password}
+          type="submit"
+          variant="primary"
+          className="mt-3"
+        >
+          Sign Up
+        </Button>
 
-      <Row className="py-3">
-        <Col>
-          Already a User? <Link to="/login">Login</Link>
-        </Col>
-      </Row>
+        <Row className="py-3">
+          <Col>
+            Already a User? <Link to="/login">Login</Link>
+          </Col>
+        </Row>
+      </Col>
     </form>
   );
 };

@@ -6,7 +6,6 @@ import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import { userAuth } from "../ultContext/AuthContext";
-import jsCookie from "js-cookie";
 
 const LoginPage = () => {
   const [userCridential, setUserCridentail] = useState({

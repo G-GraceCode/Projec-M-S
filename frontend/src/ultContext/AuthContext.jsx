@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import jsCookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const AuthContext = createContext();
 
@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   //   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleLogin = async () => {
     try {
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       console.log("pro", provedUser);
       // we check if user is present
       if (status) {
-        setUser(provedUser);
+        setUser(provedUser.user);
         localStorage.setItem("token", provedUser.token);
       } else {
         return console.log("no User");
@@ -40,7 +42,9 @@ export const AuthProvider = ({ children }) => {
     );
     console.log("logout", userOut);
     setUser(null);
+    navigate("/");
     localStorage.removeItem("token");
+    enqueueSnackbar("user Successfully Logout", { variant: "success" });
   };
 
   useEffect(() => {

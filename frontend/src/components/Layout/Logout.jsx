@@ -1,10 +1,18 @@
 import styled from "styled-components";
-import { Container, Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import Navbar from "../Navbar";
+import { userAuth } from "../../ultContext/AuthContext";
 
 const Logout = () => {
+  const { user, handleLogout } = userAuth();
+  const navigate = useNavigate();
+
+  const handleCancle = () => {
+    navigate("/app");
+  };
+
   return (
     <div className="content">
       <Navbar />
@@ -12,12 +20,12 @@ const Logout = () => {
       <Signout>
         <div className="logoutContent">
           <h3> Sign Out </h3>
-          <p> user logout by clicking the link below </p>
+          <p>{` ${user.username} logout by clicking the link below`}</p>
           <div className="btn-logout">
-            <Button variant="primary" href="/" className="me-3">
+            <Button variant="primary" className="me-3" onClick={handleCancle}>
               Cancle
             </Button>
-            <Button variant="danger" href="/register">
+            <Button variant="danger" onClick={handleLogout}>
               Logout
             </Button>
           </div>
