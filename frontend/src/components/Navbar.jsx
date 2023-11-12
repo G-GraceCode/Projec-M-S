@@ -27,8 +27,6 @@ const Navbar = () => {
         )}
       </Pagetitle>
 
-      <Storeproject>Add Project</Storeproject>
-
       <User>
         <div className="userprofile">
           <div className="userimg">
@@ -112,13 +110,4 @@ const User = styled.div`
       color: var(--color-bg);
     }
   }
-`;
-
-const Storeproject = styled.button`
-  padding: .5rem 1rem;
-  outline: none;
-  border: 1px solid transparent;
-  background-color: var(--color-green);
-  color: var(--color-sec);
-  
 `;
