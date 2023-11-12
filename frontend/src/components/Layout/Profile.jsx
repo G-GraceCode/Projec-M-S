@@ -15,7 +15,7 @@ const Profile = () => {
     email: "",
     password: "",
   });
-  const { user } = userAuth();
+  const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -33,52 +33,70 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`https://dtv62c-5000.csb.app/projec/user/profile`, {
-        withCredentials: true,
-      })
-      .then(({ data }) => {
-        const { provedUser } = data;
-        setUserCridentail({
-          ...userCridential,
-          username: provedUser.user.username,
-          email: provedUser.user.email,
-        });
-        console.log("res", data);
-      })
-      .catch((e) => {
+    const getUser = async () => {
+      try {
+        const res = await fetch(
+          "https://dtv62c-5000.csb.app/projec/user/profile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (res.ok) {
+          res.json().then((user) => {
+            setUserCridentail({
+              ...userCridential,
+              username: user.username,
+              email: user.email,
+            });
+          });
+        }
+      } catch (e) {
         console.log("Could Not Edit the User", e.message);
-      });
+      }
+    };
+    getUser();
   }, []);
 
   const HandleUpdate = async (e) => {
     e.preventDefault();
+    // const data = new FormData();
+    // data.set("username", userCridential.username);
+    // data.set("email", userCridential.email);
+    // data.set("password", userCridential.password);
 
     try {
-      const { data } = await axios.put(
+      const res = await fetch(
         "https://dtv62c-5000.csb.app/projec/user/profile",
-        { ...userCridential },
-        { withCredentials: true },
+        {
+          method: "PUT",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(userCridential),
+        },
       );
 
       // const { success, message } = res;
-      console.log("data", data);
-      if (data) {
-        handleSuccess();
-        navigate("/profile");
+      if (res) {
+        res.json().then((user) => {
+          console.log("res", user);
+
+          // setUserInfo(user);
+          // handleSuccess();
+          // navigate("/profile");
+        });
       } else {
         handleError();
       }
     } catch (e) {
       console.log("bat", e.message);
     }
-
-    console.log("cri", userCridential);
-    // setUserCridentail({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    // });
   };
 
   return (

@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
-import axios from "axios";
+// import axios from "axios";
 import { useSnackbar } from "notistack";
-import { userAuth } from "../ultContext/AuthContext";
 
 const RegisterPage = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -13,7 +12,6 @@ const RegisterPage = () => {
     password: "",
   });
 
-  const { user, handleLogin } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { username, email, password } = userCredentail;
@@ -27,31 +25,28 @@ const RegisterPage = () => {
     enqueueSnackbar("user Successfully Login", { variant: "success" });
   };
 
-  const handleError = (err) => {
-    enqueueSnackbar("Error Login", { variant: "Error" });
+  const handleError = () => {
+    enqueueSnackbar("Error Login", { variant: "error" });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
-      const data = await axios.post(
+      const data = await fetch(
         "https://dtv62c-5000.csb.app/projec/user/register",
-        { ...userCredentail },
-        { withCredentials: true },
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...userCredentail }),
+          credentials: "include",
+        },
       );
-
-      console.log("result", data);
-      console.log("result", data.user);
-
-      if (data) {
-        handleLogin(data._id);
+      if (data.status === 201) {
         handleSuccess();
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
+        navigate("/login");
       } else {
-        handleError(message);
+        handleError();
       }
     } catch (e) {
       console.log("message Error", e.message);

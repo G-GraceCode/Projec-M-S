@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 // import { ToastContainer, toast } from "react-toastify";
 import { useSnackbar } from "notistack";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import { userAuth } from "../ultContext/AuthContext";
 
@@ -12,9 +12,10 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const { handleLogin } = userAuth();
+  const { setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [redirect, setRedirect] = useState(false);
 
   const handleSuccess = () => {
     enqueueSnackbar("user Successfully Login", { variant: "success" });
@@ -33,18 +34,23 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
-        "https://dtv62c-5000.csb.app/projec/user/auth",
-        { ...userCridential },
-        { withCredentials: true },
-      );
+      const data = await fetch("https://dtv62c-5000.csb.app/projec/user/auth", {
+        method: "POST",
+        body: JSON.stringify({ ...userCridential }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
       // const { success, message } = res;
       console.log("data", data);
-      if (data) {
-        handleSuccess();
-        await handleLogin();
-        navigate("/app");
+      if (data.ok) {
+        data.json().then((user) => {
+          console.log("succ", user);
+          handleSuccess();
+          setUserInfo(user);
+          setRedirect(true);
+          navigate("/app");
+        });
       } else {
         handleError();
       }
@@ -57,6 +63,13 @@ const LoginPage = () => {
       password: "",
     });
   };
+
+  
+
+  if (redirect) {
+    return <Navigate to="/app" />;
+  }
+
   return (
     <form onSubmit={Handler}>
       <h1>Sign In</h1>

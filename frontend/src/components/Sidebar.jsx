@@ -17,7 +17,7 @@ import { userAuth } from "../ultContext/AuthContext";
 // import { FaTimes } from "react-icons/fa";
 
 const Sidebar = () => {
-  const { user } = userAuth();
+  const { userInfo } = userAuth();
   // const [isCollapsed, setIsCollapsed] = useState(true);
 
   // const handleToggle = () => {
@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {user ? (
+      {userInfo ? (
         <Menu className="nav-controler">
           <div className="logo"> Projec</div>
 

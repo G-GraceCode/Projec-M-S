@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 import { userAuth } from "../../ultContext/AuthContext";
 
 const Logout = () => {
-  const { user, handleLogout } = userAuth();
+  const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
 
   const handleCancle = () => {
@@ -20,7 +20,7 @@ const Logout = () => {
       <Signout>
         <div className="logoutContent">
           <h3> Sign Out </h3>
-          <p>{` ${user.username} logout by clicking the link below`}</p>
+          <p>{` ${userInfo.username} logout by clicking the link below`}</p>
           <div className="btn-logout">
             <Button variant="primary" className="me-3" onClick={handleCancle}>
               Cancle

@@ -1,11 +1,15 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { userAuth } from "../ultContext/AuthContext";
+// import { userAuth } from "../ultContext/AuthContext";
 import "../index.css";
+import Sidebar from "../components/Sidebar";
 
 const PrivateRoutes = () => {
-  const usertoken = localStorage.getItem("token");
-
-  return <>{usertoken ? <Outlet className="PrivateRoutes" /> : <Navigate to="/" />}</>;
+  return (
+    <>
+      <Sidebar />
+      <Outlet />
+    </>
+  );
 };
 
 export default PrivateRoutes;

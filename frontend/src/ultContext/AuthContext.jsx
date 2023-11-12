@@ -3,58 +3,83 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
-const AuthContext = createContext();
+const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   //   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleLogin = async () => {
-    try {
-      const { data } = await axios.get(
-        "https://dtv62c-5000.csb.app/projec/user/profile",
-        { withCredentials: true },
-      );
-
-      // We destructure the data
-      const { status, provedUser } = data;
-      console.log("pro", provedUser);
-      // we check if user is present
-      if (status) {
-        setUser(provedUser.user);
-        localStorage.setItem("token", provedUser.token);
-      } else {
-        return console.log("no User");
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await fetch(
+          "https://dtv62c-5000.csb.app/projec/user/profile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (res.ok) {
+          res.json().then((user) => {
+            setUserInfo(user);
+          });
+        }
+      } catch (e) {
+        console.log("Could Not Edit the User", e.message);
       }
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+    };
+    getUser();
+  }, []);
+  // const handleLogin = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       "https://dtv62c-5000.csb.app/projec/user/profile",
+
+  //       { withCredentials: true },
+  //     );
+
+  //     // We destructure the data
+  //     const { status, provedUser } = data;
+  //     console.log("pro", provedUser);
+  //     // we check if user is present
+  //     if (status) {
+  //       setUser(provedUser.user);
+  //       localStorage.setItem("token", provedUser.token);
+  //     } else {
+  //       return console.log("no User");
+  //     }
+  //   } catch (e) {
+  //     console.log(e.message);
+  //   }
+  // };
 
   const handleLogout = async () => {
-    const userOut = await axios.post(
+    const userOut = await fetch(
       "https://dtv62c-5000.csb.app/projec/user/logout",
-      {},
-      { withCredentials: true },
+      {
+        credentials: "include",
+        method: "Post",
+      },
     );
     console.log("logout", userOut);
-    setUser(null);
+    setUserInfo(null);
     navigate("/");
-    localStorage.removeItem("token");
     enqueueSnackbar("user Successfully Logout", { variant: "success" });
   };
 
-  useEffect(() => {
-    handleLogin();
-  }, []);
+  // useEffect(() => {
+  //   handleLogin();
+  // }, []);
 
   const contextData = {
-    user,
-    isAuthenticated,
-    handleLogin,
+    userInfo,
+    setUserInfo,
+    // handleLogin,
     handleLogout,
   };
 

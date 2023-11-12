@@ -6,7 +6,7 @@ import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
 
 const Navbar = () => {
-  const { user } = userAuth();
+  const { userInfo } = userAuth();
   // const { username } = user;
   // console.log("user", user);
   // assigning location variable
@@ -27,6 +27,8 @@ const Navbar = () => {
         )}
       </Pagetitle>
 
+      <Storeproject>Add Project</Storeproject>
+
       <User>
         <div className="userprofile">
           <div className="userimg">
@@ -37,7 +39,7 @@ const Navbar = () => {
               loading="lazy"
             /> */}
           </div>
-          <h4>{user.username}</h4>
+          <h4>{userInfo.username}</h4>
         </div>
 
         <Link className="link" to="/logout">
@@ -110,4 +112,13 @@ const User = styled.div`
       color: var(--color-bg);
     }
   }
+`;
+
+const Storeproject = styled.button`
+  padding: .5rem 1rem;
+  outline: none;
+  border: 1px solid transparent;
+  background-color: var(--color-green);
+  color: var(--color-sec);
+  
 `;

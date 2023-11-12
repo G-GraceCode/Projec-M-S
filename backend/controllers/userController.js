@@ -94,7 +94,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
   return res.status(200).json({
     _id: user._id,
-    username: user.name,
+    username: user.username,
     email: user.email,
   });
 });
@@ -103,11 +103,12 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // route Get /projec/users/profile
 // @access private
 const updateUserProfile = asyncHandler(async (req, res) => {
+  console.log("upade", req.user);
   try {
     const user = await User.findById(req.user._id);
     if (user) {
-      user.username = req.body.username || user.username;
-      user.email = req.body.email || user.email;
+      user.username = req.body.username;
+      user.email = req.body.email;
 
       if (user.body.password) {
         user.password = req.body.password;
@@ -134,7 +135,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       throw new Error("User Not Found");
     }
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send(e.message);
   }
 });
 

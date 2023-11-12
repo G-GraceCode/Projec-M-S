@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 
-const protect = asyncHandler(async (req, res) => {
+const protect = asyncHandler(async (req, res, next) => {
   let token;
   token = req.cookies.jwt;
 
@@ -11,18 +11,7 @@ const protect = asyncHandler(async (req, res) => {
       //use respond from the generated token to verify the use
       const decoded = jwt.verify(token, process.env.JWT_SECRETE);
       req.user = await User.findById(decoded.userId).select("-password");
-      if (!req.user) {
-        return res.json({ status: false });
-      } else {
-        const user = req.user;
-        res.json({
-          status: true,
-          provedUser: {
-            user,
-            token: token,
-          },
-        });
-      }
+      next();
     } catch (e) {
       res.status(401);
       throw new Error("Not authorized, token failed");
