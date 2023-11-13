@@ -20,7 +20,7 @@ const Logout = () => {
       <Signout>
         <div className="logoutContent">
           <h3> Sign Out </h3>
-          <p>{` ${userInfo.username} logout by clicking the link below`}</p>
+          <p>{` ${userInfo?.username} logout by clicking the link below`}</p>
           <div className="btn-logout">
             <Button variant="primary" className="me-3" onClick={handleCancle}>
               Cancle

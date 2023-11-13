@@ -26,9 +26,10 @@ const Container = styled.div`
   height: 100%;
   border-radius: var(--border-radius);
   padding: 2%;
+  overflow-y: hidden;
   .content {
     margin-left: 15%;
     position: relative;
-    min-height: 100%;
+    height: 100%;
   }
 `;

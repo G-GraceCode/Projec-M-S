@@ -1,10 +1,15 @@
+import { useState } from "react";
 import Navbar from "../Navbar";
 import styled from "styled-components";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { MdGridView } from "react-icons/md";
 import { MdOutlineViewAgenda } from "react-icons/md";
+import Cards from "../Cards";
+import Tableview from "../Tableview";
 
 const Projects = () => {
+  const [showType, setShowType] = useState("table");
+
   return (
     <div className="content">
       <Navbar />
@@ -21,23 +26,18 @@ const Projects = () => {
           <BsPlusCircleFill className="icon" /> Add Project
         </Addproject>
       </Searchproject>
-      {/* <Projectlist>
-        <div className="carts">
-          <Card>
-            <div>
-              <BsPlusCircleFill className="icon" />
-            </div>
-            <div>
-              <h4>Create Projects</h4>
-            </div>
-          </Card>
-        </div>
-      </Projectlist> */}
+      {showType === "table" ? <Tableview /> : <Cards />}
       <Projectfooter>
         <h4>Total Project 3</h4>
         <div className="viewIcon">
-          <MdGridView className="icon first" />
-          <MdOutlineViewAgenda className="icon" />
+          <MdGridView
+            className={`icon first ${showType === "grid" ? "color" : ""}`}
+            onClick={() => setShowType("grid")}
+          />
+          <MdOutlineViewAgenda
+            className={`icon ${showType === "table" ? "color" : ""}`}
+            onClick={() => setShowType("table")}
+          />
         </div>
       </Projectfooter>
     </div>
@@ -46,53 +46,18 @@ const Projects = () => {
 
 export default Projects;
 
-// const Projectlist = styled.div`
-//   padding: 0 1.5rem;
-// `;
-
-const Card = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-flow: column nowrap;
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--color-bg-2);
-  width: 230px;
-  color: var(--natural-white);
-  height: 200px;
-  max-height: 200px;
-  min-height: 150px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-
-  .icon {
-    font-size: 50px;
-  }
-  h4 {
-    font-size: 20px;
-    letter-spacing: 1.4px;
-  }
-  &:hover {
-    box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.15);
-    .icon {
-      transform: rotate(180deg);
-      transition: transform var(--transition);
-    }
-  }
-`;
-
 const Searchproject = styled.div`
   display: flex;
   align-items: cemter;
   justify-content: center;
   flex-flow: row nowrap;
   text-align: center;
+  margin-bottom: 2rem;
   filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.1));
   & > .searchbar {
     input[type="search"] {
       width: 450px;
-      min-width: 200px;
+      min-width: 120px;
       max-width: 470px;
       flex: 1;
       padding: 0.7rem 1rem;
@@ -126,6 +91,7 @@ const Projectfooter = styled.footer`
   left: 0;
   right: 0;
   color: var(--natural-white);
+  z-index: 100;
 
   & > .viewIcon {
     color: var(--color-bg-2);
@@ -137,6 +103,9 @@ const Projectfooter = styled.footer`
       margin: 0.4rem 0.7rem;
       font-size: 30px;
       color: var(--color-sec);
+    }
+    .color {
+      color: var(--color-green);
     }
   }
 `;

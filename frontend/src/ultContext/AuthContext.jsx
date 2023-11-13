@@ -6,7 +6,6 @@ import { useSnackbar } from "notistack";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  //   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
