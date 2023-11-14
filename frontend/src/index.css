@@ -21,7 +21,7 @@
   /* z-index */
   --z-tooltip: 10;
   --z-fixed: 100;
-  --z-modal: 100;
+  --z-modal: 1000;
 
   /* border-radius */
 
@@ -40,11 +40,16 @@
   transition: all var(--transition);
   border: none;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: auto;
+}
 
 body {
   font-family: "Montserrat", sans-serif;
   color: var(--color-sec);
   background-color: var(--color-bg);
+  overflow: hidden;
 }
 
 h1,
@@ -84,7 +89,6 @@ img {
   }
 }
 
-
 /* ends */
 
 /* Privated Route style */
@@ -92,7 +96,6 @@ img {
 }
 
 /*Slidar section start here*/
-
 
 .swiper {
   width: 100%;
@@ -102,20 +105,19 @@ img {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  /* background: #fff; */
 
   /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: var(--border-radius);
 }
 
 .swiper-slide img {
+  border-radius: var(--border-radius);
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
-
-
-

@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-// import { userAuth } from "../ultContext/AuthContext";
+import { userAuth } from "../ultContext/AuthContext";
 import "../index.css";
 import Sidebar from "../components/Sidebar";
 
@@ -11,5 +11,4 @@ const PrivateRoutes = () => {
     </>
   );
 };
-
 export default PrivateRoutes;

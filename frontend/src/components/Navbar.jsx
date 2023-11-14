@@ -59,6 +59,9 @@ const Nav = styled.nav`
   flex-wrap: nowrap;
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--natural-white);
+  position: sticky;
+  top: 0%;
+  z-index: var(--z-modal);
 `;
 const Pagetitle = styled.div`
   display: flex;

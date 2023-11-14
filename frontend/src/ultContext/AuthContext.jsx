@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         console.log("Could Not Edit the User", e.message);
       }
     };
-    getUser();
+    userInfo && getUser();
   }, []);
   // const handleLogin = async () => {
   //   try {
