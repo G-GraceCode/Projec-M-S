@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -17,14 +16,13 @@ const CreateProject = () => {
       <Content>
         <div className="header">
           <h2>
-            {" "}
-            <FaArrowLeftLong /> Create Project{" "}
+            <FaArrowLeftLong /> Create Project
           </h2>
           <Link to="/home" className="logo">
             Projec
           </Link>
         </div>
-        <form onSubmit={createNewPost}>
+        <form>
           <input
             type="title"
             placeholder={"Title"}
@@ -39,7 +37,7 @@ const CreateProject = () => {
           />
           <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
           <Editor value={content} onChange={setContent} />
-          <button style={{ marginTop: "5px" }}>Create post</button>
+          <button style={{ marginTop: "5px" }}>Create Project</button>
         </form>
       </Content>
     </Create>
