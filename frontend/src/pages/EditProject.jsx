@@ -1,9 +1,9 @@
-const EditEProject = () => {
-    return(
-        <div>
-            <h3> EditE Project </h3>
-        </div>
-    )
-}
+const EditProject = () => {
+  return (
+    <div>
+      <h3> EditE Project </h3>
+    </div>
+  );
+};
 
-export default EditEProject
+export default EditProject;

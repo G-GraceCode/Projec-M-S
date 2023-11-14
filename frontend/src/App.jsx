@@ -7,7 +7,7 @@ import Project from "./pages/Project";
 import SettingProfile from "./pages/SettingProfile";
 import LogoutPage from "./pages/LogoutPage";
 import Home from "./pages/Home";
-import CreateProject from "./pages/CreateProject";
+import EditProject from "./pages/EditProject";
 // import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./ultContext/AuthContext";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/project" element={<Project />} />
             <Route path="/profile" element={<SettingProfile />} />
             <Route path="/logout" element={<LogoutPage />} />
-            <Route Path="/createproject" element={<CreateProject />} />
+            <Route path="/editproject" element={<EditProject />} />
           </Route>
         </Routes>
       </AuthProvider>

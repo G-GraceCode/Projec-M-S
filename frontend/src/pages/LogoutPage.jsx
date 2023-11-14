@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logout from "../components/Layout/Logout";
 
-const LoginPage = () => {
+const LogOutPage = () => {
   return (
     <Dashboard className="">
       <Container>
@@ -11,7 +11,7 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LogOutPage;
 
 const Dashboard = styled.div`
   background-color: var(--color-bg-2);

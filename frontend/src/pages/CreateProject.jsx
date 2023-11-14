@@ -48,7 +48,9 @@ export default CreateProject;
 
 const Create = styled.div`
   position: absolute;
-  inset: 0%;
+  // inset: 0%; //the correct value
+
+  left: -100%;
   z-index: 1001;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
