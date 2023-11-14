@@ -98,6 +98,7 @@ const Projectfooter = styled.footer`
     border-radius: var(--border-radius);
     border: 1px solid var(--color-bg-2);
     background-color: var(--color-bg-2);
+    cursor: pointer;
 
     .icon {
       margin: 0.4rem 0.7rem;

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
+import { AiFillDelete } from "react-icons/ai";
 
 const BookTable = () => {
   return (
@@ -40,10 +42,10 @@ const BookTable = () => {
           <td className="border border-slate-700 rounded-md text-center">
             <div className="flex justify-center gap-x-4">
               <Link to={`/books/editbook/`}>
-                <AiOutlineEdit className="text-2xl text-yellow-600" />
+                <FiEdit className="text-2xl text-yellow" />
               </Link>
               <Link to={`/books/deletebook/`}>
-                <MdOutlineDelete className="text-2xl text-red-600" />
+                <AiFillDelete className="text-2xl text-red" />
               </Link>
             </div>
           </td>
@@ -61,11 +63,11 @@ const BookTable = () => {
           </td>
           <td className="border border-slate-700 rounded-md text-center">
             <div className="flex justify-center gap-x-4">
-              <Link to={`/books/editbook/`}>
-                <AiOutlineEdit className="text-2xl text-yellow-600" />
+               <Link to={`/books/editbook/`}>
+                <FiEdit className="text-2xl text-yellow" />
               </Link>
               <Link to={`/books/deletebook/`}>
-                <MdOutlineDelete className="text-2xl text-red-600" />
+                <AiFillDelete className="text-2xl text-red" />
               </Link>
             </div>
           </td>
@@ -84,10 +86,10 @@ const BookTable = () => {
           <td className="border border-slate-700 rounded-md text-center">
             <div className="flex justify-center gap-x-4">
               <Link to={`/books/editbook/`}>
-                <AiOutlineEdit className="text-2xl text-yellow-600" />
+                <FiEdit className="text-2xl text-yellow" />
               </Link>
               <Link to={`/books/deletebook/`}>
-                <MdOutlineDelete className="text-2xl text-red-600" />
+                <AiFillDelete className="text-2xl text-red" />
               </Link>
             </div>
           </td>
