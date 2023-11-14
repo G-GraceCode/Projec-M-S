@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Projects from "../components/Layout/Projects";
+import CreateProject from "./CreateProject";
 
 const Project = () => {
   return (
@@ -7,6 +8,7 @@ const Project = () => {
       <Container>
         <Projects />
       </Container>
+      <CreateProject />
     </Dashboard>
   );
 };
@@ -18,6 +20,7 @@ const Dashboard = styled.div`
   height: 100dvh;
   width: 100dvw;
   padding: var(--mb-1);
+  position: relative;
 `;
 
 const Container = styled.div`
