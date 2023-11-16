@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
 app.use(
   cors({
-    origin: ["https://dtv62c-4000.csb.app"],
+    origin: ["https://tnmwcq-4000.csb.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
