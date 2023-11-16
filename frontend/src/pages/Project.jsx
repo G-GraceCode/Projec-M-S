@@ -28,7 +28,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius);
-  padding: 2%;
+  padding: 1.2%;
   overflow-y: hidden;
   .content {
     margin-left: 15%;

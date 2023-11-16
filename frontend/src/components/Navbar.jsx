@@ -54,7 +54,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.6rem 1rem 0.7rem 1rem;
+  padding: 1rem 1rem 0.7rem 1rem;
   color: var(--natural-white);
   flex-wrap: nowrap;
   margin-bottom: 2rem;

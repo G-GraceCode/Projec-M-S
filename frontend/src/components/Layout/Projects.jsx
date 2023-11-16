@@ -8,7 +8,7 @@ import Cards from "../Cards";
 import Tableview from "../Tableview";
 
 const Projects = () => {
-  const [showType, setShowType] = useState("table");
+  const [showType, setShowType] = useState("");
 
   return (
     <div className="content">
@@ -31,8 +31,8 @@ const Projects = () => {
         <h4>Total Project 3</h4>
         <div className="viewIcon">
           <MdGridView
-            className={`icon first ${showType === "grid" ? "color" : ""}`}
-            onClick={() => setShowType("grid")}
+            className={`icon first ${showType === "" ? "color" : ""}`}
+            onClick={() => setShowType("")}
           />
           <MdOutlineViewAgenda
             className={`icon ${showType === "table" ? "color" : ""}`}
@@ -87,7 +87,7 @@ const Projectfooter = styled.footer`
   flex: 1;
   padding: 0 1.5rem;
   position: absolute;
-  bottom: -2%;
+  bottom: 0%;
   left: 0;
   right: 0;
   color: var(--natural-white);

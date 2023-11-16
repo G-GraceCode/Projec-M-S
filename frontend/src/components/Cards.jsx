@@ -24,9 +24,8 @@ const Cards = () => {
               sunt corrupti vero natus consequatur blanditiis voluptas.
             </p>
           </div>
-          
         </Card>
-       
+
         <Card>
           <img src="/images/flyer.png" className="image" alt="img" />
           <div className="Category">
@@ -76,7 +75,7 @@ const Projectlist = styled.div`
   & > .carts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(250px), 1fr));
-    row-gap: 0.8rem;
+    gap: 0.8rem;
     margin: 0.85rem;
     overflow-y: scroll;
   }
@@ -91,7 +90,6 @@ const Card = styled.div`
   flex-flow: column nowrap;
   text-align: center;
   background-color: var(--natural-white);
-  width: 300px;
   color: var(--color-bg-2);
   height: 240px;
   max-height: 240px;
