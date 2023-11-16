@@ -34,7 +34,7 @@ const RegisterPage = () => {
 
     try {
       const data = await fetch(
-        "https://dtv62c-5000.csb.app/projec/user/register",
+        "https://tnmwcq-5000.csb.app/projec/user/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
