@@ -8,7 +8,7 @@ const DeleteProject = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
 
-  const handleCancle = () => {
+  const handleCancle = ({ close }) => {
     navigate("/app");
   };
 

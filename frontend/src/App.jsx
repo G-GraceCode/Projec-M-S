@@ -8,6 +8,7 @@ import SettingProfile from "./pages/SettingProfile";
 import LogoutPage from "./pages/LogoutPage";
 import Home from "./pages/Home";
 import EditProject from "./pages/EditProject";
+import ViewProject from "./pages/ViewProject";
 // import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./ultContext/AuthContext";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";

@@ -1,7 +1,5 @@
-const ViewProject =  () => {
-    return(
-        <div> </div>
-    )
-}
+const ViewProject = () => {
+  return <div> view</div>;
+};
 
-export default v
+export default ViewProject;

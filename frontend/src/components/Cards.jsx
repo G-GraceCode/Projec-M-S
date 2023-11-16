@@ -3,7 +3,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
-const Cards = () => {
+const Cards = ({ show }) => {
   return (
     <Projectlist>
       <div className="carts">
@@ -14,7 +14,7 @@ const Cards = () => {
           </div>
           <div className="Icons">
             <FiEdit className="icon" />
-            <AiFillDelete className="icon-2" />
+            <AiFillDelete className="icon-2" onClick={show} />
           </div>
           <div className="Detail">
             <h4>How I Design a UI/UX Design</h4>
@@ -33,7 +33,7 @@ const Cards = () => {
           </div>
           <div className="Icons">
             <FiEdit className="icon" />
-            <AiFillDelete className="icon-2" />
+            <AiFillDelete className="icon-2" onClick={show} />
           </div>
           <div className="Detail">
             <h4>How I Design a UI/UX Design</h4>
@@ -51,7 +51,7 @@ const Cards = () => {
           </div>
           <div className="Icons">
             <FiEdit className="icon" />
-            <AiFillDelete className="icon-2" />
+            <AiFillDelete className="icon-2" onClick={show} />
           </div>
           <div className="Detail">
             <h4>How I Design a UI/UX Design</h4>
