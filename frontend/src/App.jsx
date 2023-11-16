@@ -26,6 +26,7 @@ const App = () => {
             <Route path="/profile" element={<SettingProfile />} />
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="/editproject" element={<EditProject />} />
+            <Route path="/viewing" element={<ViewProject />} />
           </Route>
         </Routes>
       </AuthProvider>

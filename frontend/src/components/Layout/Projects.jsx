@@ -6,9 +6,11 @@ import { MdGridView } from "react-icons/md";
 import { MdOutlineViewAgenda } from "react-icons/md";
 import Cards from "../Cards";
 import Tableview from "../Tableview";
+import DeleteProject from "../../pages/DeleteProject";
 
 const Projects = () => {
   const [showType, setShowType] = useState("");
+  const [delet, setDelet] = useState("");
 
   return (
     <div className="content">
@@ -26,7 +28,11 @@ const Projects = () => {
           <BsPlusCircleFill className="icon" /> Add Project
         </Addproject>
       </Searchproject>
-      {showType === "table" ? <Tableview /> : <Cards />}
+      {showType === "table" ? (
+        <Tableview show={() => setDelet("active")} />
+      ) : (
+        <Cards show={() => setDelet("active")} />
+      )}
       <Projectfooter>
         <h4>Total Project 3</h4>
         <div className="viewIcon">
@@ -40,6 +46,8 @@ const Projects = () => {
           />
         </div>
       </Projectfooter>
+
+      {delet && <DeleteProject close={() => setDelet("")} />}
     </div>
   );
 };
