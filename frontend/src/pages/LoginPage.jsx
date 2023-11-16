@@ -22,7 +22,7 @@ const LoginPage = () => {
   };
 
   const handleError = (err) => {
-    enqueueSnackbar("Error Login", { variant: "Error" });
+    enqueueSnackbar("Error Login", { variant: "error" });
   };
 
   const handleChange = (e) => {

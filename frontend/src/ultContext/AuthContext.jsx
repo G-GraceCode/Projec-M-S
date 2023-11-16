@@ -13,13 +13,16 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch("https://tnmwcq-5000.csb.app/user/profile", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+        const res = await fetch(
+          "https://tnmwcq-5000.csb.app/projec/user/profile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
           },
-          credentials: "include",
-        });
+        );
         if (res.ok) {
           res.json().then((user) => {
             setUserInfo(user);
