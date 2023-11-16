@@ -1,9 +1,33 @@
-const EditProject = () => {
+import styled from "styled-components";
+import Edit from "../components/Layout/Edit";
+
+const LogOutPage = () => {
   return (
-    <div>
-      <h3> EditE Project </h3>
-    </div>
+    <Dashboard className="">
+      <Container>
+        <Edit />
+      </Container>
+    </Dashboard>
   );
 };
 
-export default EditProject;
+export default LogOutPage;
+
+const Dashboard = styled.div`
+  background-color: var(--color-bg-2);
+  height: 100dvh;
+  width: 100dvw;
+  padding: var(--mb-1);
+`;
+
+const Container = styled.div`
+  background-color: var(--color-bg);
+  width: 100%;
+  min-height: 100%;
+  border-radius: var(--border-radius);
+  padding: 1.2%;
+  & .content {
+    margin-left: 15%;
+    overflow: scroll;
+  }
+`;

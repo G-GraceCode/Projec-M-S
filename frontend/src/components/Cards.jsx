@@ -1,22 +1,29 @@
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
 const Cards = ({ show }) => {
+  const navigate = useNavigate();
   return (
     <Projectlist>
       <div className="carts">
         <Card>
-          <img src="/images/flyer.png" className="image" alt="img" />
+          <img
+            src="/images/flyer.png"
+            onClick={() => navigate("/viewing")}
+            className="image"
+            alt="img"
+          />
           <div className="Category">
             <h4>UI/UX Design</h4>
           </div>
           <div className="Icons">
-            <FiEdit className="icon" />
+            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
             <AiFillDelete className="icon-2" onClick={show} />
           </div>
-          <div className="Detail">
+          <div className="Detail" onClick={() => navigate("/viewing")}>
             <h4>How I Design a UI/UX Design</h4>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
@@ -27,15 +34,20 @@ const Cards = ({ show }) => {
         </Card>
 
         <Card>
-          <img src="/images/flyer.png" className="image" alt="img" />
+          <img
+            src="/images/flyer.png"
+            onClick={() => navigate("/viewing")}
+            className="image"
+            alt="img"
+          />
           <div className="Category">
             <h4>UI/UX Design</h4>
           </div>
           <div className="Icons">
-            <FiEdit className="icon" />
+            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
             <AiFillDelete className="icon-2" onClick={show} />
           </div>
-          <div className="Detail">
+          <div className="Detail" onClick={() => navigate("/viewing")}>
             <h4>How I Design a UI/UX Design</h4>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
@@ -45,15 +57,20 @@ const Cards = ({ show }) => {
           </div>
         </Card>
         <Card>
-          <img src="/images/flyer.png" className="image" alt="img" />
+          <img
+            src="/images/flyer.png"
+            onClick={() => navigate("/viewing")}
+            className="image"
+            alt="img"
+          />
           <div className="Category">
             <h4>UI/UX Design</h4>
           </div>
           <div className="Icons">
-            <FiEdit className="icon" />
+            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
             <AiFillDelete className="icon-2" onClick={show} />
           </div>
-          <div className="Detail">
+          <div className="Detail" onClick={() => navigate("/viewing")}>
             <h4>How I Design a UI/UX Design</h4>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat

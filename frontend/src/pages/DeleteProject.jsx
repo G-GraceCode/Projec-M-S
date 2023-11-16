@@ -51,6 +51,8 @@ const Delete = styled.div`
     padding: 1.5rem;
     background-color: var(--color-bg-2);
     letter-spacing: 1.4px;
+    width: max(300px, 350px);
+    border-radius: 10px;
 
     h3 {
       text-transform: uppercase;

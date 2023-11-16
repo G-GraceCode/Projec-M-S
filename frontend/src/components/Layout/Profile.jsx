@@ -36,7 +36,7 @@ const Profile = () => {
     const getUser = async () => {
       try {
         const res = await fetch(
-          "https://dtv62c-5000.csb.app/projec/user/profile",
+          "https://tnmwcq-5000.csb.app/projec/user/profile",
           {
             method: "GET",
             headers: {
