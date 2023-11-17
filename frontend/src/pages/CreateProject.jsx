@@ -104,7 +104,7 @@ const CreateProject = ({ close }) => {
             )}
           </label>
 
-          <div>
+          <div className="btn">
             <button style={{ marginTop: "5px" }}>Cancle</button>
             <button style={{ marginTop: "5px" }}>Create Project</button>
           </div>
@@ -137,6 +137,7 @@ const Content = styled.div`
   width: 90%;
   height: 100%;
   padding: 2rem;
+  overflow-y: scroll;
   .header {
     display: flex;
     align-items: center;
@@ -156,6 +157,7 @@ const Content = styled.div`
     flex-flow: column nowrap;
     row-gap: 1rem;
     width: 100%;
+    padding: 2rem;
     label {
       display: flex;
       flex-flow: column nowrap;
@@ -165,6 +167,23 @@ const Content = styled.div`
         outline: none;
         border: 0.8px solid var(--color-bg);
         padding: 0.7rem;
+      }
+    }
+    .btn {
+      display: flex;
+      align-self: flex-end;
+      button {
+        padding: 0.5rem 1.3rem;
+        outline: none;
+        border-radius: 10px;
+      }
+      & > button:first-child {
+        margin-right: 0.4rem;
+        background: transparent;
+        border: 1px solid var(--color-green);
+      }
+      & > button:nth-child(2) {
+        background: var(--color-green);
       }
     }
   }

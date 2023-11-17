@@ -75,7 +75,7 @@ const Pagetitle = styled.div`
     cursor: pointer;
   }
   h2 {
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
 `;
 
