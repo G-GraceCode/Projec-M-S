@@ -10,6 +10,7 @@ const CreateProject = ({ close }) => {
   const [summary, setSummary] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
+  const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
 
   return (
@@ -58,9 +59,55 @@ const CreateProject = ({ close }) => {
             Cover Image
             <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
           </label>
+          <label htmlFor="content">
+            <Editor value={content} name="content" onChange={setContent} />
+          </label>
+          <label htmlFor="complete">
+            Choose whether your is a complete project or it a new Project
+            <p>
+              Complete Project
+              <input
+                type="radio"
+                name="radio"
+                value={"complete"}
+                onChange={(e) => setComplete(e.target.value)}
+              />
+              New Project
+              <input
+                type="radio"
+                name="radio"
+                value={"New"}
+                onChange={(e) => setComplete(e.target.value)}
+              />
+            </p>
+          </label>
 
-          <Editor value={content} name="content" onChange={setContent} />
-          <button style={{ marginTop: "5px" }}>Create Project</button>
+          <label>
+            {complete === "complete" && (
+              <>
+                set start and End Date of the Project
+                <p>
+                  Started <input type="date" name="from" />
+                  Ended <input type="date" name="to" />
+                </p>
+              </>
+            )}
+          </label>
+          <label>
+            {complete === "New" && (
+              <>
+                set start only of the Project
+                <p>
+                  <input type="date" name="to" />
+                </p>
+              </>
+            )}
+          </label>
+
+          <div>
+            <button style={{ marginTop: "5px" }}>Cancle</button>
+            <button style={{ marginTop: "5px" }}>Create Project</button>
+          </div>
         </form>
       </Content>
     </Create>
@@ -101,6 +148,24 @@ const Content = styled.div`
       font-size: 30px;
       color: var(--color-green);
       font-weight: 600;
+    }
+  }
+  form {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column nowrap;
+    row-gap: 1rem;
+    width: 100%;
+    label {
+      display: flex;
+      flex-flow: column nowrap;
+      flex: 1;
+      width: inherit;
+      input {
+        outline: none;
+        border: 0.8px solid var(--color-bg);
+        padding: 0.7rem;
+      }
     }
   }
 `;

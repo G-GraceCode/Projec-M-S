@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const getUser = async () => {
       try {
         const res = await fetch(
-          "https://tnmwcq-5000.csb.app/projec/user/profile",
+          "https://7wvkdh-5000.csb.app/projec/user/profile",
           {
             method: "GET",
             headers: {

@@ -8,7 +8,7 @@ export default defineConfig({
     port: 4000,
     proxy: {
       "/projec/user": {
-        target: "https://tnmwcq-5000.csb.app",
+        target: "https://7wvkdh-5000.csb.app",
         changeOrigin: true,
       },
     },

@@ -34,7 +34,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const data = await fetch("https://tnmwcq-5000.csb.app/projec/user/auth", {
+      const data = await fetch("https://7wvkdh-5000.csb.app/projec/user/auth", {
         method: "POST",
         body: JSON.stringify({ ...userCridential }),
         headers: { "Content-Type": "application/json" },

@@ -35,16 +35,13 @@ const Profile = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(
-          "https://tnmwcq-5000.csb.app/projec/user/profile",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
+        const res = await fetch("https://7wvkdh-5000.csb.app/user/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          credentials: "include",
+        });
         if (res.ok) {
           res.json().then((user) => {
             setUserCridentail({
@@ -70,7 +67,7 @@ const Profile = () => {
 
     try {
       const res = await fetch(
-        "https://dtv62c-5000.csb.app/projec/user/profile",
+        "https://7wvkdh-5000.csb.app/projec/user/profile",
         {
           method: "PUT",
 
