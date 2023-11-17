@@ -82,30 +82,27 @@ const CreateProject = ({ close }) => {
             </p>
           </label>
 
-          <label>
-            {complete === "complete" && (
-              <>
-                set start and End Date of the Project
-                <p>
-                  Started <input type="date" name="from" />
-                  Ended <input type="date" name="to" />
-                </p>
-              </>
-            )}
-          </label>
-          <label>
-            {complete === "New" && (
-              <>
-                set start only of the Project
-                <p>
-                  <input type="date" name="to" />
-                </p>
-              </>
+          <label htmlFor="date">
+            {complete === "complete" ? (
+              <p>
+                <span>sset start and End Date of the Project</span>
+                Started <input type="date" name="from" />
+                Ended <input type="date" name="to" />
+              </p>
+            ) : complete === "New" ? (
+              <p>
+                <span>set start only of the Project</span>
+                <input type="date" name="to" />
+              </p>
+            ) : (
+              ""
             )}
           </label>
 
           <div className="btn">
-            <button style={{ marginTop: "5px" }}>Cancle</button>
+            <button style={{ marginTop: "5px" }} onClick={close}>
+              Cancle
+            </button>
             <button style={{ marginTop: "5px" }}>Create Project</button>
           </div>
         </form>
@@ -184,6 +181,7 @@ const Content = styled.div`
       }
       & > button:nth-child(2) {
         background: var(--color-green);
+        color: var(--natural-white);
       }
     }
   }
