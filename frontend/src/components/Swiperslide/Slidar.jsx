@@ -19,7 +19,7 @@ const Slidar = () => {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 6000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -30,13 +30,13 @@ const Slidar = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="/images/course1.jpg" />
+          <img src="/images/course1.jpg" loading="lazy" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/images/course2.jpg" />
+          <img src="/images/course2.jpg" loading="lazy" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/images/course18.jpg" />
+          <img src="/images/course18.jpg" loading="lazy" />
         </SwiperSlide>
       </Swiper>
     </>

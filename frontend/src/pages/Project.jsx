@@ -1,14 +1,17 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Projects from "../components/Layout/Projects";
 import CreateProject from "./CreateProject";
 
 const Project = () => {
+  const [active, setActive] = useState('');
+
   return (
     <Dashboard className="">
       <Container>
-        <Projects />
+        <Projects present = {() => setActive('active')} />
       </Container>
-      <CreateProject />
+      {active && <CreateProject close={() => setActive('')} />}
     </Dashboard>
   );
 };

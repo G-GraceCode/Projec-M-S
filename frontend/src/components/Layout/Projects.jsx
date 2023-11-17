@@ -8,7 +8,7 @@ import Cards from "../Cards";
 import Tableview from "../Tableview";
 import DeleteProject from "../../pages/DeleteProject";
 
-const Projects = () => {
+const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
   const [delet, setDelet] = useState("");
 
@@ -24,7 +24,7 @@ const Projects = () => {
             placeholder="Search by Project Category"
           />
         </div>
-        <Addproject>
+        <Addproject onClick={present}>
           <BsPlusCircleFill className="icon" /> Add Project
         </Addproject>
       </Searchproject>

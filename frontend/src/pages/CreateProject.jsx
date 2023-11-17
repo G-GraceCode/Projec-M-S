@@ -5,38 +5,61 @@ import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Editor from "../components/Editor";
 
-const CreateProject = () => {
+const CreateProject = ({ close }) => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
 
   return (
     <Create>
-      <Content>
+      <Content style={{ right: `${close ? "-100%" : "0"}` }}>
         <div className="header">
           <h2>
-            <FaArrowLeftLong /> Create Project
+            <FaArrowLeftLong onClick={close} /> Create Project
           </h2>
           <Link to="/home" className="logo">
             Projec
           </Link>
         </div>
         <form>
-          <input
-            type="title"
-            placeholder={"Title"}
-            value={title}
-            onChange={(ev) => setTitle(ev.target.value)}
-          />
-          <input
-            type="summary"
-            placeholder={"Summary"}
-            value={summary}
-            onChange={(ev) => setSummary(ev.target.value)}
-          />
-          <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
-          <Editor value={content} onChange={setContent} />
+          <label htmlFor="title">
+            Title
+            <input
+              type="title"
+              name="title"
+              placeholder={"Title"}
+              value={title}
+              onChange={(ev) => setTitle(ev.target.value)}
+            />
+          </label>
+          <label htmlFor="category">
+            Project Category
+            <input
+              type="category"
+              name="category"
+              placeholder={"Example, Graphic design, UI/UX Design"}
+              value={category}
+              onChange={(ev) => setCategory(ev.target.value)}
+            />
+          </label>
+          <label htmlFor="summary">
+            Summarise your Project
+            <input
+              type="summary"
+              name="summary"
+              placeholder={"Summary of the project"}
+              value={summary}
+              onChange={(ev) => setSummary(ev.target.value)}
+            />
+          </label>
+          <label htmlFor="file">
+            Cover Image
+            <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+          </label>
+
+          <Editor value={content} name="content" onChange={setContent} />
           <button style={{ marginTop: "5px" }}>Create Project</button>
         </form>
       </Content>
@@ -48,9 +71,11 @@ export default CreateProject;
 
 const Create = styled.div`
   position: absolute;
-  // inset: 0%; //the correct value
-
-  left: -100%;
+  left: 0%;
+  bottom: 0%;
+  top: 0%;
+  right: 0%;
+  transition: right var(--transition);
   z-index: 1001;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
