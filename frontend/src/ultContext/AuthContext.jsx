@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogout = async () => {
     const userOut = await fetch(
-      "https://tnmwcq-5000.csb.app/projec/user/logout",
+      "https://7wvkdh-5000.csb.app/projec/user/logout",
       {
         credentials: "include",
         method: "Post",
