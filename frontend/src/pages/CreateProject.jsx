@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Editor from "../components/Editor";
+import { useSnackbar } from "notistack";
 
 const CreateProject = ({ close }) => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,16 @@ const CreateProject = ({ close }) => {
   const [content, setContent] = useState("");
   const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
+  const handleSuccess = () => {
+    enqueueSnackbar("new Project created", { variant: "success" });
+  };
+
+  const handleError = (err) => {
+    enqueueSnackbar("Failed Project not created", { variant: "error" });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +38,21 @@ const CreateProject = ({ close }) => {
       const res = await fetch("https://7wvkdh-5000.csb.app/project/create", {
         method: "POST",
         body: data,
+        credentials: "include",
         cors: "no-cors",
       });
-      console.log(await res.json());
+      if (res.ok) {
+        navigate("/project");
+        close();
+        setTimeout(() => {
+          handleSuccess();
+        }, 1000);
+        return;
+      } else {
+        setTimeout(() => {
+          handleError();
+        }, 1000);
+      }
     } catch (e) {
       console.log("message", e);
     }

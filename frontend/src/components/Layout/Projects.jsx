@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import styled from "styled-components";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -10,7 +10,20 @@ import DeleteProject from "../../pages/DeleteProject";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
+  const [post, setPost] = useState([]); 
   const [delet, setDelet] = useState("");
+
+  useEffect(() => {
+    fetch("https://7wvkdh-5000.csb.app/project/projects", {
+      method: "GET",
+      credentials: "include",
+      cors: "no-cors",
+    }).then((res) => {
+      res.json().then((userProjects) => {
+        setPost(userProjects);
+      });
+    });
+  }, []);
 
   return (
     <div className="content">
@@ -31,7 +44,7 @@ const Projects = ({ present }) => {
       {showType === "table" ? (
         <Tableview show={() => setDelet("active")} />
       ) : (
-        <Cards show={() => setDelet("active")} />
+        <Cards show={() => setDelet("active")} {...post} />
       )}
       <Projectfooter>
         <h4>Total Project 3</h4>
