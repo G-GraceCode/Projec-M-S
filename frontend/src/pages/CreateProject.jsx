@@ -13,6 +13,10 @@ const CreateProject = ({ close }) => {
   const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Create>
       <Content style={{ right: `${close ? "-100%" : "0"}` }}>
@@ -24,7 +28,7 @@ const CreateProject = ({ close }) => {
             Projec
           </Link>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="title">
             Title
             <input
@@ -103,7 +107,9 @@ const CreateProject = ({ close }) => {
             <button style={{ marginTop: "5px" }} onClick={close}>
               Cancle
             </button>
-            <button style={{ marginTop: "5px" }}>Create Project</button>
+            <button type="submit" style={{ marginTop: "5px" }}>
+              Create Project
+            </button>
           </div>
         </form>
       </Content>
