@@ -3,6 +3,7 @@ import MongoConnect from "./connectDB/connectDB.js";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 import userRouters from "./routes/userRouters.js";
+import projectRouters from "./routes/projectRouters.js";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
@@ -45,6 +46,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use("/projec/user", userRouters);
+app.use("/project", projectRouters);
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcom to the MERN Stack");

@@ -13,8 +13,26 @@ const CreateProject = ({ close }) => {
   const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.set("title", title);
+    data.set("summary", summary);
+    data.set("category", category);
+    data.set("content", content);
+    // data.set("complete", complete);
+    data.set("file", files);
+
+    try {
+      const res = await fetch("https://7wvkdh-5000.csb.app/project/create", {
+        method: "POST",
+        body: data,
+        cors: "no-cors",
+      });
+      console.log(await res.json());
+    } catch (e) {
+      console.log("message", e);
+    }
   };
 
   return (
@@ -61,7 +79,10 @@ const CreateProject = ({ close }) => {
           </label>
           <label htmlFor="file">
             Cover Image
-            <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+            <input
+              type="file"
+              onChange={(ev) => setFiles(ev.target.files[0])}
+            />
           </label>
           <label htmlFor="content">
             <Editor value={content} name="content" onChange={setContent} />

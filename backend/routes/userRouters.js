@@ -6,6 +6,7 @@ import {
   updateUserProfile,
   logOutUser,
 } from "../controllers/userController.js";
+import { createProject } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
