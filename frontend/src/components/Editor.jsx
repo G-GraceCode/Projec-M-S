@@ -19,7 +19,7 @@ export default function Editor({ value, onChange }) {
     ],
   };
   return (
-    <div className="content">
+    <div style={{ background: "var(--natural-white)" }}>
       <ReactQuill
         value={value}
         theme={"snow"}

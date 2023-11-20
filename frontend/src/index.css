@@ -43,13 +43,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: auto;
+  overflow: hidden;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
   color: var(--color-sec);
   background-color: var(--color-bg);
-  overflow: hidden;
 }
 
 h1,

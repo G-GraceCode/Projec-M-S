@@ -1,6 +1,7 @@
 import Navbar from "../Navbar";
 import styled from "styled-components";
 import Slidar from "../Swiperslide/Slidar";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,9 @@ const Dashboard = () => {
           <div>
             <h1>Welcome Back Yanmick</h1>
             <p>What New do you love adding today in Projectject</p>
+            <Link to="/project" className="proj">
+              Create a New Project
+            </Link>
           </div>
         </div>
       </HomeSlide>
@@ -38,9 +42,16 @@ const HomeSlide = styled.div`
     justify-content: center;
     & > div {
       text-align: center;
-
-      padding: 1rem;
+      border-radius: var(--border-radius);
+      padding: 1.5rem 2rem;
       background-color: var(--natural-white);
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+      h1 {
+        margin-bottom: 1rem;
+      }
+      .proj {
+        text-decoration: none;
+      }
     }
   }
 `;

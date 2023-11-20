@@ -23,11 +23,12 @@ const Dashboard = styled.div`
 const Container = styled.div`
   background-color: var(--color-bg);
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   border-radius: var(--border-radius);
   padding: 1.2%;
+  overflow-y: scroll;
   & .content {
     margin-left: 15%;
-    overflow: scroll;
+    // overflow-y: scroll;
   }
 `;
