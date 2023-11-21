@@ -10,19 +10,34 @@ import DeleteProject from "../../pages/DeleteProject";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
-  const [post, setPost] = useState([]); 
+  const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
 
   useEffect(() => {
-    fetch("https://7wvkdh-5000.csb.app/project/projects", {
-      method: "GET",
-      credentials: "include",
-      cors: "no-cors",
-    }).then((res) => {
-      res.json().then((userProjects) => {
-        setPost(userProjects);
-      });
-    });
+    const getProjects = async () => {
+      try {
+        const res = await fetch(
+          "https://7wvkdh-5000.csb.app/project/projects",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            cors: "no-cors",
+          },
+        );
+        if (res.status === 200) {
+          res.json().then((userProjects) => {
+            setPosts(userProjects);
+            console.log("user", userProjects);
+          });
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    getProjects();
   }, []);
 
   return (
@@ -44,7 +59,9 @@ const Projects = ({ present }) => {
       {showType === "table" ? (
         <Tableview show={() => setDelet("active")} />
       ) : (
-        <Cards show={() => setDelet("active")} {...post} />
+        posts.map((post) => (
+          <Cards key={post._id} show={() => setDelet("active")} {...post} />
+        ))
       )}
       <Projectfooter>
         <h4>Total Project 3</h4>

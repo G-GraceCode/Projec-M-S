@@ -4,19 +4,29 @@ import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 import userRouters from "./routes/userRouters.js";
 import projectRouters from "./routes/projectRouters.js";
+import path from "path";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
 const Port = process.env.PORT || 5000;
 
+// connecting to our database
 MongoConnect();
 
 const app = express();
 
 app.use(express.json());
+
+// handling the upload images endpoints (it works for all the images that shows image the frontend)
+const __dirname = path.resolve();
+const staticPath = path.join(__dirname, "uploads");
+app.use("/uploads", express.static(staticPath));
+
+// middleware to handle text from our body
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
+
+// middleware to handle our methods
 app.use(
   cors({
     origin: ["https://7wvkdh-4000.csb.app"],

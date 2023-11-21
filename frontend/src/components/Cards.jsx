@@ -4,79 +4,28 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
-const Cards = ({ show }) => {
+const Cards = ({ title, category, summary, coverImg, show }) => {
   const navigate = useNavigate();
   return (
     <Projectlist>
       <div className="carts">
         <Card>
           <img
-            src="/images/flyer.png"
+            src={`https://7wvkdh-5000.csb.app/${coverImg}`}
             onClick={() => navigate("/viewing")}
             className="image"
             alt="img"
           />
           <div className="Category">
-            <h4>UI/UX Design</h4>
+            <h4>{category}</h4>
           </div>
           <div className="Icons">
             <FiEdit className="icon" onClick={() => navigate("/editproject")} />
             <AiFillDelete className="icon-2" onClick={show} />
           </div>
           <div className="Detail" onClick={() => navigate("/viewing")}>
-            <h4>How I Design a UI/UX Design</h4>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
-              explicabo veniam reiciendis repellendus voluptatem? Asperiores
-              sunt corrupti vero natus consequatur blanditiis voluptas.
-            </p>
-          </div>
-        </Card>
-
-        <Card>
-          <img
-            src="/images/flyer.png"
-            onClick={() => navigate("/viewing")}
-            className="image"
-            alt="img"
-          />
-          <div className="Category">
-            <h4>UI/UX Design</h4>
-          </div>
-          <div className="Icons">
-            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
-            <AiFillDelete className="icon-2" onClick={show} />
-          </div>
-          <div className="Detail" onClick={() => navigate("/viewing")}>
-            <h4>How I Design a UI/UX Design</h4>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
-              explicabo veniam reiciendis repellendus voluptatem? Asperiores
-              sunt corrupti vero natus consequatur blanditiis voluptas.
-            </p>
-          </div>
-        </Card>
-        <Card>
-          <img
-            src="/images/flyer.png"
-            onClick={() => navigate("/viewing")}
-            className="image"
-            alt="img"
-          />
-          <div className="Category">
-            <h4>UI/UX Design</h4>
-          </div>
-          <div className="Icons">
-            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
-            <AiFillDelete className="icon-2" onClick={show} />
-          </div>
-          <div className="Detail" onClick={() => navigate("/viewing")}>
-            <h4>How I Design a UI/UX Design</h4>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
-              explicabo veniam reiciendis repellendus voluptatem? Asperiores
-              sunt corrupti vero natus consequatur blanditiis voluptas.
-            </p>
+            <h4>{title}</h4>
+            <p>{summary}</p>
           </div>
         </Card>
       </div>

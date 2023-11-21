@@ -33,7 +33,8 @@ const createProject = asyncHandler(async (req, res) => {
       console.log("user not found");
     }
   } catch (e) {
-    console.log(e);
+    res.status(401);
+    throw new Error(e.message);
   }
 });
 
@@ -41,7 +42,19 @@ const createProject = asyncHandler(async (req, res) => {
 // @access public
 
 const getProjects = asyncHandler(async (req, res) => {
-    
+  try {
+    const author = req.user._id;
+    const projects = await Project.find({ author }).sort({createdAt: -1}).limit(5); //.populate("author", ["username"]);
+    console.log("prjects", projects);
+    if (projects.length >= 1) {
+      res.status(200).json(projects);
+    } else {
+      res.status(201).json({ message: "No Project Created" });
+    }
+  } catch (e) {
+    res.status(401);
+    throw new Error(e.message);
+  }
 });
 
 export { createProject, getProjects };
