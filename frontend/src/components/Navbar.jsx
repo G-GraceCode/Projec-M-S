@@ -57,7 +57,7 @@ const Nav = styled.nav`
   padding: 1rem 1rem 0.7rem 1rem;
   color: var(--natural-white);
   flex-wrap: nowrap;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
   border-bottom: 1px solid var(--natural-white);
   position: sticky;
   top: 0%;

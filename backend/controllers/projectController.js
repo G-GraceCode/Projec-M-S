@@ -38,6 +38,10 @@ const createProject = asyncHandler(async (req, res) => {
   }
 });
 
+const editProject = asyncHandler(async (req, res) => {
+
+})
+
 // route get /project
 // @access private getting projects of a particular user
 
@@ -73,4 +77,4 @@ const getAproject = asyncHandler(async (req, res) => {
   }
 });
 
-export { createProject, getProjects, getAproject };
+export { createProject, getProjects, getAproject, editProject };
