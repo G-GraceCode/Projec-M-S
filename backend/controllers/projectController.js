@@ -39,13 +39,16 @@ const createProject = asyncHandler(async (req, res) => {
 });
 
 // route get /project
-// @access public
+// @access private getting projects of a particular user
 
 const getProjects = asyncHandler(async (req, res) => {
   try {
     const author = req.user._id;
-    const projects = await Project.find({ author }).sort({createdAt: -1}).limit(5); //.populate("author", ["username"]);
-    console.log("prjects", projects);
+
+    // Now we Sor the project in descending order of date created
+    const projects = await Project.find({ author })
+      .sort({ createdAt: -1 })
+      .limit(5); //.populate("author", ["username"]);
     if (projects.length >= 1) {
       res.status(200).json(projects);
     } else {
@@ -57,4 +60,17 @@ const getProjects = asyncHandler(async (req, res) => {
   }
 });
 
-export { createProject, getProjects };
+//route get/project/:id
+//@access public get a particular project  by id
+
+const getAproject = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const theProject = await Project.findById(id);
+    res.status(200).json(theProject);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+export { createProject, getProjects, getAproject };

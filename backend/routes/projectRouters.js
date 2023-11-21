@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProject,
   getProjects,
+  getAproject,
 } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import multer from "multer";
@@ -15,5 +16,6 @@ router
   .route("/create")
   .post(protect, upLoadMiddleware.single("file"), createProject);
 router.route("/projects").get(protect, getProjects);
+router.get("/:id", getAproject);
 
 export default router;

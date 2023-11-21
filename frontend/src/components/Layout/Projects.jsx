@@ -10,6 +10,7 @@ import DeleteProject from "../../pages/DeleteProject";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
+  const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
 
@@ -30,6 +31,9 @@ const Projects = ({ present }) => {
       }
     } catch (e) {
       console.log(e.message);
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -54,9 +58,9 @@ const Projects = ({ present }) => {
         </Addproject>
       </Searchproject>
       {showType === "table" ? (
-        <Tableview show={() => setDelet("active")} />
+        <Tableview show={() => setDelet("active")} posts={posts} loading = {loading} />
       ) : (
-        <Cards show={() => setDelet("active")} posts={posts} />
+        <Cards show={() => setDelet("active")} posts={posts} loading = {loading} />
       )}
       <Projectfooter>
         <h4>{`Total Project ${posts.length}`}</h4>

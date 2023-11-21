@@ -4,16 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
+import AnimatedCircle from "../AnimatedCircle";
 
-const Cards = ({ posts, show }) => {
+const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
+
   return (
     <Projectlist>
       <div className="carts">
-        {totalPost.length > 0 ? (
+        {loading ? (
+          <div className="circle">
+            <AnimatedCircle />
+          </div>
+        ) : (
           posts.map((post) => (
-            <Card>
+            <Card key={post._id}>
               <img
                 src={`https://7wvkdh-5000.csb.app/${post?.coverImg}`}
                 onClick={() => navigate("/viewing/" + post._id)}
@@ -40,9 +46,8 @@ const Cards = ({ posts, show }) => {
               </div>
             </Card>
           ))
-        ) : (
-          <> No Project Added</>
         )}
+        {totalPost === 0 && <> No Project Created</>}
       </div>
     </Projectlist>
   );
@@ -56,6 +61,9 @@ const Projectlist = styled.div`
   & > .carts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px), 1fr));
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: 0.8rem;
     margin: 0.85rem;
   }
