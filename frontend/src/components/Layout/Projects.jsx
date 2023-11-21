@@ -13,30 +13,27 @@ const Projects = ({ present }) => {
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
 
-  useEffect(() => {
-    const getProjects = async () => {
-      try {
-        const res = await fetch(
-          "https://7wvkdh-5000.csb.app/project/projects",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-            cors: "no-cors",
-          },
-        );
-        if (res.status === 200) {
-          res.json().then((userProjects) => {
-            setPosts(userProjects);
-            console.log("user", userProjects);
-          });
-        }
-      } catch (e) {
-        console.log(e.message);
+  const getProjects = async () => {
+    try {
+      const res = await fetch("https://7wvkdh-5000.csb.app/project/projects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        cors: "no-cors",
+      });
+      if (res.status === 200) {
+        res.json().then((userProjects) => {
+          setPosts(userProjects);
+        });
       }
-    };
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
     getProjects();
   }, []);
 
@@ -59,12 +56,10 @@ const Projects = ({ present }) => {
       {showType === "table" ? (
         <Tableview show={() => setDelet("active")} />
       ) : (
-        posts.map((post) => (
-          <Cards key={post._id} show={() => setDelet("active")} post={post} />
-        ))
+        <Cards show={() => setDelet("active")} posts={posts} />
       )}
       <Projectfooter>
-        <h4>Total Project 3</h4>
+        <h4>{`Total Project ${posts.length}`}</h4>
         <div className="viewIcon">
           <MdGridView
             className={`icon first ${showType === "" ? "color" : ""}`}

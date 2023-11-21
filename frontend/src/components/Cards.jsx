@@ -5,40 +5,45 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
-const Cards = ({ post, show }) => {
+const Cards = ({ posts, show }) => {
   const navigate = useNavigate();
-  const [totalPost, setTotalPost] = useState([post]);
+  const [totalPost, setTotalPost] = useState([posts]);
   return (
     <Projectlist>
-      {totalPost.length > 0 ? (
-        <div className="carts">
-          <Card>
-            <img
-              src={`https://7wvkdh-5000.csb.app/${post?.coverImg}`}
-              onClick={() => navigate("/viewing")}
-              className="image"
-              alt="img"
-              loading="lazy"
-            />
-            <div className="Category">
-              <h4>{post.category}</h4>
-            </div>
-            <div className="Icons">
-              <FiEdit
-                className="icon"
-                onClick={() => navigate("/editproject")}
+      <div className="carts">
+        {totalPost.length > 0 ? (
+          posts.map((post) => (
+            <Card>
+              <img
+                src={`https://7wvkdh-5000.csb.app/${post?.coverImg}`}
+                onClick={() => navigate("/viewing/" + post._id)}
+                className="image"
+                alt="img"
+                loading="lazy"
               />
-              <AiFillDelete className="icon-2" onClick={show} />
-            </div>
-            <div className="Detail" onClick={() => navigate("/viewing")}>
-              <h4>{post?.title}</h4>
-              <p>{post.summary}</p>
-            </div>
-          </Card>
-        </div>
-      ) : (
-        <> No Project Added</>
-      )}
+              <div className="Category">
+                <h4>{post.category}</h4>
+              </div>
+              <div className="Icons">
+                <FiEdit
+                  className="icon"
+                  onClick={() => navigate("/editproject/" + post._id)}
+                />
+                <AiFillDelete className="icon-2" onClick={show} />
+              </div>
+              <div
+                className="Detail"
+                onClick={() => navigate("/viewing/" + post._id)}
+              >
+                <h4>{post?.title}</h4>
+                <p>{post.summary}</p>
+              </div>
+            </Card>
+          ))
+        ) : (
+          <> No Project Added</>
+        )}
+      </div>
     </Projectlist>
   );
 };
@@ -47,13 +52,12 @@ export default Cards;
 
 const Projectlist = styled.div`
   padding: 0.4rem 1.5rem;
-  overflow-y: scroll;
+  text-align: center;
   & > .carts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px), 1fr));
     gap: 0.8rem;
     margin: 0.85rem;
-    overflow-y: scroll;
   }
 `;
 
@@ -63,7 +67,7 @@ const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-flow: column nowrap;
+  // flex-flow: column nowrap;
   text-align: center;
   background-color: var(--natural-white);
   color: var(--color-bg-2);
