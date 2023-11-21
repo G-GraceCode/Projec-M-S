@@ -1,34 +1,44 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 
-const Cards = ({ title, category, summary, coverImg, show }) => {
+const Cards = ({ post, show }) => {
   const navigate = useNavigate();
+  const [totalPost, setTotalPost] = useState([post]);
   return (
     <Projectlist>
-      <div className="carts">
-        <Card>
-          <img
-            src={`https://7wvkdh-5000.csb.app/${coverImg}`}
-            onClick={() => navigate("/viewing")}
-            className="image"
-            alt="img"
-          />
-          <div className="Category">
-            <h4>{category}</h4>
-          </div>
-          <div className="Icons">
-            <FiEdit className="icon" onClick={() => navigate("/editproject")} />
-            <AiFillDelete className="icon-2" onClick={show} />
-          </div>
-          <div className="Detail" onClick={() => navigate("/viewing")}>
-            <h4>{title}</h4>
-            <p>{summary}</p>
-          </div>
-        </Card>
-      </div>
+      {totalPost.length > 0 ? (
+        <div className="carts">
+          <Card>
+            <img
+              src={`https://7wvkdh-5000.csb.app/${post?.coverImg}`}
+              onClick={() => navigate("/viewing")}
+              className="image"
+              alt="img"
+              loading="lazy"
+            />
+            <div className="Category">
+              <h4>{post.category}</h4>
+            </div>
+            <div className="Icons">
+              <FiEdit
+                className="icon"
+                onClick={() => navigate("/editproject")}
+              />
+              <AiFillDelete className="icon-2" onClick={show} />
+            </div>
+            <div className="Detail" onClick={() => navigate("/viewing")}>
+              <h4>{post?.title}</h4>
+              <p>{post.summary}</p>
+            </div>
+          </Card>
+        </div>
+      ) : (
+        <> No Project Added</>
+      )}
     </Projectlist>
   );
 };
@@ -40,7 +50,7 @@ const Projectlist = styled.div`
   overflow-y: scroll;
   & > .carts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(250px), 1fr));
     gap: 0.8rem;
     margin: 0.85rem;
     overflow-y: scroll;

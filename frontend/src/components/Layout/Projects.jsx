@@ -60,7 +60,7 @@ const Projects = ({ present }) => {
         <Tableview show={() => setDelet("active")} />
       ) : (
         posts.map((post) => (
-          <Cards key={post._id} show={() => setDelet("active")} {...post} />
+          <Cards key={post._id} show={() => setDelet("active")} post={post} />
         ))
       )}
       <Projectfooter>
