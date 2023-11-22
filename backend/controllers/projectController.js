@@ -38,9 +38,50 @@ const createProject = asyncHandler(async (req, res) => {
   }
 });
 
-const editProject = asyncHandler(async (req, res) => {
+// route update /project
+// @access private getting projects of a particular user
 
-})
+const editProject = asyncHandler(async (req, res) => {
+  try {
+    let newPath = null;
+    // gettting the image and reanaming it parts when it is Uploaded
+    if (req.file) {
+      const { originalname, path } = req.file;
+      const part = originalname.split(".");
+      const ext = part[part.length - 1];
+      newPath = path + "." + ext;
+      fs.renameSync(path, newPath);
+    }
+
+    // req for title, content, summary, category
+    const { id } = req.params;
+    const { title, category, content, summary } = req.body;
+    console.log("put", id);
+    const project = await Project.findById(id);
+
+    if (project) {
+      project.title = title;
+      project.summary = summary;
+      project.category = category;
+      project.content = content;
+      project.coverImg = newPath ? newPath : data.coverImg;
+
+      const data = await project.save();
+      res.status(200).json({
+        title: data.title,
+        summary: data.summary,
+        category: data.category,
+        content: data.content,
+        coverImg: data.coverImg,
+      });
+    } else {
+      console.log("Project not found");
+    }
+  } catch (e) {
+    res.status(401);
+    throw new Error(e.message);
+  }
+});
 
 // route get /project
 // @access private getting projects of a particular user

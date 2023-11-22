@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import Navbar from "../Navbar";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Editor from "../../components/Editor";
+import { useSnackbar } from "notistack";
+import AnimatedCircle from "../../AnimatedCircle";
 
 const Edit = () => {
   const [title, setTitle] = useState("");
@@ -13,6 +15,79 @@ const Edit = () => {
   const [content, setContent] = useState("");
   const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const editProject = async () => {
+    try {
+      const res = await fetch(`https://7wvkdh-5000.csb.app/project/${id}`, {
+        method: "Get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cors: "no-cors",
+      });
+      if (res.status === 200) {
+        res.json().then((pro) => {
+          setTitle(pro.title);
+          setSummary(pro.summary);
+          setCategory(pro.category);
+          setContent(pro.content);
+        });
+      }
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    editProject();
+  }, [id]);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.set("title", title);
+    data.set("summary", summary);
+    data.set("category", category);
+    data.set("content", content);
+    // data.set("complete", complete);
+    if (files) {
+      data.set("file", files);
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch(
+        `https://7wvkdh-5000.csb.app/project/editproject/${id}`,
+        {
+          method: "PUT",
+          body: data,
+          // credentials: "include",
+          cors: "no-cors",
+        },
+      );
+      if (res.status === 200) {
+        res.json().then((pro) => {
+          setRedirect(true);
+          setTimeout(() => {
+            enqueueSnackbar("Project updated successful", {
+              variant: "success",
+            });
+          }, 2000);
+        });
+      }
+    } catch (e) {
+      enqueueSnackbar(e.message, { variant: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (redirect) {
+    navigate("/project");
+  }
 
   return (
     <div className="content">
@@ -60,9 +135,12 @@ const Edit = () => {
             </label>
             <label htmlFor="file">
               Cover Image
-              <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+              <input
+                type="file"
+                onChange={(ev) => setFiles(ev.target.files[0])}
+              />
             </label>
-            <label htmlFor="content">
+            <label htmlFor="content" className="editorLabel">
               Write more about your project
               <Editor
                 value={content}
@@ -109,8 +187,22 @@ const Edit = () => {
             </label>
 
             <div className="btn">
-              <button style={{ marginTop: "5px" }}>Cancle</button>
-              <button style={{ marginTop: "5px" }}>Publish</button>
+              <button
+                type="button"
+                style={{ marginTop: "5px" }}
+                onClick={() => navigate("/project")}
+              >
+                Cancle
+              </button>
+              <button style={{ marginTop: "5px" }} onClick={handleUpdate}>
+                {loading ? (
+                  <>
+                    <AnimatedCircle /> Publishing...
+                  </>
+                ) : (
+                  "Publish"
+                )}
+              </button>
             </div>
           </form>
         </Content>
@@ -131,7 +223,6 @@ const Create = styled.div`
 const Content = styled.div`
   border-radius: var(--border-radius);
   background-color: var(--color-bg-2);
-  color: var(--natural-white);
   padding: 1rem 0.6rem;
   width: 100%;
   height: 100%;
@@ -164,6 +255,8 @@ const Content = styled.div`
       flex-flow: column nowrap;
       flex: 1;
       width: inherit;
+      color: var(--natural-white);
+
       input {
         outline: none;
         border: 0.8px solid var(--color-bg);
@@ -172,6 +265,9 @@ const Content = styled.div`
       .editor {
         background: white;
       }
+    }
+    .editorLabel {
+      color: var(--natural-black);
     }
     .btn {
       display: flex;

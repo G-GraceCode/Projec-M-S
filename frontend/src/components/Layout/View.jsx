@@ -130,9 +130,10 @@ const Content = styled.div`
   .text {
     text-align: left;
     padding: 0.7rem;
-    line-height: 0.7rem;
+    line-height: 1.4rem;
+    text-align: justify;
     font-size: 16px;
     word-spacing: 1.4px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
   }
 `;
