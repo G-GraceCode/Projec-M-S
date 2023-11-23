@@ -1,33 +1,36 @@
 // import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Row } from "react-bootstrap";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Header = () => {
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar
+        style={{ backgroundColor: "var(--color-bg-2)" }}
+        variant="dark"
+        expand="lg"
+        collapseOnSelect
+      >
         <Container>
-          <LinkContainer to={"/"}>
+          <LinkContainer to={"/"} className="H-logo">
             <Navbar.Brand>Projec</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              
-                <div>
-                  <LinkContainer to="/login">
-                    <Nav.Link>
-                      <FaSignInAlt /> Sign In
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/register">
-                    <Nav.Link>
-                      <FaSignOutAlt /> Sign Up
-                    </Nav.Link>
-                  </LinkContainer>
-                </div>
-              
+              <div className="navLink">
+                <LinkContainer to="/login" className="butn">
+                  <Nav.Link>
+                    <FaSignInAlt /> Sign In
+                  </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/register" className="butn">
+                  <Nav.Link>
+                    <FaSignOutAlt /> Sign Up
+                  </Nav.Link>
+                </LinkContainer>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
