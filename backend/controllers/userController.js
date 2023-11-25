@@ -109,7 +109,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
-    console.log('use', user)
     if (user) {
       user.username = req.body.username;
       user.email = req.body.email;
@@ -128,7 +127,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         password: updatedUser.password,
         prof: updatedUser.profession,
       });
-    
     } else {
       res.status(401);
       throw new Error("User Not Found");
@@ -142,27 +140,29 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // route Get /projec/users/:id
 // @access private
 const deletUser = asyncHandler(async (req, res) => {
-  try{
-    const {_id} = req.user;
-    const author = _id;
-    const user = await User.findByIdAndDelete(_id);
-    const projects = await Project.findMany({author});
+  try {
+    const id = req.user._id;
+    const author = id;
+    const user = await User.findByIdAndDelete(id);
+    const projects = await Project.deleteMany({ author });
 
-    if(!user){
+    if (!user) {
       return res.status(404).json({ message: "User not Not Found" });
     }
 
-    res.cookie("jwt", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    }).status(200).json({
-      message: "Account Deleted Successfully",
-    });
-
-  }catch(e){
+    res
+      .cookie("jwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .status(200)
+      .json({
+        message: "Account Deleted Successfully",
+      });
+  } catch (e) {
     res.status(500).json({ message: e.message });
   }
-})
+});
 
 export {
   authUser,

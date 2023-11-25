@@ -83,8 +83,6 @@ const Profile = () => {
       console.log("respon", res);
       if (res) {
         res.json().then((user) => {
-          console.log("res", user);
-
           setUserInfo(user);
           handleSuccess();
           navigate("/profile");

@@ -5,12 +5,10 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
 
-
 const DeleteUser = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -25,26 +23,23 @@ const DeleteUser = ({ close }) => {
           credentials: "include",
         },
       );
-      if(res.ok){
+      if (res.ok) {
         res.json().then((info) => {
-            setTimout(() => {
-
-            enqueueSnackbar(`${info.Message}`, {
-                variant: "success",
-              });
-            }, 2000)
-            navigate('/')
-
-        })
-      } else{
+          setTimeout(() => {
+            enqueueSnackbar(`${info.message}`, {
+              variant: "success",
+            });
+          }, 2000);
+          navigate("/");
+        });
+      } else {
         res.json().then((info) => {
-            setTimout(() => {
-                enqueueSnackbar(`${info.Message}`, {
-                    variant: "error",
-                  });
-            }, 2000)
-            
-        })
+          setTimeout(() => {
+            enqueueSnackbar(`${info.message}`, {
+              variant: "error",
+            });
+          }, 2000);
+        });
       }
       console.log("res", res);
     } catch (e) {
