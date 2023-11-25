@@ -27,9 +27,14 @@ const DeleteUser = ({ close }) => {
       );
       if(res.ok){
         res.json().then((info) => {
+            setTimout(() => {
+
             enqueueSnackbar(`${info.Message}`, {
                 variant: "success",
               });
+            }, 2000)
+            navigate('/')
+
         })
       } else{
         res.json().then((info) => {
