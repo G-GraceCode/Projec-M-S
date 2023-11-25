@@ -3,13 +3,14 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
-import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
 
 
 const DeleteUser = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
 
   const handleDelete = async (e) => {
     e.preventDefault();
