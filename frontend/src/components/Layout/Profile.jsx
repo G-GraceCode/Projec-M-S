@@ -14,6 +14,7 @@ const Profile = () => {
     username: "",
     email: "",
     password: "",
+    profession: "",
   });
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
@@ -51,6 +52,7 @@ const Profile = () => {
               ...userCridential,
               username: user.username,
               email: user.email,
+              profession: user.prof,
             });
           });
         }
@@ -121,6 +123,17 @@ const Profile = () => {
               name="email"
               placeholder="Enter Email"
               value={userCridential.email}
+              onChange={handleChange}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group className="my-2" controlId="profession">
+            <Form.Label>Portrofession</Form.Label>
+            <Form.Control
+              type="profession"
+              name="profession"
+              placeholder="Enter profession"
+              value={userCridential.profession}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>

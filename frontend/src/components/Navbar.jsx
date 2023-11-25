@@ -37,7 +37,9 @@ const Navbar = () => {
               loading="lazy"
             /> */}
           </div>
-          <h4>{userInfo?.username}</h4>
+          <h4>
+            {userInfo?.username} <br /> <small>{userInfo?.prof}</small>
+          </h4>
         </div>
 
         <Link className="link" to="/logout">

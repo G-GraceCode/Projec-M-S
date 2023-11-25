@@ -22,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         username: user.username,
         email: user.email,
-        prof: user.pr
+        prof: user.profession
       });
     } else {
       res.status(401);
@@ -99,6 +99,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
     _id: user._id,
     username: user.username,
     email: user.email,
+    prof: user.profession
+    
   });
 });
 

@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { username, email, password, profession} = userCredentail;
+  const { username, email, password, profession } = userCredentail;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,16 +52,14 @@ const RegisterPage = () => {
       }
     } catch (e) {
       console.log("message Error", e.message);
-    } finally{
-      setUserCredentail({
-        ...userCredentail,
-        username: "",
-        email: "",
-        password: "",
-        profession: '',
-      });
     }
-   
+    setUserCredentail({
+      ...userCredentail,
+      username: "",
+      email: "",
+      password: "",
+      profession: "",
+    });
   };
 
   return (
@@ -129,7 +127,10 @@ const RegisterPage = () => {
         </Row>
         <Row className="py-3">
           <Col>
-            <Link to="/"> <FaArrowLeftLong /> Back</Link>
+            <Link to="/">
+              {" "}
+              <FaArrowLeftLong /> Back
+            </Link>
           </Col>
         </Row>
       </Col>

@@ -14,7 +14,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    profe: {
+    profession: {
       type: String,
       required: true,
       unique: true,
