@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import Project from "../models/projectModel.js";
 import bcrypt from "bcryptjs";
 
 // @des Auth user/set token
@@ -140,8 +141,27 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @des delete user profile
 // route Get /projec/users/:id
 // @access private
-const deletUser = asyncHandler(async () => {
+const deletUser = asyncHandler(async (req, res) => {
+  try{
+    const {_id} = req.user;
+    const author = _id;
+    const user = await User.findByIdAndDelete(_id);
+    const projects = await Project.findMany({author});
 
+    if(!user){
+      return res.status(404).json({ message: "User not Not Found" });
+    }
+
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    }).status(200).json({
+      message: "Account Deleted Successfully",
+    });
+
+  }catch(e){
+    res.status(500).json({ message: e.message });
+  }
 })
 
 export {

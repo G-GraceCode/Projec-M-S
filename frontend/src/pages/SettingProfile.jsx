@@ -28,5 +28,8 @@ const Container = styled.div`
   padding: 1.2%;
   & .content {
     margin-left: 15%;
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
   }
 `;

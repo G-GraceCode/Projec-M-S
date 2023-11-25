@@ -12,7 +12,7 @@ const BookTable = ({ posts, loading, show }) => {
 
   return (
     <>
-      {" "}
+    
       {loading ? (
         <AnimatedCircle />
       ) : (

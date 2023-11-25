@@ -148,7 +148,7 @@ const CreateProject = ({ close }) => {
           </label>
 
           <div className="btn">
-            <button style={{ marginTop: "5px" }} onClick={close}>
+            <button type='button' style={{ marginTop: "5px" }} onClick={close}>
               Cancle
             </button>
             <button type="submit" style={{ marginTop: "5px" }}>

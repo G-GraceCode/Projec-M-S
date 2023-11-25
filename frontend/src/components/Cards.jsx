@@ -17,7 +17,7 @@ const Cards = ({ posts, show, loading }) => {
           <div className="circle">
             <AnimatedCircle /> Searching ...
           </div>
-        ) : totalPost.length ? (
+        ) : totalPost.length === 0 ? (
           <h4> No Project Created</h4>
         ) : (
           posts.map((post) => (

@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
+import DeleteUser from "../../pages/DeleteUser";
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -16,6 +17,7 @@ const Profile = () => {
     password: "",
     profession: "",
   });
+  const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -151,6 +153,12 @@ const Profile = () => {
             Save Changes
           </Button>
         </form>
+
+        <DeletetUser className="my-3" onClick={() => setDelet("active")}>
+          Delete Accout
+        </DeletetUser>
+
+        {delet && <DeleteUser close={() => setDelet("")} />}
       </Edituser>
     </div>
   );
@@ -162,6 +170,7 @@ const Edituser = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column nowrap;
   color: var(--natural-white);
 
   & form {
@@ -173,4 +182,12 @@ const Edituser = styled.div`
       margin-right: 0.5rem;
     }
   }
+`;
+
+const DeletetUser = styled.div`
+  background: red;
+  padding: 0.5rem 1.5rem;
+  width: 32%;
+  cursor: pointer;
+  border-radius: var(--border-radius);
 `;
