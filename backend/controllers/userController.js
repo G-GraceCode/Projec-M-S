@@ -22,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         username: user.username,
         email: user.email,
-        prof: user.profession
+        prof: user.profession,
       });
     } else {
       res.status(401);
@@ -50,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
       username,
       email,
       password,
-      profession
+      profession,
     });
 
     if (newUser) {
@@ -59,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
-        prof: newUser.profession
+        prof: newUser.profession,
       });
     } else {
       res.status(401);
@@ -87,7 +87,6 @@ const logOutUser = (req, res) => {
 // route POST /projec/users/profile
 // @access private
 const getUserProfile = asyncHandler(async (req, res) => {
-  console.log("loginU", req.user);
   const user = await User.findById(req.user._id);
 
   if (!user) {
@@ -99,8 +98,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     _id: user._id,
     username: user.username,
     email: user.email,
-    prof: user.profession
-    
+    prof: user.profession,
   });
 });
 
@@ -108,33 +106,28 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // route Get /projec/users/profile
 // @access private
 const updateUserProfile = asyncHandler(async (req, res) => {
-  console.log("upade", req.user);
   try {
     const user = await User.findById(req.user._id);
+    console.log('use', user)
     if (user) {
       user.username = req.body.username;
       user.email = req.body.email;
+      user.profession = req.body.profession;
 
-      if (user.body.password) {
+      if (user.password) {
         user.password = req.body.password;
       }
 
       const updatedUser = await user.save();
+
       res.status(200).json({
         _id: updatedUser._id,
         username: updatedUser.username,
         email: updatedUser.email,
         password: updatedUser.password,
+        prof: updatedUser.profession,
       });
-      console.log(
-        "updated",
-        res.status(200).json({
-          _id: updatedUser._id,
-          username: updatedUser.username,
-          email: updatedUser.email,
-          password: updatedUser.password,
-        }),
-      );
+    
     } else {
       res.status(401);
       throw new Error("User Not Found");
@@ -144,10 +137,18 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @des delete user profile
+// route Get /projec/users/:id
+// @access private
+const deletUser = asyncHandler(async () => {
+
+})
+
 export {
   authUser,
   registerUser,
   logOutUser,
   getUserProfile,
+  deletUser,
   updateUserProfile,
 };

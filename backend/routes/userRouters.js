@@ -4,6 +4,7 @@ import {
   registerUser,
   getUserProfile,
   updateUserProfile,
+  deletUser,
   logOutUser,
 } from "../controllers/userController.js";
 import { createProject } from "../controllers/projectController.js";
@@ -17,5 +18,6 @@ router
   .route("/profile")
   .put(protect, updateUserProfile)
   .get(protect, getUserProfile);
+router.route('/:id').delete(protect, deletUser)
 
 export default router;

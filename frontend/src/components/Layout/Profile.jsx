@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userAuth } from "../../ultContext/AuthContext";
 
 const Profile = () => {
-  const [userCridential, setUserCridentail] = useState({
+  const [userCredentail, setUserCredentail] = useState({
     username: "",
     email: "",
     password: "",
@@ -19,7 +19,7 @@ const Profile = () => {
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-
+  const { username, email, password, profession } = userCredentail;
   const handleSuccess = () => {
     enqueueSnackbar("User Updated Successfully", { variant: "success" });
   };
@@ -30,7 +30,7 @@ const Profile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserCridentail({ ...userCridential, [name]: value });
+    setUserCredentail({ ...userCredentail, [name]: value });
   };
 
   useEffect(() => {
@@ -48,8 +48,8 @@ const Profile = () => {
         );
         if (res.ok) {
           res.json().then((user) => {
-            setUserCridentail({
-              ...userCridential,
+            setUserCredentail({
+              ...userCredentail,
               username: user.username,
               email: user.email,
               profession: user.prof,
@@ -61,36 +61,31 @@ const Profile = () => {
       }
     };
     getUser();
-  }, []);
+  }, [userInfo]);
 
   const HandleUpdate = async (e) => {
     e.preventDefault();
-    // const data = new FormData();
-    // data.set("username", userCridential.username);
-    // data.set("email", userCridential.email);
-    // data.set("password", userCridential.password);
-
     try {
       const res = await fetch(
-        "https://7wvkdh-5000.csb.app/projec/user/profile",
+        "https://trrmmy-5000.csb.app/projec/user/profile",
         {
           method: "PUT",
+          body: JSON.stringify({ ...userCredentail }),
           headers: {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify({ ...userCridential }),
+          cors: "no-cors",
         },
       );
-
-      // const { success, message } = res;
+      console.log("respon", res);
       if (res) {
         res.json().then((user) => {
           console.log("res", user);
 
-          // setUserInfo(user);
-          // handleSuccess();
-          // navigate("/profile");
+          setUserInfo(user);
+          handleSuccess();
+          navigate("/profile");
         });
       } else {
         handleError();
@@ -112,7 +107,7 @@ const Profile = () => {
               type="text"
               name="username"
               placeholder="Enter Name"
-              value={userCridential.username}
+              value={username}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>
@@ -122,18 +117,18 @@ const Profile = () => {
               type="email"
               name="email"
               placeholder="Enter Email"
-              value={userCridential.email}
+              value={email}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>
 
           <Form.Group className="my-2" controlId="profession">
-            <Form.Label>Portrofession</Form.Label>
+            <Form.Label>Profession</Form.Label>
             <Form.Control
               type="profession"
               name="profession"
               placeholder="Enter profession"
-              value={userCridential.profession}
+              value={profession}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>
@@ -144,15 +139,15 @@ const Profile = () => {
               type="password"
               name="password"
               placeholder="Enter password"
-              value={userCridential.password}
+              value={password}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="mt-3 btn">
+          <Button type="button" variant="primary" className="mt-3 btn">
             Cancle
           </Button>
-          <Button type="submit" variant="primary" className="mt-3">
+          <Button type="submit" ariant="success" className="mt-3">
             Save Changes
           </Button>
         </form>
