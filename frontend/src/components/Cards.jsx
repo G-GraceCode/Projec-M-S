@@ -21,7 +21,7 @@ const Cards = ({ posts, show, loading }) => {
           posts.map((post) => (
             <Card key={post._id}>
               <img
-                src={`https://7wvkdh-5000.csb.app/${post?.coverImg}`}
+                src={`https://trrmmy-5000.csb.app/${post?.coverImg}`}
                 onClick={() => navigate("/viewing/" + post._id)}
                 className="image"
                 alt="img"

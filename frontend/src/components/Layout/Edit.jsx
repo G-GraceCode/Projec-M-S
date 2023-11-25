@@ -23,7 +23,7 @@ const Edit = () => {
 
   const editProject = async () => {
     try {
-      const res = await fetch(`https://7wvkdh-5000.csb.app/project/${id}`, {
+      const res = await fetch(`https://trrmmy-5000.csb.app/project/${id}`, {
         method: "Get",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const Edit = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://7wvkdh-5000.csb.app/project/editproject/${id}`,
+        `https://trrmmy-5000.csb.app/project/editproject/${id}`,
         {
           method: "PUT",
           body: data,

@@ -22,6 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         username: user.username,
         email: user.email,
+        prof: user.pr
       });
     } else {
       res.status(401);
@@ -37,7 +38,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
   try {
-    const { username, email, password } = req.body || req.params;
+    const { username, email, password, profession } = req.body || req.params;
     const userExist = await User.findOne({ email });
 
     if (userExist) {
@@ -49,6 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
       username,
       email,
       password,
+      profession
     });
 
     if (newUser) {
@@ -57,6 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
+        prof: newUser.profession
       });
     } else {
       res.status(401);

@@ -16,7 +16,7 @@ const Projects = ({ present }) => {
 
   const getProjects = async () => {
     try {
-      const res = await fetch("https://7wvkdh-5000.csb.app/project/projects", {
+      const res = await fetch("https://trrmmy-5000.csb.app/project/projects", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

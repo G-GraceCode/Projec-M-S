@@ -193,6 +193,10 @@ img {
   background-color: var(--color-bg-2) !important;
   border-radius: 20px;
 }
+.start:hover{
+  letter-spacing: 1px;
+  transition: letter-spacing var(--transition);
+}
 
 @media (max-width: 769px) {
   .container-box {

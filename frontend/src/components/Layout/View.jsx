@@ -14,7 +14,7 @@ const View = () => {
 
   const getTheProject = async () => {
     try {
-      const res = await fetch(`https://7wvkdh-5000.csb.app/project/${id}`, {
+      const res = await fetch(`https://trrmmy-5000.csb.app/project/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const View = () => {
             </div>
             <div className="imgContainer">
               <img
-                src={`https://7wvkdh-5000.csb.app/${projectInfo.coverImg}`}
+                src={`https://trrmmy-5000.csb.app/${projectInfo.coverImg}`}
                 alt=""
                 loading="lazy"
               />

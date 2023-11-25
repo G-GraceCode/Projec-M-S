@@ -35,7 +35,7 @@ const CreateProject = ({ close }) => {
     data.set("file", files);
 
     try {
-      const res = await fetch("https://7wvkdh-5000.csb.app/project/create", {
+      const res = await fetch("https://trrmmy-5000.csb.app/project/create", {
         method: "POST",
         body: data,
         credentials: "include",

@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 // middleware to handle our methods
 app.use(
   cors({
-    origin: ["https://7wvkdh-4000.csb.app"],
+    origin: ["https://trrmmy-5173.csb.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
