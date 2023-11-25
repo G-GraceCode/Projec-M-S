@@ -37,9 +37,10 @@ const Navbar = () => {
               loading="lazy"
             /> */}
           </div>
-          <h4>
-            {userInfo?.username} <br /> <small>{userInfo?.prof}</small>
-          </h4>
+          <div className="info">
+            <h4>{userInfo?.username}</h4>
+            <small>{userInfo?.prof}</small>
+          </div>
         </div>
 
         <Link className="link" to="/logout">
@@ -94,6 +95,20 @@ const User = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    cursor: pointer;
+    .info{
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: center;
+      h4{
+        letter-spacing: .8px;
+      }
+      small {
+        margin-top: -4px;
+        font-size: 12px;
+      }
+    }
   }
 
   & > .link {
