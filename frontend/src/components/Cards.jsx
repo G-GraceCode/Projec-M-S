@@ -15,8 +15,10 @@ const Cards = ({ posts, show, loading }) => {
       <div className="carts">
         {loading ? (
           <div className="circle">
-            <AnimatedCircle />
+            <AnimatedCircle /> Searching ...
           </div>
+        ) : totalPost.length ? (
+          <h4> No Project Created</h4>
         ) : (
           posts.map((post) => (
             <Card key={post._id}>
@@ -47,7 +49,6 @@ const Cards = ({ posts, show, loading }) => {
             </Card>
           ))
         )}
-        {totalPost === 0 && <> No Project Created</>}
       </div>
     </Projectlist>
   );
