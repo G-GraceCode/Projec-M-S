@@ -10,7 +10,7 @@ import DeleteProject from "../../pages/DeleteProject";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
 
@@ -31,15 +31,14 @@ const Projects = ({ present }) => {
       }
     } catch (e) {
       console.log(e.message);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [loading]);
 
   return (
     <div className="content">
@@ -58,9 +57,17 @@ const Projects = ({ present }) => {
         </Addproject>
       </Searchproject>
       {showType === "table" ? (
-        <Tableview show={() => setDelet("active")} posts={posts} loading = {loading} />
+        <Tableview
+          show={() => setDelet("active")}
+          posts={posts}
+          loading={loading}
+        />
       ) : (
-        <Cards show={() => setDelet("active")} posts={posts} loading = {loading} />
+        <Cards
+          show={() => setDelet("active")}
+          posts={posts}
+          loading={loading}
+        />
       )}
       <Projectfooter>
         <h4>{`Total Project ${posts.length}`}</h4>
@@ -76,7 +83,9 @@ const Projects = ({ present }) => {
         </div>
       </Projectfooter>
 
-      {delet && <DeleteProject close={() => setDelet("")} />}
+      {delet && (
+        <DeleteProject close={() => (setDelet(""), setLoading(true))} />
+      )}
     </div>
   );
 };

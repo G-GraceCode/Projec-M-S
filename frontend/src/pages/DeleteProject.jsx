@@ -26,8 +26,6 @@ const DeleteProject = ({ close }) => {
     );
     if (res.ok) {
       res.json().then((info) => {
-        close()
-        navigate("/app");
         setTimeout(() => {
           enqueueSnackbar(`${info.message}`, {
             variant: "success",
@@ -51,7 +49,7 @@ const DeleteProject = ({ close }) => {
         variant: "error",
       });
     }, 2000);
-   }
+   } final
   };
 
   return (
