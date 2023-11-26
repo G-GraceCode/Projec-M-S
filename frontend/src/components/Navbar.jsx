@@ -36,7 +36,7 @@ const Navbar = () => {
               src={avater}
               alt="user-photo"
               loading="lazy"
-              title='a'
+              title="Your Avater"
             />
           </div>
           <div className="info">
