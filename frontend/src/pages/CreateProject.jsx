@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Editor from "../components/Editor";
 import { useSnackbar } from "notistack";
+import AnimatedCircle from "../AnimatedCircle";
 
 const CreateProject = ({ close }) => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,7 @@ const CreateProject = ({ close }) => {
   const [content, setContent] = useState("");
   const [complete, setComplete] = useState("");
   const [files, setFiles] = useState("");
+  const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -20,12 +22,15 @@ const CreateProject = ({ close }) => {
     enqueueSnackbar("new Project created", { variant: "success" });
   };
 
-  const handleError = (err) => {
+  const handleError = () => {
     enqueueSnackbar("Failed Project not created", { variant: "error" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
@@ -41,20 +46,23 @@ const CreateProject = ({ close }) => {
         credentials: "include",
         cors: "no-cors",
       });
+
       if (res.ok) {
-        navigate("/project");
-        close();
+        setLoading(false);
         setTimeout(() => {
           handleSuccess();
         }, 1000);
         return;
       } else {
+        setLoading(false);
         setTimeout(() => {
           handleError();
         }, 1000);
       }
     } catch (e) {
       console.log("message", e);
+    } finally {
+      navigate("/app");
     }
   };
 
@@ -148,11 +156,11 @@ const CreateProject = ({ close }) => {
           </label>
 
           <div className="btn">
-            <button type='button' style={{ marginTop: "5px" }} onClick={close}>
+            <button type="button" style={{ marginTop: "5px" }} onClick={close}>
               Cancle
             </button>
             <button type="submit" style={{ marginTop: "5px" }}>
-              Create Project
+              {loading ? <AnimatedCircle /> : "Create Project"}
             </button>
           </div>
         </form>

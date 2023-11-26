@@ -4,52 +4,51 @@ import { useNavigate } from "react-router-dom";
 import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
 
-
 const DeleteProject = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-
   const handleDelete = async (e) => {
-   e.preventDefault();
-   try{
-    const res = await fetch(
-      `https://trrmmy-5000.csb.app/project/deleteproject/${userInfo?._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        `https://trrmmy-5000.csb.app/project/deleteproject/${userInfo?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
         },
-        credentials: "include",
-      },
-    );
-    if (res.ok) {
-      res.json().then((info) => {
-        setTimeout(() => {
-          enqueueSnackbar(`${info.message}`, {
-            variant: "success",
-          });
-        }, 2000);
-        
-      });
-    } else {
-      res.json().then((info) => {
-        setTimeout(() => {
-          enqueueSnackbar(`${info.message}`, {
-            variant: "error",
-          });
-        }, 2000);
-      });
+      );
+      if (res.ok) {
+        res.json().then((info) => {
+          setTimeout(() => {
+            enqueueSnackbar(`${info.message}`, {
+              variant: "success",
+            });
+          }, 2000);
+        });
+      } else {
+        res.json().then((info) => {
+          setTimeout(() => {
+            enqueueSnackbar(`${info.message}`, {
+              variant: "error",
+            });
+          }, 2000);
+        });
+      }
+      console.log("res", res);
+    } catch (e) {
+      setTimeout(() => {
+        enqueueSnackbar(`${e.message}`, {
+          variant: "error",
+        });
+      }, 2000);
+    } finally {
+      close();
     }
-    console.log("res", res);
-   }catch(e){
-    setTimeout(() => {
-      enqueueSnackbar(`${e.message}`, {
-        variant: "error",
-      });
-    }, 2000);
-   } final
   };
 
   return (
@@ -59,7 +58,12 @@ const DeleteProject = ({ close }) => {
           <h3> Delete Project </h3>
           <p>{` ${userInfo?.username} delete by clicking the link below`}</p>
           <div className="btn-logout">
-            <Button type="button" variant="primary" className="me-3" onClick={close}>
+            <Button
+              type="button"
+              variant="primary"
+              className="me-3"
+              onClick={close}
+            >
               Cancle
             </Button>
             <Button variant="danger" onClick={handleDelete}>
