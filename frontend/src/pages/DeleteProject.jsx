@@ -8,8 +8,13 @@ const DeleteProject = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
 
-  const handleCancle = ({ close }) => {
-    navigate("/app");
+  const handleDelete = async (e) => {
+   e.preventDefault();
+   try{
+
+   }catch{
+    
+   }
   };
 
   return (
@@ -19,10 +24,10 @@ const DeleteProject = ({ close }) => {
           <h3> Delete Project </h3>
           <p>{` ${userInfo?.username} delete by clicking the link below`}</p>
           <div className="btn-logout">
-            <Button variant="primary" className="me-3" onClick={close}>
+            <Button type="button" variant="primary" className="me-3" onClick={close}>
               Cancle
             </Button>
-            <Button variant="danger" onClick={handleLogout}>
+            <Button variant="danger" onClick={handleDelete}>
               Delete
             </Button>
           </div>

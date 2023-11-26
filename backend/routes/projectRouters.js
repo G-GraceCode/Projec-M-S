@@ -4,6 +4,7 @@ import {
   getProjects,
   getAproject,
   editProject,
+  deleteProject
 } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import multer from "multer";
@@ -19,5 +20,7 @@ router
 router.put("/editproject/:id", upLoadMiddleware.single("file"), editProject);
 router.route("/projects").get(protect, getProjects);
 router.get("/:id", getAproject);
+router.route('/deleteproject/:id').delete(protect, deleteProject)
+
 
 export default router;

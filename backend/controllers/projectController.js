@@ -118,4 +118,26 @@ const getAproject = asyncHandler(async (req, res) => {
   }
 });
 
-export { createProject, getProjects, getAproject, editProject };
+// @des delete user profile
+// route Get /project/deleteproject/:id
+// @access private
+
+const deleteProject = asyncHandler(async (req, res) => {
+  try {
+    const id = req.user._id;
+    const author = id;
+    const project = await Project.deleteOne({author});
+
+    if (!project) {
+      return res.status(404).json({ message: "User not Not Found" });
+    }
+
+    res.status(200).json({
+        message: "Project Deleted Successfully",
+      });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+
+export { createProject, getProjects, getAproject, editProject, deleteProject };
