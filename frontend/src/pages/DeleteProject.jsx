@@ -1,19 +1,54 @@
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
+import { useSnackbar } from "notistack";
+
 
 const DeleteProject = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
 
   const handleDelete = async (e) => {
    e.preventDefault();
    try{
-
-   }catch{
-    
+    const res = await fetch(
+      `https://trrmmy-5000.csb.app/project/deleteproject/${userInfo?._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      },
+    );
+    if (res.ok) {
+      res.json().then((info) => {
+        setTimeout(() => {
+          enqueueSnackbar(`${info.message}`, {
+            variant: "success",
+          });
+        }, 2000);
+        navigate("/project");
+      });
+    } else {
+      res.json().then((info) => {
+        setTimeout(() => {
+          enqueueSnackbar(`${info.message}`, {
+            variant: "error",
+          });
+        }, 2000);
+      });
+    }
+    console.log("res", res);
+   }catch(e){
+    setTimeout(() => {
+      enqueueSnackbar(`${e.message}`, {
+        variant: "error",
+      });
+    }, 2000);
    }
   };
 

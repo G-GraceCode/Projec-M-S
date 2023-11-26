@@ -129,7 +129,7 @@ const deleteProject = asyncHandler(async (req, res) => {
     const project = await Project.deleteOne({author});
 
     if (!project) {
-      return res.status(404).json({ message: "User not Not Found" });
+      return res.status(404).json({ message: "Project not Not Found" });
     }
 
     res.status(200).json({
