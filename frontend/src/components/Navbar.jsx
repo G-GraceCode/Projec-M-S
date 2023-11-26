@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
+import avater from "../assets/add.png"
 
 const Navbar = () => {
   const { userInfo } = userAuth();
@@ -30,12 +31,13 @@ const Navbar = () => {
       <User>
         <div className="userprofile">
           <div className="userimg">
-            {/* <img
+            <img
               className="img"
-              src="/images/yan.jpg"
+              src={avater}
               alt="user-photo"
               loading="lazy"
-            /> */}
+              title='a'
+            />
           </div>
           <div className="info">
             <h4>{userInfo?.username}</h4>
@@ -63,6 +65,15 @@ const Nav = styled.nav`
   margin-bottom: 1.6rem;
   border-bottom: 1px solid var(--natural-white);
   position: sticky;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.06)
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.37));
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
   top: 0%;
   z-index: var(--z-modal);
 `;
@@ -96,13 +107,21 @@ const User = styled.div`
     justify-content: center;
     gap: 1rem;
     cursor: pointer;
-    .info{
+    .userimg{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-bg-2);
+      padding: .4rem;
+      border-radius: 50%;
+    }
+    .info {
       display: flex;
       flex-flow: column nowrap;
       align-items: flex-start;
       justify-content: center;
-      h4{
-        letter-spacing: .8px;
+      h4 {
+        letter-spacing: 0.8px;
       }
       small {
         margin-top: -4px;

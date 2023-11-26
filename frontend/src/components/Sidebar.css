@@ -35,6 +35,48 @@
   color: var(--color-sec);
   width: 100%;
 }
+.content_hover span {
+  width: 10px;
+  height: 10px;
+  /* padding: 0.2rem; */
+  margin-left: auto;
+  background-color: var(--color-bg);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_hover span::before {
+  content: "";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 10;
+  height: 10px;
+  background-color: var(--color-bg-2);
+  border-radius: 0 0 7px 0;
+  left: 0%;
+  right: 0%;
+  z-index: 100;
+}
+.content_hover .span::before {
+  content: "";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-bg-2);
+  border-radius: 0 7px 0 0;
+  /* left: 0%;
+  right: 0%; */
+  z-index: 100;
+}
 
 .content_hover .info::before {
   content: attr(arial-content);
@@ -51,7 +93,7 @@
 .content_hover:hover .info::before {
   position: absolute;
   background-color: var(--color-bg-2);
-  right: -46%;
+  /* right: -46%; */
   z-index: -1;
   text-transform: capitalize;
   /* transform: scale(1); */
@@ -79,7 +121,7 @@
 
 .active-btn {
   border-left: 4px solid var(--color-sec);
-  transition: border var(--transition);
+  /* transition: border var(--transition); */
   color: var(--color-btn-sec);
   background-color: var(--color-bg);
 }
@@ -103,8 +145,4 @@
 .font p {
   margin: 0.4rem 0 0 0.7rem;
   cursor: pointer;
-}
-
-.content_hover .resume {
-  background-color: var(--color-btn-prim);
 }

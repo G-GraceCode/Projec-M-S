@@ -39,6 +39,8 @@ const Sidebar = () => {
           <div className="logo"> Projec</div>
 
           <div className="content_hover">
+            {splitLocation[1] === "app" && <span></span>}
+
             <div
               className={`control control-1 info ${
                 splitLocation[1] === "app" ? "active-btn" : ""
@@ -51,9 +53,12 @@ const Sidebar = () => {
                 <p>Home</p>
               </Link>
             </div>
+            {splitLocation[1] === "app" && <span className="span"></span>}
           </div>
 
           <div className="content_hover">
+            {splitLocation[1] === "project" && <span></span>}
+
             <div
               className={`control control-1 ${
                 splitLocation[1] === "project" ? "active-btn" : ""
@@ -65,9 +70,12 @@ const Sidebar = () => {
                 <p> Projects </p>
               </Link>
             </div>
+            {splitLocation[1] === "project" && <span className="span"></span>}
           </div>
 
           <div className="content_hover">
+            {splitLocation[1] === "profile" && <span></span>}
+
             <div
               className={`control control-1  ${
                 splitLocation[1] === "profile" ? "active-btn" : ""
@@ -79,9 +87,12 @@ const Sidebar = () => {
                 <p>Profile </p>
               </Link>
             </div>
+            {splitLocation[1] === "profile" && <span className="span"></span>}
           </div>
 
           <div className="content_hover">
+            {splitLocation[1] === "logout" && <span></span>}
+
             <div
               className={`control control-1  ${
                 splitLocation[1] === "logout" ? "active-btn" : ""
@@ -94,6 +105,7 @@ const Sidebar = () => {
                 <p> Logout </p>
               </Link>
             </div>
+            {splitLocation[1] === "logout" && <span className="span"></span>}
           </div>
         </Menu>
       ) : (
