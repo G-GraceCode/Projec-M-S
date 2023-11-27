@@ -100,12 +100,12 @@ const Profile = () => {
       <Navbar />
       <Edituser>
         <Col className="image-replace"> 
-        <Card>
-          <Row>
-            <div>
+        <Card className="card">
+          
+            <div className="img-sec">
               <img src="" alt="" />
             </div>
-            </Row>
+            
             <Row>
             <input
                 type="file"
@@ -185,18 +185,34 @@ const Edituser = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   margin: 0 auto;
   color: var(--natural-white);
-  width: max(500px, 350px);
+  width: max(600px, 350px);
   background: var(--color-bg-2);
+  padding: 1.5rem;
+  gap: 1.2rem;
+
+
  .image-replace{
-  display: ;
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  & > .card{
+    .img-sec{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+      border-radius: 50%;
+      margin: 0 auto;
+  }
+ 
  }
 
   & form {
-    padding: 1.5rem;
-    margin-top: 1rem;
+    // margin-top: 1rem;
     border-radius: var(--border-radius);
     .btn {
       margin-right: 0.5rem;
