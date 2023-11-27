@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import styled from "styled-components";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 // import { ToastContainer, toast } from "react-toastify";
 import { useSnackbar } from "notistack";
@@ -99,6 +99,23 @@ const Profile = () => {
     <div className="content">
       <Navbar />
       <Edituser>
+        <Col className="image-replace"> 
+        <Card>
+          <Row>
+            <div>
+              <img src="" alt="" />
+            </div>
+            </Row>
+            <Row>
+            <input
+                type="file"
+                // onChange={(ev) => setFiles(ev.target.files[0])}
+              />
+              <p>Replace Image</p>
+            </Row>
+            
+          </Card>
+        </Col>
         <form onSubmit={HandleUpdate}>
           <h1>Update Your Info</h1>
           <Form.Group className="my-2" controlId="username">
@@ -152,12 +169,12 @@ const Profile = () => {
           </Button>
         </form>
 
+      </Edituser>
         <DeletetUser className="my-3" onClick={() => setDelet("active")}>
           Delete Accout
         </DeletetUser>
 
         {delet && <DeleteUser close={() => setDelet("")} />}
-      </Edituser>
     </div>
   );
 };
@@ -168,11 +185,16 @@ const Edituser = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
+  margin: 0 auto;
   color: var(--natural-white);
+  width: max(500px, 350px);
+  background: var(--color-bg-2);
+ .image-replace{
+  display: ;
+ }
 
   & form {
-    background: var(--color-bg-2);
     padding: 1.5rem;
     margin-top: 1rem;
     border-radius: var(--border-radius);
