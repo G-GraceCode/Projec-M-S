@@ -99,21 +99,19 @@ const Profile = () => {
     <div className="content">
       <Navbar />
       <Edituser>
-        <Col className="image-replace"> 
-        <Card className="card">
-          
+        <Col className="image-replace">
+          <Card className="card">
             <div className="img-sec">
               <img src="" alt="" />
             </div>
-            
-            <Row>
-            <input
+
+            <Row className="row">
+              <input
                 type="file"
                 // onChange={(ev) => setFiles(ev.target.files[0])}
               />
               <p>Replace Image</p>
             </Row>
-            
           </Card>
         </Col>
         <form onSubmit={HandleUpdate}>
@@ -168,13 +166,12 @@ const Profile = () => {
             Save Changes
           </Button>
         </form>
-
       </Edituser>
-        <DeletetUser className="my-3" onClick={() => setDelet("active")}>
-          Delete Accout
-        </DeletetUser>
+      <DeletetUser className="my-3" onClick={() => setDelet("active")}>
+        Delete Accout
+      </DeletetUser>
 
-        {delet && <DeleteUser close={() => setDelet("")} />}
+      {delet && <DeleteUser close={() => setDelet("")} />}
     </div>
   );
 };
@@ -201,12 +198,33 @@ const Edituser = styled.div`
   justify-content: center;
   text-align: center;
   & > .card{
+    background-color: transparent !important;
+    color: var(--natural-white);
+    border: 1px solid var(--natural-white);
+    padding: 1rem 0rem;
     .img-sec{
     width: 100px;
     height: 100px;
     background-color: red;
       border-radius: 50%;
       margin: 0 auto;
+  }
+  .row{
+    margin-top: 1.5rem;
+    
+    input[type="file"]{
+    color: red;
+    background-color: blue !important;
+    // display: none;
+
+    }
+
+    & > &input#file-upload-button{
+      color: red !important;
+      background-color: blue !important:
+      display: none;
+      
+    }
   }
  
  }
