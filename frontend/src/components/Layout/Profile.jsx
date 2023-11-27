@@ -219,7 +219,7 @@ const Edituser = styled.div`
 
     }
 
-    & > &input#file-upload-button{
+    & > #file-upload-button{
       color: red !important;
       background-color: blue !important:
       display: none;
