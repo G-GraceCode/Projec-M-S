@@ -185,7 +185,7 @@ const Edituser = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: row wrap;
+  flex-direction: wrap;
   margin: 0 auto;
   color: var(--natural-white);
   width: max(600px, 350px);
