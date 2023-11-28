@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
+import avater from "../../assets/addAvatar.png"
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -100,19 +101,21 @@ const Profile = () => {
       <Navbar />
       <Edituser>
         <Col className="image-replace">
-          <Card className="card">
+          <label className="card" htmlFor="file-input">
             <div className="img-sec">
-              <img src="" alt="" />
+              <img src={avater} alt="" />
             </div>
 
             <Row className="row">
-              <input
+                <input
                 type="file"
-                // onChange={(ev) => setFiles(ev.target.files[0])}
-              />
-              <p>Replace Image</p>
+                id="file-input"
+               />
+              <label htmlFor="file-input" className="file-input">Replace Image </label>
+             
+             
             </Row>
-          </Card>
+          </label>
         </Col>
         <form onSubmit={HandleUpdate}>
           <h1>Update Your Info</h1>
@@ -162,7 +165,7 @@ const Profile = () => {
           <Button type="button" variant="primary" className="mt-3 btn">
             Cancle
           </Button>
-          <Button type="submit" ariant="success" className="mt-3">
+          <Button type="submit"  variant="success" className="mt-3 mx-2">
             Save Changes
           </Button>
         </form>
@@ -189,41 +192,53 @@ const Edituser = styled.div`
   background: var(--color-bg-2);
   padding: 1.5rem;
   gap: 1.2rem;
+  border-radius: var(--border-radius);
 
+ .image-replace {
 
- .image-replace{
   display: flex;
-  align-self: flex-start;
   align-items: center;
   justify-content: center;
   text-align: center;
+
   & > .card{
     background-color: transparent !important;
     color: var(--natural-white);
-    border: 1px solid var(--natural-white);
+    border: none;
     padding: 1rem 0rem;
     .img-sec{
-    width: 100px;
-    height: 100px;
-    background-color: red;
-      border-radius: 50%;
-      margin: 0 auto;
+    width: 120px;
+    height: 120px;
+    ovaerflow: hidden;
+    border: 1px solid var(--color-bg);
+    border-radius: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+    img{
+      object-fit: cover;
+      object-position: center center;
+    }
   }
-  .row{
+  .row {
     margin-top: 1.5rem;
     
     input[type="file"]{
-    color: red;
-    background-color: blue !important;
-    // display: none;
+    display: none;
+    }  
 
-    }
-
-    & > #file-upload-button{
+    input[type="file"]::file-selector-button{
+      display: none;
       color: red !important;
       background-color: blue !important:
-      display: none;
-      
+    }
+
+   .file-input{
+    background-color: var(--natural-white);
+    color: var(--color-bg-2);
+    padding: .4rem .7rem;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 14px;
     }
   }
  
@@ -241,7 +256,9 @@ const Edituser = styled.div`
 const DeletetUser = styled.div`
   background: red;
   padding: 0.5rem 1.5rem;
-  width: 32%;
+  width: min(40%, 25%);
   cursor: pointer;
   border-radius: var(--border-radius);
+  margin: 0 auto;
+  color: var(--natural-white);
 `;
