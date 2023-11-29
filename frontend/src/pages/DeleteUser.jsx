@@ -63,7 +63,7 @@ const DeleteUser = ({ close }) => {
               Cancle
             </Button>
             <Button variant="danger" onClick={handleDelete}>
-             {} Delete
+             {loading ? "wait Deleting..." : "Delete"}
             </Button>
           </div>
         </div>

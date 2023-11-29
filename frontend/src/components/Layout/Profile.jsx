@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
-import avater from "../../assets/addAvatar.png"
+import avater from "../../assets/addAvatar.png";
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -17,12 +17,15 @@ const Profile = () => {
     email: "",
     password: "",
     profession: "",
+    file: "",
   });
+  const [files, setFiles] = useState("");
   const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { username, email, password, profession } = userCredentail;
+  console.log("profile", files);
   const handleSuccess = () => {
     enqueueSnackbar("User Updated Successfully", { variant: "success" });
   };
@@ -107,13 +110,14 @@ const Profile = () => {
             </div>
 
             <Row className="row">
-                <input
+              <input
                 type="file"
                 id="file-input"
-               />
-              <label htmlFor="file-input" className="file-input">Replace Image </label>
-             
-             
+                onChange={(e) => setFiles(e.target.files[0])}
+              />
+              <label htmlFor="file-input" className="file-input">
+                Replace Image{" "}
+              </label>
             </Row>
           </label>
         </Col>
@@ -165,7 +169,7 @@ const Profile = () => {
           <Button type="button" variant="primary" className="mt-3 btn">
             Cancle
           </Button>
-          <Button type="submit"  variant="success" className="mt-3 mx-2">
+          <Button type="submit" variant="success" className="mt-3 mx-2">
             Save Changes
           </Button>
         </form>
