@@ -144,7 +144,7 @@ const deletUser = asyncHandler(async (req, res) => {
     const id = req.user._id;
     const author = id;
     const user = await User.findByIdAndDelete(id);
-    const projects = await Project.deleteMany({ author });
+    await Project.deleteMany({ author });
 
     if (!user) {
       return res.status(404).json({ message: "User not Not Found" });
