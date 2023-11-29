@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
-import avater from "../../assets/addAvatar.png";
+import avatar from "../../assets/addAvatar.png";
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -76,7 +76,7 @@ const Profile = () => {
         "https://trrmmy-5000.csb.app/projec/user/profile",
         {
           method: "PUT",
-          body: JSON.stringify({ ...userCredentail }),
+          body: JSON.stringify({ ...userCredentail, f }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -106,7 +106,7 @@ const Profile = () => {
         <Col className="image-replace">
           <label className="card" htmlFor="file-input">
             <div className="img-sec">
-              <img src={avater} alt="" />
+              <img src={avatar} alt="" />
             </div>
 
             <Row className="row">
