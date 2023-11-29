@@ -129,6 +129,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.email = req.body.email;
       user.profession = req.body.profession;
 
+      if (req.file) {
+        user.profile = newPath;
+      }
+
       if (user.password) {
         user.password = req.body.password;
       }
@@ -141,7 +145,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         email: updatedUser.email,
         password: updatedUser.password,
         prof: updatedUser.profession,
-        profile: newPath ? newPath : "",
+        profile: updatedUser.profile,
       });
     } else {
       res.status(401);

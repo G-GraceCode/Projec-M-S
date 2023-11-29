@@ -118,10 +118,11 @@ const User = styled.div`
       align-items: center;
       justify-content: center;
       background-color: var(--color-bg-2);
-      padding: 0.4rem;
+
       border-radius: 50%;
       overflow: hidden;
-      img {
+      .img {
+        width: 100%;
         object-fit: cover;
         object-position: center center;
       }

@@ -119,9 +119,7 @@ const Profile = () => {
             <div className="img-sec">
               <img
                 src={
-                  profile
-                    ? `https://trrmmy-5000.csb.app/${credentail.profile}`
-                    : avatar
+                  profile ? `https://trrmmy-5000.csb.app/${profile}` : avatar
                 }
                 alt="avater"
               />
@@ -232,13 +230,15 @@ const Edituser = styled.div`
     .img-sec{
     width: 120px;
     height: 120px;
-    ovaerflow: hidden;
+    overflow: hidden;
     border: 1px solid var(--color-bg);
     border-radius: 50%;
     margin: 0 auto;
     cursor: pointer;
     img{
-      object-fit: cover;
+      display: block;
+      width: 100%;
+      object-fit: contain;
       object-position: center center;
     }
   }
@@ -246,7 +246,10 @@ const Edituser = styled.div`
     margin-top: 1.5rem;
     
     input[type="file"]{
-    display: none;
+    text-align:center;
+    width: 100px;
+    margin: 0 auto;
+
     }  
 
     input[type="file"]::file-selector-button{
@@ -262,6 +265,7 @@ const Edituser = styled.div`
     cursor: pointer;
     border-radius: 15px;
     font-size: 14px;
+    margin: 0 auto;
     }
   }
  
