@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
+import AnimatedCircle from "../AnimatedCircle";
 
 const DeleteUser = ({ close }) => {
   const { userInfo, handleLogout } = userAuth();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const res = await fetch(
         `https://trrmmy-5000.csb.app/projec/user/${userInfo?._id}`,
         {
@@ -44,6 +47,8 @@ const DeleteUser = ({ close }) => {
       console.log("res", res);
     } catch (e) {
       console.log(e.message);
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -58,7 +63,7 @@ const DeleteUser = ({ close }) => {
               Cancle
             </Button>
             <Button variant="danger" onClick={handleDelete}>
-              Delete
+             {} Delete
             </Button>
           </div>
         </div>
