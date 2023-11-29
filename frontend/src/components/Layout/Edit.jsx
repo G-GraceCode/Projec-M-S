@@ -56,6 +56,7 @@ const Edit = () => {
     if (files) {
       data.set("file", files);
     }
+    console.log('setFile', files)
 
     try {
       setLoading(true);

@@ -17,15 +17,15 @@ const Profile = () => {
     email: "",
     password: "",
     profession: "",
-    file: "",
+    profile: "",
   });
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState({});
   const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { username, email, password, profession } = userCredentail;
-  console.log("profile", files);
+  const { username, email, password, profession, profile } = userCredentail;
+
   const handleSuccess = () => {
     enqueueSnackbar("User Updated Successfully", { variant: "success" });
   };
@@ -54,11 +54,13 @@ const Profile = () => {
         );
         if (res.ok) {
           res.json().then((user) => {
+            console.log("user", user);
             setUserCredentail({
               ...userCredentail,
               username: user.username,
               email: user.email,
               profession: user.prof,
+              profile: user.profile,
             });
           });
         }
@@ -71,20 +73,29 @@ const Profile = () => {
 
   const HandleUpdate = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.set("username", username);
+    data.set("email", email);
+    data.set("profession", profession);
+
+    if (password) {
+      data.set("password", password);
+    }
+
+    if (files) {
+      data.set("file", files);
+    }
+
     try {
       const res = await fetch(
         "https://trrmmy-5000.csb.app/projec/user/profile",
         {
           method: "PUT",
-          body: JSON.stringify({ ...userCredentail, f }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+          body: data,
           credentials: "include",
           cors: "no-cors",
         },
       );
-      console.log("respon", res);
       if (res) {
         res.json().then((user) => {
           setUserInfo(user);
@@ -104,19 +115,27 @@ const Profile = () => {
       <Navbar />
       <Edituser>
         <Col className="image-replace">
-          <label className="card" htmlFor="file-input">
+          <label className="card" htmlFor="file">
             <div className="img-sec">
-              <img src={avatar} alt="" />
+              <img
+                src={
+                  profile
+                    ? `https://trrmmy-5000.csb.app/${credentail.profile}`
+                    : avatar
+                }
+                alt="avater"
+              />
             </div>
 
             <Row className="row">
               <input
                 type="file"
-                id="file-input"
+                name="file"
+                id="file"
                 onChange={(e) => setFiles(e.target.files[0])}
               />
-              <label htmlFor="file-input" className="file-input">
-                Replace Image{" "}
+              <label htmlFor="file" className="file-input">
+                Replace Image
               </label>
             </Row>
           </label>

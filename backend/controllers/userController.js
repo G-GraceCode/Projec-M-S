@@ -3,6 +3,7 @@ import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 import Project from "../models/projectModel.js";
 import bcrypt from "bcryptjs";
+import fs from "fs";
 
 // @des Auth user/set token
 // route POST /projec/users/auth
@@ -39,7 +40,8 @@ const authUser = asyncHandler(async (req, res) => {
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
   try {
-    const { username, email, password, profession } = req.body || req.params;
+    const profile = "";
+    const { username, email, password, profession } = req.body;
     const userExist = await User.findOne({ email });
 
     if (userExist) {
@@ -52,6 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       profession,
+      profile,
     });
 
     if (newUser) {
@@ -100,6 +103,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     username: user.username,
     email: user.email,
     prof: user.profession,
+    profile: user.profile,
   });
 });
 
@@ -107,8 +111,19 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // route Get /projec/users/profile
 // @access private
 const updateUserProfile = asyncHandler(async (req, res) => {
+  let newPath;
+
   try {
+    if (req.file) {
+      const { originalname, path } = req.file;
+      const part = originalname.split(".");
+      const ext = part[part.length - 1];
+      newPath = `${path}.${ext}`;
+      fs.renameSync(path, newPath);
+    }
+
     const user = await User.findById(req.user._id);
+
     if (user) {
       user.username = req.body.username;
       user.email = req.body.email;
@@ -126,6 +141,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         email: updatedUser.email,
         password: updatedUser.password,
         prof: updatedUser.profession,
+        profile: newPath ? newPath : "",
       });
     } else {
       res.status(401);

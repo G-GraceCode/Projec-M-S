@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
-import avater from "../assets/add.png"
+import avater from "../assets/add.png";
 
 const Navbar = () => {
   const { userInfo } = userAuth();
@@ -33,7 +33,11 @@ const Navbar = () => {
           <div className="userimg">
             <img
               className="img"
-              src={avater}
+              src={
+                userInfo?.profile
+                  ? `https://trrmmy-5000.csb.app/${userInfo.profile}`
+                  : avater
+              }
               alt="user-photo"
               loading="lazy"
               title="Your Avater"
@@ -107,13 +111,20 @@ const User = styled.div`
     justify-content: center;
     gap: 1rem;
     cursor: pointer;
-    .userimg{
+    .userimg {
+      width: 2.5rem;
+      height: 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       background-color: var(--color-bg-2);
-      padding: .4rem;
+      padding: 0.4rem;
       border-radius: 50%;
+      overflow: hidden;
+      img {
+        object-fit: cover;
+        object-position: center center;
+      }
     }
     .info {
       display: flex;

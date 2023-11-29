@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ const DeleteUser = ({ close }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await fetch(
         `https://trrmmy-5000.csb.app/projec/user/${userInfo?._id}`,
         {
@@ -47,8 +48,8 @@ const DeleteUser = ({ close }) => {
       console.log("res", res);
     } catch (e) {
       console.log(e.message);
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,7 +64,7 @@ const DeleteUser = ({ close }) => {
               Cancle
             </Button>
             <Button variant="danger" onClick={handleDelete}>
-             {loading ? "wait Deleting..." : "Delete"}
+              {loading ? "wait Deleting..." : "Delete"}
             </Button>
           </div>
         </div>

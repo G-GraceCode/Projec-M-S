@@ -51,13 +51,13 @@ const CreateProject = ({ close }) => {
         setLoading(false);
         setTimeout(() => {
           handleSuccess();
-        }, 1000);
+        }, 1500);
         return;
       } else {
         setLoading(false);
         setTimeout(() => {
           handleError();
-        }, 1000);
+        }, 1500);
       }
     } catch (e) {
       console.log("message", e);
