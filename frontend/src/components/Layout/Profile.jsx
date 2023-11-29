@@ -238,8 +238,9 @@ const Edituser = styled.div`
     img{
       display: block;
       width: 100%;
-      object-fit: contain;
-      object-position: center center;
+      height: 100%;
+      object-fit: cover;
+      // object-position: center center;
     }
   }
   .row {
