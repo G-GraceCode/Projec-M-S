@@ -45,6 +45,8 @@ const Signout = styled.div`
   text-align: center;
   background-color: var(--color-bg-2);
   padding: 0rem 1rem;
+  width: min(900px, 500px);
+  margin: auto;
 
   border-radius: var(--border-radius);
   & > .logoutContent {
