@@ -7,11 +7,11 @@
   flex-flow: column nowrap;
   background-color: var(--color-bg-2);
   position: fixed;
-  bottom: 4%;
-  top: 4%;
-  left: 2.4%;
+  bottom: 0%;
+  top: 0%;
+  /* left: 2.4%; */
   z-index: var(--z-modal);
-  border-radius: var(--border-radius);
+  /* border-radius: var(--border-radius); */
 }
 
 .nav-controler .logo {

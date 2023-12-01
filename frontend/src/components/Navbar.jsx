@@ -77,7 +77,6 @@ const Nav = styled.nav`
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.37));
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
   top: 0%;
   z-index: var(--z-modal);
 `;
