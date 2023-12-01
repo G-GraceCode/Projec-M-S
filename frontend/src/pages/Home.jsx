@@ -15,20 +15,6 @@ const Home = () => {
 
 export default Home;
 
-const HomeDash = styled.div`
-  background-color: var(--color-bg-2);
-  height: 100dvh;
-  width: 100dvw;
-`;
+const HomeDash = styled.div``;
 
-const Container = styled.div`
-  background-color: var(--color-bg);
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  // padding: 1.2%;
-  & .content {
-    margin-left: 15%;
-    z-index: 1;
-  }
-`;
+const Container = styled.div``;

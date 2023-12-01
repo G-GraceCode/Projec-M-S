@@ -78,6 +78,9 @@ const Nav = styled.nav`
   backdrop-filter: blur(20px);
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.37));
   top: 0%;
+  left: 0%;
+  right: 0%;
+
   z-index: var(--z-modal);
 `;
 const Pagetitle = styled.div`

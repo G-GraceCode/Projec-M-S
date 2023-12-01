@@ -9,6 +9,7 @@
   position: fixed;
   bottom: 0%;
   top: 0%;
+  width: 15%;
   /* left: 2.4%; */
   z-index: var(--z-modal);
   /* border-radius: var(--border-radius); */
@@ -16,7 +17,7 @@
 
 .nav-controler .logo {
   position: absolute;
-  top: 5%;
+  top: 3%;
   font-size: 30px;
   text-align: center;
   color: var(--natural-white);

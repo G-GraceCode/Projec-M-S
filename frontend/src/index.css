@@ -169,7 +169,7 @@ img {
   text-align: left !important;
 }
 
-.container-box h1{
+.container-box h1 {
   font-size: 3rem;
   font-weight: 600;
   letter-spacing: 1.2px;
@@ -193,9 +193,28 @@ img {
   background-color: var(--color-bg-2) !important;
   border-radius: 20px;
 }
-.start:hover{
+.start:hover {
   letter-spacing: 1px;
   transition: letter-spacing var(--transition);
+}
+
+.general {
+  background-color: var(--color-bg-2);
+  height: 100dvh;
+  width: 100dvw;
+}
+
+.container-g {
+  background-color: var(--color-bg);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.container-g .content {
+  width: calc(100% - 15%);
+  margin-left: auto;
+  z-index: 1;
 }
 
 @media (max-width: 769px) {
