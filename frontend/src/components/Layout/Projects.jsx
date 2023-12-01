@@ -132,12 +132,18 @@ const Projectfooter = styled.footer`
   justify-content: space-between;
   flex: 1;
   padding: 0 1.5rem;
-  position: absolute;
+  position: fixed;
+  background-color: var(--color-green);
+  width: calc(100% - 15%);
+  padding: 1rem 0.8rem;
   bottom: 0%;
-  left: 0;
   right: 0;
   color: var(--natural-white);
   z-index: 100;
+
+  h4 {
+    color: var(--natural-white);
+  }
 
   & > .viewIcon {
     color: var(--color-bg-2);

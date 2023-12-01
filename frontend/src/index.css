@@ -215,6 +215,7 @@ img {
   width: calc(100% - 15%);
   margin-left: auto;
   z-index: 1;
+  position: relative;
 }
 
 @media (max-width: 769px) {
