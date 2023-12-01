@@ -139,8 +139,8 @@ const User = styled.div`
         letter-spacing: 0.8px;
       }
       small {
-        margin-top: -4px;
-        font-size: 12px;
+        margin-top: -10px;
+        font-size: 11px;
       }
     }
   }
@@ -151,11 +151,11 @@ const User = styled.div`
     color: var(--natural-white);
     text-decoration: none;
     margin-bottom: 0.36rem;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem 0.5rem;
     border-radius: var(--border-radius);
 
     .icon {
-      margin-right: 0.5rem;
+      margin-right: 0.3rem;
     }
 
     &:hover {
