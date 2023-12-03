@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
+// import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
 import avater from "../assets/add.png";
+import { BsPlusCircleFill } from "react-icons/bs";
 
 const Navbar = () => {
   const { userInfo } = userAuth();
@@ -29,12 +30,16 @@ const Navbar = () => {
       </Pagetitle>
 
       <User>
+        <Link className="link" to="/project">
+          <BsPlusCircleFill className="icon" /> create
+        </Link>
+
         <div className="userprofile">
           <div className="userimg">
             <img
               className="img"
               src={
-                userInfo?.profile
+                userInfo.profile
                   ? `https://trrmmy-5000.csb.app/${userInfo.profile}`
                   : avater
               }
@@ -48,10 +53,6 @@ const Navbar = () => {
             <small>{userInfo?.prof}</small>
           </div>
         </div>
-
-        <Link className="link" to="/logout">
-          <FaSignOutAlt className="icon" /> Logout
-        </Link>
       </User>
     </Nav>
   );
@@ -111,7 +112,7 @@ const User = styled.div`
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.6rem;
     cursor: pointer;
     .userimg {
       width: 2.5rem;
@@ -123,6 +124,9 @@ const User = styled.div`
 
       border-radius: 50%;
       overflow: hidden;
+      outline: 1px solid var(--natural-white);
+      outline-offset: 3px;
+
       .img {
         width: 100%;
         height: 100%;
@@ -135,6 +139,7 @@ const User = styled.div`
       flex-flow: column nowrap;
       align-items: flex-start;
       justify-content: center;
+      cursor: pointer;
       h4 {
         letter-spacing: 0.8px;
       }
@@ -146,21 +151,22 @@ const User = styled.div`
   }
 
   & > .link {
-    background-color: transparent;
-    border: 1px solid var(--natural-white);
+    background-color: var(--color-green);
+    border: 1px solid transparent;
     color: var(--natural-white);
     text-decoration: none;
-    margin-bottom: 0.36rem;
-    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.2rem;
+    margin-right: 16px;
+    padding: 0.15rem 0.7rem;
     border-radius: var(--border-radius);
 
     .icon {
-      margin-right: 0.3rem;
+      margin-right: 0.2rem;
     }
 
     &:hover {
       background-color: var(--natural-white);
-      border: 1px solid transparent;
+      border: 1px solid var(--color-green);
       color: var(--color-bg);
     }
   }
