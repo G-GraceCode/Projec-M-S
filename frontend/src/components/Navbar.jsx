@@ -31,7 +31,7 @@ const Navbar = () => {
 
       <User>
         <Link className="link" to="/project">
-          <BsPlusCircleFill className="icon" /> create
+          Create
         </Link>
 
         <div className="userprofile">
@@ -157,7 +157,7 @@ const User = styled.div`
     text-decoration: none;
     margin-bottom: 0.2rem;
     margin-right: 16px;
-    padding: 0.15rem 0.7rem;
+    padding: 0.15rem 0.8rem;
     border-radius: var(--border-radius);
 
     .icon {

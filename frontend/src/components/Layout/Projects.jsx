@@ -43,6 +43,7 @@ const Projects = ({ present }) => {
   return (
     <div className="content">
       <Navbar />
+
       <Searchproject>
         <div className="searchbar">
           <input
@@ -52,10 +53,46 @@ const Projects = ({ present }) => {
             placeholder="Search by Project Category"
           />
         </div>
+        <Sortby>
+          <select>
+            <option value="hide">Select By: </option>
+            <option>Complete</option>
+            <option>Uncomplete</option>
+            <option>Old Project</option>
+            <option>New Projects</option>
+            <option>Best Projects</option>
+          </select>
+          <select id="mounth">
+            <option value="hide">-- Month --</option>
+            <option value="january">January</option>
+            <option value="february">February</option>
+            <option value="march">March</option>
+            <option value="april">April</option>
+            <option value="may">May</option>
+            <option value="june">June</option>
+            <option value="july">July</option>
+            <option value="august">August</option>
+            <option value="september">September</option>
+            <option value="october">October</option>
+            <option value="november">November</option>
+            <option value="december">December</option>
+          </select>
+
+          <select id="year">
+            <option value="hide">-- Year --</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+          </select>
+        </Sortby>
         <Addproject onClick={present}>
           <BsPlusCircleFill className="icon" /> Add Project
         </Addproject>
       </Searchproject>
+
       {showType === "table" ? (
         <Tableview
           show={() => setDelet("active")}
@@ -94,33 +131,40 @@ export default Projects;
 
 const Searchproject = styled.div`
   display: flex;
-  align-items: cemter;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
   flex-flow: row nowrap;
   text-align: center;
   margin-bottom: 2rem;
+  padding: 0 1.5rem;
   filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.1));
   & > .searchbar {
+    display: flex;
+    align-items: center;
+
     input[type="search"] {
-      width: 450px;
+      width: 290px;
       min-width: 120px;
-      max-width: 470px;
+      max-width: 290px;
       flex: 1;
-      padding: 0.7rem 1rem;
+      padding: 0.4rem 0.6rem;
       outline: none;
-      border-radius: var(--border-radius-2) 0 0 var(--border-radius-2);
+      border-radius: var(--border-radius-2);
+      margin-right: 16px;
+      font-size: 12px;
+      font-style: italic;
     }
   }
 `;
 
 const Addproject = styled.button`
-  border-radius: 0 var(--border-radius-2) var(--border-radius-2) 0;
-  padding: 0 1rem;
+  border-radius: var(--border-radius-2);
+  padding: 0.4rem 0.8rem;
   border: none;
   background-color: var(--color-green);
   color: var(--natural-white);
   .icon {
-    font-size: 20px;
+    font-size: 18px;
     transform: rotate(180deg);
     transition: transform var(--transition);
   }
@@ -160,5 +204,19 @@ const Projectfooter = styled.footer`
     .color {
       color: var(--color-green);
     }
+  }
+`;
+
+const Sortby = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-right: auto;
+  border: none;
+  color: var(--natural-white);
+  select {
+    padding: 0.4rem 1rem;
+    font-size: 12px;
+    border: none;
+    border-radius: var(--border-radius-2);
   }
 `;
