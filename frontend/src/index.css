@@ -219,10 +219,25 @@ img {
   position: relative;
 }
 
-@media (max-width: 769px) {
+/* media query for small screen */
+@media screen and (max-width: 769px) {
   .container-box {
     display: flex !important;
     flex-flow: column-reverse wrap !important;
     text-align: center;
+  }
+  /* edit page */
+  .edituser {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    width: 90% !important;
+  }
+  .delet {
+    width: 90% !important;
+  }
+
+  /* logout page */
+  .signout{
+    width: 100% !important;
   }
 }

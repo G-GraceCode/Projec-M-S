@@ -113,7 +113,7 @@ const Profile = () => {
   return (
     <div className="content">
       <Navbar />
-      <Edituser>
+      <Edituser className="edituser">
         <Col className="image-replace">
           <label className="card" htmlFor="file">
             <div className="img-sec">
@@ -138,9 +138,9 @@ const Profile = () => {
             </Row>
           </label>
         </Col>
-        <form onSubmit={HandleUpdate}>
+        <form className="form" onSubmit={HandleUpdate}>
           <h1>Update Your Info</h1>
-          <Form.Group className="my-2" controlId="username">
+          <Form.Group className="my-2 w-100%" controlId="username">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
@@ -191,7 +191,7 @@ const Profile = () => {
           </Button>
         </form>
       </Edituser>
-      <DeletetUser className="my-3" onClick={() => setDelet("active")}>
+      <DeletetUser className="my-3 delet" onClick={() => setDelet("active")}>
         Delete Accout
       </DeletetUser>
 
@@ -203,13 +203,14 @@ const Profile = () => {
 export default Profile;
 
 const Edituser = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(min(300px), 1fr) minmax(min(300px), 1fr);
   justify-content: center;
   align-items: center;
-  flex-direction: wrap;
+  // flex-flow: row wrap;
   margin: 0 auto;
   color: var(--natural-white);
-  width: max(600px, 350px);
+  width: fit-content;
   background: var(--color-bg-2);
   padding: 1.5rem;
   gap: 1.2rem;
@@ -272,8 +273,9 @@ const Edituser = styled.div`
  
  }
 
-  & form {
-    // margin-top: 1rem;
+  .form {
+    width: 100%;
+    background-color: red;
     border-radius: var(--border-radius);
     .btn {
       margin-right: 0.5rem;

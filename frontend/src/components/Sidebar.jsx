@@ -43,7 +43,7 @@ const Sidebar = () => {
             <Menu
               className="nav-controler"
               style={{
-                width: `${isCollapsed ? "15%" : "2.5%"}`,
+                left: `${isCollapsed ? "0%" : "2.5%"}`,
                 backgroundColor: `${
                   isCollapsed ? "var(--color-bg-2)" : "var(--color-bg)"
                 }`,
@@ -128,7 +128,7 @@ const Sidebar = () => {
               </div>
             </Menu>
           ) : (
-            <div className="sidebar">
+            <div className="sidebar sideclose">
               <IoIosArrowDropright className="icon" onClick={handleToggle} />
             </div>
           )}
@@ -142,4 +142,4 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-const Menu = styled.div``;
+const Menu = styled.aside``;

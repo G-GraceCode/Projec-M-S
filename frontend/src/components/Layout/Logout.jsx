@@ -17,7 +17,7 @@ const Logout = () => {
     <div className="content">
       <Navbar />
 
-      <Signout>
+      <Signout className="signout">
         <div className="logoutContent">
           <h3> Sign Out </h3>
           <p>{` ${userInfo?.username} logout by clicking the link below`}</p>
@@ -45,7 +45,7 @@ const Signout = styled.div`
   text-align: center;
   background-color: var(--color-bg-2);
   padding: 0rem 1rem;
-  width: min(900px, 500px);
+  width: min(600px, 400px);
   margin: auto;
 
   border-radius: var(--border-radius);

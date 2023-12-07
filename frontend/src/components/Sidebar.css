@@ -6,11 +6,12 @@
   justify-content: center;
   flex-flow: column nowrap;
   background-color: var(--color-bg-2);
-  position: absolute;
+  position: fixed;
   bottom: 0%;
   top: 0%;
   /* width: 15%; */
-  /* left: 2.4%; */
+  left: 0%;
+  transition: left var(--transition);
   z-index: var(--z-modal);
   /* border-radius: var(--border-radius); */
   /* display: none; */
@@ -162,6 +163,11 @@
   position: absolute;
   bottom: 10%;
   right: -20%;
+}
+
+.sideclose {
+  left: 0% !important;
+  right:98% !important;
 }
 
 .sidebar .icon {
