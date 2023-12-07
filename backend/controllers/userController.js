@@ -41,7 +41,7 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   try {
     const profile = "";
-    const { username, email, password, profession } = req.body;
+    const { username, email, password, profession } = req.body || req.params;
     const userExist = await User.findOne({ email });
 
     if (userExist) {
