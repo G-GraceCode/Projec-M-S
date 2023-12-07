@@ -80,6 +80,7 @@ const Nav = styled.nav`
   top: 0%;
   left: 0%;
   right: 0%;
+  min-width: 85%;
 
   z-index: var(--z-modal);
 `;

@@ -38,18 +38,18 @@ const Sidebar = () => {
   return (
     <>
       {userInfo ? (
-        <Menu
-          className="nav-controler"
-          style={{
-            width: `${isCollapsed ? "15%" : "2.5%"}`,
-            backgroundColor: `${
-              isCollapsed ? "var(--color-bg-2)" : "var(--color-bg)"
-            }`,
-          }}
-        >
-          {isCollapsed && (
-            <div>
-              v<div className="logo"> Projec</div>
+        <>
+          {isCollapsed ? (
+            <Menu
+              className="nav-controler"
+              style={{
+                width: `${isCollapsed ? "15%" : "2.5%"}`,
+                backgroundColor: `${
+                  isCollapsed ? "var(--color-bg-2)" : "var(--color-bg)"
+                }`,
+              }}
+            >
+              <div className="logo"> Projec</div>
               <div className="content_hover">
                 {splitLocation[1] === "app" && <span></span>}
 
@@ -122,12 +122,17 @@ const Sidebar = () => {
                   <span className="span"></span>
                 )}
               </div>
+
+              <div className="sidebar">
+                <IoIosArrowDropleft className="icon" onClick={handleToggle} />
+              </div>
+            </Menu>
+          ) : (
+            <div className="sidebar">
+              <IoIosArrowDropright className="icon" onClick={handleToggle} />
             </div>
           )}
-          <div className="sidebar">
-            <IoIosArrowDropleft className="icon" onClick={handleToggle} />
-          </div>
-        </Menu>
+        </>
       ) : (
         ""
       )}
