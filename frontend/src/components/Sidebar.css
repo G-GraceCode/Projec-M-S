@@ -6,14 +6,14 @@
   justify-content: center;
   flex-flow: column nowrap;
   background-color: var(--color-bg-2);
-  position: fixed;
+  position: absolute;
   bottom: 0%;
   top: 0%;
-  width: 15%;
+  /* width: 15%; */
   /* left: 2.4%; */
   z-index: var(--z-modal);
   /* border-radius: var(--border-radius); */
-  display: none;
+  /* display: none; */
 }
 
 .nav-controler .logo {
@@ -147,4 +147,23 @@
 .font p {
   margin: 0.4rem 0 0 0.7rem;
   cursor: pointer;
+}
+
+/* side bar menu */
+.sidebar {
+  /* padding: 0.5rem; */
+  border-radius: 50%;
+  background-color: var(--natural-white);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 10%;
+  right: -14%;
+}
+
+.sidebar .icon {
+  font-size: 30px;
 }

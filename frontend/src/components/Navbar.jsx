@@ -7,7 +7,7 @@ import { userAuth } from "../ultContext/AuthContext";
 import avater from "../assets/add.png";
 import { BsPlusCircleFill } from "react-icons/bs";
 
-const Navbar = ({bar}{bar}) => {
+const Navbar = () => {
   const { userInfo } = userAuth();
   // const { username } = user;
   // console.log("user", user);
@@ -21,7 +21,6 @@ const Navbar = ({bar}{bar}) => {
   return (
     <Nav>
       <Pagetitle>
-        <FiMenu className="icon" onClickonClick={bar} />
         {splitLocation === "app" || pathname === "/app" ? (
           <h2>Dashboard</h2>
         ) : (

@@ -9,20 +9,23 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaBriefcase } from "react-icons/fa";
 import { MdContacts } from "react-icons/md";
 import { BsDownload } from "react-icons/bs";
+import { FiMenu } from "react-icons/fi";
 import "./Sidebar.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
 
 // import { FaBars } from "react-icons/fa";
 // import { FaTimes } from "react-icons/fa";
 
 const Sidebar = () => {
   const { userInfo } = userAuth();
-  // const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
-  // const handleToggle = () => {
-  //   setIsCollapsed((prevState) => !prevState);
-  // };
+  const handleToggle = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   // assigning location variable
   const location = useLocation();
@@ -35,77 +38,89 @@ const Sidebar = () => {
   return (
     <>
       {userInfo ? (
-        <Menu className="nav-controler">
-          <div className="logo"> Projec</div>
+        <Menu
+          className="nav-controler"
+          style={{ widt: `${isCollapsed ? "15%" : "5%"}` }}
+        >
+          {isCollapsed && (
+            <div>
+              v<div className="logo"> Projec</div>
+              <div className="content_hover">
+                {splitLocation[1] === "app" && <span></span>}
 
-          <div className="content_hover">
-            {splitLocation[1] === "app" && <span></span>}
+                <div
+                  className={`control control-1 info ${
+                    splitLocation[1] === "app" ? "active-btn" : ""
+                  }`}
+                  // arial-content="home"
+                  data-id="home"
+                >
+                  <Link className="font" to="/app">
+                    <AiFillHome />
+                    <p>Home</p>
+                  </Link>
+                </div>
+                {splitLocation[1] === "app" && <span className="span"></span>}
+              </div>
+              <div className="content_hover">
+                {splitLocation[1] === "project" && <span></span>}
 
-            <div
-              className={`control control-1 info ${
-                splitLocation[1] === "app" ? "active-btn" : ""
-              }`}
-              // arial-content="home"
-              data-id="home"
-            >
-              <Link className="font" to="/app">
-                <AiFillHome />
-                <p>Home</p>
-              </Link>
+                <div
+                  className={`control control-1 ${
+                    splitLocation[1] === "project" ? "active-btn" : ""
+                  }`}
+                  arial-content="Project"
+                >
+                  <Link to="/project" className="font">
+                    <FaBriefcase />
+                    <p> Projects </p>
+                  </Link>
+                </div>
+                {splitLocation[1] === "project" && (
+                  <span className="span"></span>
+                )}
+              </div>
+              <div className="content_hover">
+                {splitLocation[1] === "profile" && <span></span>}
+
+                <div
+                  className={`control control-1  ${
+                    splitLocation[1] === "profile" ? "active-btn" : ""
+                  }`}
+                  arial-content="profile"
+                >
+                  <Link to="/profile" className="font">
+                    <FaUserAlt />
+                    <p>Profile </p>
+                  </Link>
+                </div>
+                {splitLocation[1] === "profile" && (
+                  <span className="span"></span>
+                )}
+              </div>
+              <div className="content_hover">
+                {splitLocation[1] === "logout" && <span></span>}
+
+                <div
+                  className={`control control-1  ${
+                    splitLocation[1] === "logout" ? "active-btn" : ""
+                  }`}
+                  arial-content="logout"
+                >
+                  <Link to="/logout" className="font">
+                    <FaSignOutAlt />
+
+                    <p> Logout </p>
+                  </Link>
+                </div>
+                {splitLocation[1] === "logout" && (
+                  <span className="span"></span>
+                )}
+              </div>
             </div>
-            {splitLocation[1] === "app" && <span className="span"></span>}
-          </div>
-
-          <div className="content_hover">
-            {splitLocation[1] === "project" && <span></span>}
-
-            <div
-              className={`control control-1 ${
-                splitLocation[1] === "project" ? "active-btn" : ""
-              }`}
-              arial-content="Project"
-            >
-              <Link to="/project" className="font">
-                <FaBriefcase />
-                <p> Projects </p>
-              </Link>
-            </div>
-            {splitLocation[1] === "project" && <span className="span"></span>}
-          </div>
-
-          <div className="content_hover">
-            {splitLocation[1] === "profile" && <span></span>}
-
-            <div
-              className={`control control-1  ${
-                splitLocation[1] === "profile" ? "active-btn" : ""
-              }`}
-              arial-content="profile"
-            >
-              <Link to="/profile" className="font">
-                <FaUserAlt />
-                <p>Profile </p>
-              </Link>
-            </div>
-            {splitLocation[1] === "profile" && <span className="span"></span>}
-          </div>
-
-          <div className="content_hover">
-            {splitLocation[1] === "logout" && <span></span>}
-
-            <div
-              className={`control control-1  ${
-                splitLocation[1] === "logout" ? "active-btn" : ""
-              }`}
-              arial-content="logout"
-            >
-              <Link to="/logout" className="font">
-                <FaSignOutAlt />
-
-                <p> Logout </p>
-              </Link>
-            </div>
-            {splitLocation[1] === "logout" && <span className="span"></span>}
+          )}
+          <div className="sidebar">
+            <IoIosArrowDropleft className="icon" onClick={handleToggle} />
           </div>
         </Menu>
       ) : (

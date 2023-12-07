@@ -5,12 +5,11 @@ import "../index.css";
 import Sidebar from "../components/Sidebar";
 
 const PrivateRoutes = () => {
-  const [bar, setBar] = useState("active");
   return (
-    <>
-      {bar === "active" && <Sidebar />}
-      <Outlet bar={() => setBar("close")} />
-    </>
+    <div>
+      <Sidebar />
+      <Outlet />
+    </div>
   );
 };
 export default PrivateRoutes;

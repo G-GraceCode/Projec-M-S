@@ -9,7 +9,7 @@ const Dashboard = ({ bar }) => {
 
   return (
     <div className="content">
-      <Navbar />
+      <Navbar bar={bar} />
       <HomeSlide>
         <Slidar />
         <div className="Userinfo">
