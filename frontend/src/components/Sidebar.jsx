@@ -40,7 +40,12 @@ const Sidebar = () => {
       {userInfo ? (
         <Menu
           className="nav-controler"
-          style={{ widt: `${isCollapsed ? "15%" : "5%"}` }}
+          style={{
+            width: `${isCollapsed ? "15%" : "2.5%"}`,
+            backgroundColor: `${
+              isCollapsed ? "var(--color-bg-2)" : "var(--color-bg)"
+            }`,
+          }}
         >
           {isCollapsed && (
             <div>
