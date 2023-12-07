@@ -29,10 +29,11 @@ export const AuthProvider = ({ children }) => {
           });
         }
       } catch (e) {
+        enqueueSnackbar("user Couldn't Logout", { variant: "error" });
         console.log("Could Not Edit the User", e.message);
       }
     };
-    userInfo && getUser();
+    getUser();
   }, []);
   // const handleLogin = async () => {
   //   try {

@@ -212,7 +212,8 @@ img {
 }
 
 .container-g .content {
-  width: calc(100% - 15%);
+  /* width: min(calc(100% - 15%), 85%); */
+  width: 100%;
   margin-left: auto;
   z-index: 1;
   position: relative;

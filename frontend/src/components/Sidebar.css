@@ -13,6 +13,7 @@
   /* left: 2.4%; */
   z-index: var(--z-modal);
   /* border-radius: var(--border-radius); */
+  display: none;
 }
 
 .nav-controler .logo {

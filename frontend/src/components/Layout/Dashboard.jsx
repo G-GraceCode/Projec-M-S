@@ -2,8 +2,11 @@ import Navbar from "../Navbar";
 import styled from "styled-components";
 import Slidar from "../Swiperslide/Slidar";
 import { Link } from "react-router-dom";
+import { userAuth } from "../../ultContext/AuthContext";
 
-const Dashboard = () => {
+const Dashboard = ({ bar }) => {
+  const { userInfo } = userAuth();
+
   return (
     <div className="content">
       <Navbar />
@@ -11,7 +14,7 @@ const Dashboard = () => {
         <Slidar />
         <div className="Userinfo">
           <div>
-            <h1>Welcome Back Yanmick</h1>
+            <h1>{`Welcome Back ${userInfo.username}`}</h1>
             <p>What New do you love adding today in Projectject</p>
             <Link to="/project" className="proj">
               Create a New Project
