@@ -133,7 +133,7 @@ const Searchproject = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   text-align: center;
   margin-bottom: 2rem;
   padding: 0 1.5rem;
@@ -178,9 +178,10 @@ const Projectfooter = styled.footer`
   padding: 0 1.5rem;
   position: fixed;
   background-color: var(--color-green);
-  width: calc(100% - 15%);
+  // width: calc(100% - 15%);
   padding: 1rem 0.8rem;
   bottom: 0%;
+  left: 0%;
   right: 0;
   color: var(--natural-white);
   z-index: 100;

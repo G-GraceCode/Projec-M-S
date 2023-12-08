@@ -44,6 +44,7 @@ const RegisterPage = () => {
           credentials: "include",
         },
       );
+      console.log("data", data.json().then(), data);
       if (data.status === 201) {
         handleSuccess();
         navigate("/login");
@@ -51,7 +52,7 @@ const RegisterPage = () => {
         handleError();
       }
     } catch (e) {
-      console.log("message Error", e.message);
+      console.log("message Error", e.message, e);
     }
     setUserCredentail({
       ...userCredentail,
