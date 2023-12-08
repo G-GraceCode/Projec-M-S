@@ -39,8 +39,8 @@ const authUser = asyncHandler(async (req, res) => {
 // route POST /projec/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
+  const profile = "";
   try {
-    const profile = "";
     const { username, email, password, profession } = req.body || req.params;
     const userExist = await User.findOne({ email });
 
@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
       profession,
       profile,
     });
-
+    console.log("user", newUser);
     if (newUser) {
       generateToken(res, newUser._id);
       res.status(201).json({
@@ -65,6 +65,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: newUser.email,
         prof: newUser.profession,
       });
+      return;
     } else {
       res.status(401);
       throw new Error(`newUser not created`);

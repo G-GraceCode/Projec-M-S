@@ -1,6 +1,5 @@
 import Navbar from "../Navbar";
 import styled from "styled-components";
-import Slidar from "../Swiperslide/Slidar";
 import { Link } from "react-router-dom";
 import { userAuth } from "../../ultContext/AuthContext";
 
@@ -11,7 +10,6 @@ const Dashboard = ({ bar }) => {
     <div className="content">
       <Navbar bar={bar} />
       <HomeSlide>
-        <Slidar />
         <div className="Userinfo">
           <div>
             <h1>{`Welcome Back ${userInfo.username}`}</h1>
