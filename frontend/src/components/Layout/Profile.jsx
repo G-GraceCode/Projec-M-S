@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
 import avatar from "../../assets/addAvatar.png";
+import Posts from "../Posts";
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -141,6 +142,8 @@ const Profile = () => {
             Edit profile
           </Link>
         </Col>
+
+        <Posts />
       </Userprofile>
     </div>
   );
