@@ -139,9 +139,8 @@ const Setting = () => {
           </label>
         </Col>
         <form className="form" onSubmit={HandleUpdate}>
-          <h1>Update Your Info</h1>
+          <h3>Update Your Info</h3>
           <Form.Group className="my-2 w-100%" controlId="username">
-            <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               name="username"
@@ -151,7 +150,6 @@ const Setting = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group className="my-2" controlId="email">
-            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -162,9 +160,8 @@ const Setting = () => {
           </Form.Group>
 
           <Form.Group className="my-2" controlId="profession">
-            <Form.Label>Profession</Form.Label>
             <Form.Control
-              type="profession"
+              type="text"
               name="profession"
               placeholder="Enter profession"
               value={profession}
@@ -172,8 +169,31 @@ const Setting = () => {
             ></Form.Control>
           </Form.Group>
 
+          <Form.Group className="my-2 bio" controlId="bio">
+            <Form.Label>Bio: </Form.Label>
+            <textarea
+              className="textArea"
+              placeholder="Write about you in 150 character word"
+            ></textarea>
+          </Form.Group>
+
+          <Form.Group className="my-2" controlId="Social Links">
+            <Form.Label>Add Social Media Profiles Links:</Form.Label>
+            <Form.Control
+              type="text"
+              name="profession"
+              placeholder="Enter Linkedin profile link"
+            ></Form.Control>
+            <Form.Control
+              className="my-2"
+              type="text"
+              name="profession"
+              placeholder="Enter Behance profile link"
+            ></Form.Control>
+          </Form.Group>
+
           <Form.Group className="my-2" controlId="password">
-            <Form.Label>password</Form.Label>
+            <Form.Label>password:</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -215,6 +235,7 @@ const Edituser = styled.div`
   padding: 1.5rem;
   gap: 1.2rem;
   border-radius: var(--border-radius);
+    border: 2px dashed var(--natural-white);
 
  .image-replace {
 
@@ -280,6 +301,7 @@ const Edituser = styled.div`
     .btn {
       margin-right: 0.5rem;
     }
+
   }
 `;
 

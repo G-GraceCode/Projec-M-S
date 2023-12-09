@@ -219,6 +219,15 @@ img {
   position: relative;
 }
 
+/* textArea style */
+.textArea {
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 12px;
+  width: 100%;
+  outline: 2px solid var(--color-sec);
+}
+
 /* media query for small screen */
 @media screen and (max-width: 769px) {
   .container-box {
@@ -237,7 +246,7 @@ img {
   }
 
   /* logout page */
-  .signout{
+  .signout {
     width: 100% !important;
   }
 }
