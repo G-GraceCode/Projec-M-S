@@ -113,7 +113,7 @@ const Profile = () => {
   return (
     <div className="content">
       <Navbar />
-      < className="edituser">
+      <Userprofile className="edituser">
         <Col className="image-replace">
           <div className="img-sec">
             <img
@@ -130,7 +130,7 @@ const Profile = () => {
             </p>
 
             <div className="social">
-              <p> Follow him on: </p>
+              <p className="mb-2"> Follow him on: </p>
               <div>
                 <span>Linkedine</span>
                 <span>Behance</span>
@@ -226,6 +226,5 @@ const Userinfo = styled.div`
   .social {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
   }
 `;

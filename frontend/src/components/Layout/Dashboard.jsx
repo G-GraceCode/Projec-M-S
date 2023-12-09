@@ -28,7 +28,6 @@ export default Dashboard;
 
 const HomeSlide = styled.div`
   position: relative;
-  margin-top: -1.5rem;
   padding: 0 1rem;
   .Userinfo {
     position: absolute;
