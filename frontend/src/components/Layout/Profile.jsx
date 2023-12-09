@@ -115,87 +115,33 @@ const Profile = () => {
       <Navbar />
       <Edituser className="edituser">
         <Col className="image-replace">
-          <label className="card" htmlFor="file">
-            <div className="img-sec">
-              <img
-                src={
-                  profile ? `https://trrmmy-5000.csb.app/${profile}` : avatar
-                }
-                alt="avater"
-              />
-            </div>
+          <div className="img-sec">
+            <img
+              src={profile ? `https://trrmmy-5000.csb.app/${profile}` : avatar}
+              alt="avater"
+            />
+          </div>
+          <div>
 
-            <Row className="row">
-              <input
-                type="file"
-                name="file"
-                id="file"
-                onChange={(e) => setFiles(e.target.files[0])}
-              />
-              <label htmlFor="file" className="file-input">
-                Replace Image
-              </label>
-            </Row>
-          </label>
+            <h4>John Doe</h4>
+            <h6>A Full-stack-developer from usa</h6>
+            <p>Bio:
+              <span>
+              </span>
+            io:</p>
+            
+            <div> 
+              Follow him on: 
+              <span>Linkedinedn</span>
+              <span>Behance</span>
+             </div>
+            
+          </div>
+          <Link to="/edit">
+            Edit profile
+          </Link>
         </Col>
-        <form className="form" onSubmit={HandleUpdate}>
-          <h1>Update Your Info</h1>
-          <Form.Group className="my-2 w-100%" controlId="username">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              placeholder="Enter Name"
-              value={username}
-              onChange={handleChange}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group className="my-2" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={handleChange}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group className="my-2" controlId="profession">
-            <Form.Label>Profession</Form.Label>
-            <Form.Control
-              type="profession"
-              name="profession"
-              placeholder="Enter profession"
-              value={profession}
-              onChange={handleChange}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group className="my-2" controlId="password">
-            <Form.Label>password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={handleChange}
-            ></Form.Control>
-          </Form.Group>
-
-          <Button type="button" variant="primary" className="mt-3 btn">
-            Cancle
-          </Button>
-          <Button type="submit" variant="success" className="mt-3 mx-2">
-            Save Changes
-          </Button>
-        </form>
       </Edituser>
-      <DeletetUser className="my-3 delet" onClick={() => setDelet("active")}>
-        Delete Accout
-      </DeletetUser>
-
-      {delet && <DeleteUser close={() => setDelet("")} />}
     </div>
   );
 };
@@ -222,73 +168,24 @@ const Edituser = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  & > .card{
-    background-color: transparent !important;
-    color: var(--natural-white);
-    border: none;
-    padding: 1rem 0rem;
+  background-color: transparent !important;
+  color: var(--natural-white);
+  border: none;
+  padding: 1rem 0rem;
     .img-sec{
     width: 120px;
     height: 120px;
     overflow: hidden;
     border: 1px solid var(--color-bg);
     border-radius: 50%;
-    margin: 0 auto;
     cursor: pointer;
     img{
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      // object-position: center center;
+      object-position: center center;
     }
   }
-  .row {
-    margin-top: 1.5rem;
-    
-    input[type="file"]{
-    text-align:center;
-    width: 100px;
-    margin: 0 auto;
 
-    }  
-
-    input[type="file"]::file-selector-button{
-      display: none;
-      color: red !important;
-      background-color: blue !important:
-    }
-
-   .file-input{
-    background-color: var(--natural-white);
-    color: var(--color-bg-2);
-    padding: .4rem .7rem;
-    cursor: pointer;
-    border-radius: 15px;
-    font-size: 14px;
-    margin: 0 auto;
-    }
-  }
- 
- }
-
-  .form {
-    width: 100%;
-    background-color: red;
-    border-radius: var(--border-radius);
-    .btn {
-      margin-right: 0.5rem;
-    }
-  }
-`;
-
-const DeletetUser = styled.div`
-  background: red;
-  padding: 0.5rem 1.5rem;
-  width: min(40%, 25%);
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  margin: 0 auto;
-  color: var(--natural-white);
 `;
