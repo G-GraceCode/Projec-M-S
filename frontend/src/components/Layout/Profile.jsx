@@ -113,7 +113,7 @@ const Profile = () => {
   return (
     <div className="content">
       <Navbar />
-      <Edituser className="edituser">
+      < className="edituser">
         <Col className="image-replace">
           <div className="img-sec">
             <img
@@ -131,30 +131,33 @@ const Profile = () => {
 
             <div className="social">
               <p> Follow him on: </p>
-              <span>Linkedinedn</span>
-              <span>Behance</span>
+              <div>
+                <span>Linkedine</span>
+                <span>Behance</span>
+              </div>
             </div>
           </Userinfo>
           <Link to="/edit" className="edit">
             Edit profile
           </Link>
         </Col>
-      </Edituser>
+      </Userprofile>
     </div>
   );
 };
 
 export default Profile;
 
-const Edituser = styled.div`
+const Userprofile = styled.div`
   
   margin: 0 auto;
-  width: 50%;
+  width: 69%;
   color: var(--natural-white);
-  background: var(--color-bg-2);
+  background-color: var(--color-bg-2);
   padding: .7rem;
   gap: 1.2rem;
-  border-radius: var(--border-radius);
+  border-bottom: 2px dashed var(--natural-white);
+
 
  .image-replace {
   display: flex;
@@ -212,14 +215,17 @@ const Userinfo = styled.div`
     font-size: 12px;
     word-spacing: 0.3px;
     letter-spaing: 0.4px;
+    margin: 0.7rem 0;
     padding-left: 4px;
     &:fistletter {
       text-transform: uppercase;
+      font-size: 13px;
     }
   }
 
   .social {
     display: flex;
-    flex-direaction: column;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 `;
