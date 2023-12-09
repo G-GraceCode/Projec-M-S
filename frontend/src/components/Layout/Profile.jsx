@@ -121,25 +121,21 @@ const Profile = () => {
               alt="avater"
             />
           </div>
-          <div>
-
+          <Userinfo>
             <h4>John Doe</h4>
             <h6>A Full-stack-developer from usa</h6>
-            <p>Bio:
-              <span>
-              </span>
-            io:</p>
-            
-            <div> 
-              Follow him on: 
+            <p className="bio">
+              Bio:
+              <span></span>
+            </p>
+
+            <div>
+              Follow him on:
               <span>Linkedinedn</span>
               <span>Behance</span>
-             </div>
-            
-          </div>
-          <Link to="/edit">
-            Edit profile
-          </Link>
+            </div>
+          </Userinfo>
+          <Link to="/edit">Edit profile</Link>
         </Col>
       </Edituser>
     </div>
@@ -149,29 +145,27 @@ const Profile = () => {
 export default Profile;
 
 const Edituser = styled.div`
-  display: grid;
-  grid-template-columns: minmax(min(300px), 1fr) minmax(min(300px), 1fr);
-  justify-content: center;
-  align-items: center;
-  // flex-flow: row wrap;
+  
   margin: 0 auto;
   color: var(--natural-white);
-  width: fit-content;
+  width: min(calc(100% - 40%), 50%);
   background: var(--color-bg-2);
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   gap: 1.2rem;
   border-radius: var(--border-radius);
 
  .image-replace {
-
+background-color: red;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
   background-color: transparent !important;
   color: var(--natural-white);
   border: none;
+  margin: 0 auto;
   padding: 1rem 0rem;
+  position: relative;
     .img-sec{
     width: 120px;
     height: 120px;
@@ -188,4 +182,15 @@ const Edituser = styled.div`
     }
   }
 
+`;
+
+const Userinfo = styled.div`
+  h4 {
+    font-size: 30px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  h6 {
+    font-size: 16px;
+  }
 `;
