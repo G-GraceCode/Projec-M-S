@@ -125,17 +125,19 @@ const Profile = () => {
             <h4>John Doe</h4>
             <h6>A Full-stack-developer from usa</h6>
             <p className="bio">
-              Bio:
-              <span></span>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              animi incidunt quibusdam tempora quaerat aliquam.
             </p>
 
-            <div>
-              Follow him on:
+            <div className="social">
+              <p> Follow him on: </p>
               <span>Linkedinedn</span>
               <span>Behance</span>
             </div>
           </Userinfo>
-          <Link to="/edit">Edit profile</Link>
+          <Link to="/edit" className="edit">
+            Edit profile
+          </Link>
         </Col>
       </Edituser>
     </div>
@@ -147,32 +149,37 @@ export default Profile;
 const Edituser = styled.div`
   
   margin: 0 auto;
+  width: 50%;
   color: var(--natural-white);
-  width: min(calc(100% - 40%), 50%);
   background: var(--color-bg-2);
-  padding: 1rem 1.5rem;
+  padding: .7rem;
   gap: 1.2rem;
   border-radius: var(--border-radius);
 
  .image-replace {
-background-color: red;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 1.6rem;
   background-color: transparent !important;
   color: var(--natural-white);
   border: none;
-  margin: 0 auto;
+  // margin: 0 auto;
   padding: 1rem 0rem;
   position: relative;
+
     .img-sec{
+    display: flex;
+    align-self: flex-start;
     width: 120px;
     height: 120px;
     overflow: hidden;
-    border: 1px solid var(--color-bg);
+    border: 2px double var(--natural-white);
+    outline-offset: 2px;
     border-radius: 50%;
     cursor: pointer;
+    
     img{
       display: block;
       width: 100%;
@@ -181,16 +188,38 @@ background-color: red;
       object-position: center center;
     }
   }
+  
+  .edit {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
 
 `;
 
 const Userinfo = styled.div`
+  width: 50%;
   h4 {
     font-size: 30px;
     letter-spacing: 0.5px;
     font-weight: 600;
   }
   h6 {
-    font-size: 16px;
+    font-size: 10px;
+    margin-top: -6px;
+  }
+  .bio {
+    font-size: 12px;
+    word-spacing: 0.3px;
+    letter-spaing: 0.4px;
+    padding-left: 4px;
+    &:fistletter {
+      text-transform: uppercase;
+    }
+  }
+
+  .social {
+    display: flex;
+    flex-direaction: column;
   }
 `;
