@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Profile from "../components/Layout/Profile";
+import Setting from "../components/Layout/Setting";
 
 const SettingProfile = () => {
   return (
     <Dashboard className="general">
       <Container className="container-g">
-        <Profile />
+        <Setting />
       </Container>
     </Dashboard>
   );

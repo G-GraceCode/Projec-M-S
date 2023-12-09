@@ -41,7 +41,7 @@ const RegisterPage = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...userCredentail }),
-          credentials: "include",
+          // credentials: "include",
         },
       );
       console.log("data", data.json().then(), data);

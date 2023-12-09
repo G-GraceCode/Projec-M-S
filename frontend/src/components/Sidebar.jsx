@@ -15,6 +15,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { userAuth } from "../ultContext/AuthContext";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
+import { IoMdSettings } from "react-icons/io";
 
 // import { FaBars } from "react-icons/fa";
 // import { FaTimes } from "react-icons/fa";
@@ -101,6 +102,25 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 {splitLocation[1] === "profile" && (
+                  <span className="span"></span>
+                )}
+              </div>
+              <div className="content_hover">
+                {splitLocation[1] === "setting" && <span></span>}
+
+                <div
+                  className={`control control-1  ${
+                    splitLocation[1] === "setting" ? "active-btn" : ""
+                  }`}
+                  arial-content="setting"
+                >
+                  <Link to="/setting" className="font">
+                    <IoMdSettings />
+
+                    <p> Setting </p>
+                  </Link>
+                </div>
+                {splitLocation[1] === "setting" && (
                   <span className="span"></span>
                 )}
               </div>

@@ -9,6 +9,7 @@ import LogoutPage from "./pages/LogoutPage";
 import Home from "./pages/Home";
 import EditProject from "./pages/EditProject";
 import ViewProject from "./pages/ViewProject";
+import ViewProfile from "./pages/ViewProfile";
 // import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./ultContext/AuthContext";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
@@ -24,7 +25,8 @@ const App = () => {
           <Route element={<PrivateRoutes />}>
             <Route path="/app" element={<Home />} />
             <Route path="/project" element={<Project />} />
-            <Route path="/profile" element={<SettingProfile />} />
+            <Route path="/setting" element={<SettingProfile />} />
+            <Route path="/profile" element={<ViewProfile />} />
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="/editproject/:id" element={<EditProject />} />
             <Route path="/viewing/:id" element={<ViewProject />} />

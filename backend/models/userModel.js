@@ -15,10 +15,12 @@ const userSchema = new Schema(
       unique: true,
     },
     profession: {
-      type: String,
       required: true,
+      type: String,
     },
-    profile: String,
+    profile: {
+      type: String,
+    },
     password: {
       type: String,
       required: true,
