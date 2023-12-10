@@ -5,23 +5,85 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import AnimatedCircle from "../AnimatedCircle";
+import post from "../assets/pic.svg";
+import { FaShareFromSquare } from "react-icons/fa6";
 
 const Posts = () => {
   const navigate = useNavigate();
 
   return (
     <Projectlist>
+      <h4 className="my-2 text-left text-[14px]">List of Projects</h4>
       <div className="carts">
         <Card>
-          <img src="" className="image" alt="img" loading="lazy" />
+          <img src={post} className="image" alt="img" loading="lazy" />
+          <div className="Category">
+            <h4>post category</h4>
+          </div>
+          <div className="Icons-i">
+            <FaShareFromSquare className="icon share" />
+            <FiEdit className="icon" />
+            <AiFillDelete className="icon-2" />
+          </div>
+          {/* <div className="Detail">
+            <h4>post title</h4>
+            <p>post summary</p>
+          </div> */}
+        </Card>
+        <Card>
+          <img src={post} className="image" alt="img" loading="lazy" />
           <div className="Category">
             <h4>post category</h4>
           </div>
 
-          <div className="Detail">
+          {/* <div className="Detail">
             <h4>post title</h4>
             <p>post summary</p>
+          </div> */}
+        </Card>
+        <Card>
+          <img src={post} className="image" alt="img" loading="lazy" />
+          <div className="Category">
+            <h4>post category</h4>
           </div>
+
+          {/* <div className="Detail">
+            <h4>post title</h4>
+            <p>post summary</p>
+          </div> */}
+        </Card>
+        <Card>
+          <img src={post} className="image" alt="img" loading="lazy" />
+          <div className="Category">
+            <h4>post category</h4>
+          </div>
+
+          {/* <div className="Detail">
+            <h4>post title</h4>
+            <p>post summary</p>
+          </div> */}
+        </Card>
+        <Card>
+          <img src={post} className="image" alt="img" loading="lazy" />
+          <div className="Category">
+            <h4>post category</h4>
+          </div>
+
+          {/* <div className="Detail">
+            <h4>post title</h4>
+            <p>post summary</p>
+          </div> */}
+        </Card>
+        <Card>
+          <img src={post} className="image" alt="img" loading="lazy" />
+          <div className="Category">
+            <h4>post category</h4>
+          </div>
+
+          {/* <div className="Detail">
+            <h4>post title</h4>
+            <p>post summary</p>
+          </div> */}
         </Card>
       </div>
     </Projectlist>
@@ -31,8 +93,10 @@ const Posts = () => {
 export default Posts;
 
 const Projectlist = styled.div`
-  padding: 0.4rem 1.5rem;
+  padding: 0.4rem 0.7rem;
   text-align: center;
+  margin: 0 auto;
+  width: 70%;
   & > .carts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(250px), 1fr));
@@ -41,6 +105,40 @@ const Projectlist = styled.div`
     text-align: center;
     gap: 0.8rem;
     margin: 0.85rem;
+  }
+  h4 {
+    color: var(--natural-white);
+  }
+  .Icons-i {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 5%;
+    // left: 0%;
+    bottom: 5%;
+    z-index: 1000;
+    font-size: 14px;
+    background-color: var(--color-bg-2);
+    border-radius: var(--border-radius);
+    color: var(--natural-white);
+    padding: 0.3rem .4rem;
+
+    .share,
+    .icon,
+    .icon-2 {
+      margin-right: 8px;
+    }
+
+    &:hover{
+      .share,
+      .icon,
+      .icon-2 {
+        color: var(--color-sec);
+      }
+    }
+    .icon-2 {
+      color: red;
+    }
   }
 `;
 
@@ -69,6 +167,14 @@ const Card = styled.div`
     transform: Translate(0) scale(1);
     transition: transform var(--transition);
   }
+
+  &:hover {
+    .image {
+      transform: scale(1.19);
+      transition: transform var(--transition);
+    }
+  }
+
   .Category {
     position: absolute;
     top: 2%;

@@ -8,9 +8,12 @@ import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
+import { FiEdit } from "react-icons/fi";
 import DeleteUser from "../../pages/DeleteUser";
 import avatar from "../../assets/addAvatar.png";
 import Posts from "../Posts";
+import linke from "../../assets/linkedin.png";
+import instagrm from "../../assets/instagrm.png";
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -132,19 +135,22 @@ const Profile = () => {
 
             <div className="social">
               <p className="mb-2"> Follow him on: </p>
-              <div>
-                <span>Linkedine</span>
-                <span>Behance</span>
+              <div className="social-img">
+                <span>
+                  <img src={linke} />
+                </span>
+                <span>
+                  <img src={instagrm} />
+                </span>
               </div>
             </div>
           </Userinfo>
           <Link to="/edit" className="edit">
-            Edit profile
+            <FiEdit className="icon" /> Edit profile
           </Link>
         </Col>
-
-        <Posts />
       </Userprofile>
+      <Posts />
     </div>
   );
 };
@@ -155,12 +161,13 @@ const Userprofile = styled.div`
   
   margin: 0 auto;
   width: 69%;
+  border-radius: 10px 10px 0 0;
   color: var(--natural-white);
   background-color: var(--color-bg-2);
   padding: .7rem;
   gap: 1.2rem;
   border-bottom: 2px dashed var(--natural-white);
-
+  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
 
  .image-replace {
   display: flex;
@@ -229,5 +236,25 @@ const Userinfo = styled.div`
   .social {
     display: flex;
     flex-direction: column;
+
+    .social-img{
+      span{
+        display: flex;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        border: 2px double var(--natural-white);
+        outline-offset: 2px;
+        border-radius: 50%;
+        cursor: pointer;
+        
+        img{
+          display: block;
+          width: 100%;
+          object-fit: cover;
+          object-position: center center;
+        }
+      
+    }
   }
 `;

@@ -203,9 +203,6 @@ const Setting = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type="button" variant="primary" className="mt-3 btn">
-            Cancle
-          </Button>
           <Button type="submit" variant="success" className="mt-3 mx-2">
             Save Changes
           </Button>
