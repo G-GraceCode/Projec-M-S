@@ -105,7 +105,6 @@ const Projectlist = styled.div`
     text-align: center;
     gap: 0.8rem;
     margin: 0.85rem;
-    box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
   }
   h4 {
     color: var(--natural-white);
@@ -160,6 +159,7 @@ const Card = styled.div`
   border: 2px solid transparent;
   border-radius: var(--border-radius);
   z-index: 1;
+  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
 
   .image {
     display: block;
