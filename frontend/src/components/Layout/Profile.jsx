@@ -238,6 +238,8 @@ const Userinfo = styled.div`
     flex-direction: column;
 
     .social-img{
+      display: flex;
+align-items: center;
       span{
         display: flex;
         width: 30px;
@@ -247,6 +249,7 @@ const Userinfo = styled.div`
         outline-offset: 2px;
         border-radius: 50%;
         cursor: pointer;
+        margin-right: 6px;
         
         img{
           display: block;

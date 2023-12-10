@@ -105,6 +105,7 @@ const Projectlist = styled.div`
     text-align: center;
     gap: 0.8rem;
     margin: 0.85rem;
+    box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
   }
   h4 {
     color: var(--natural-white);
@@ -121,7 +122,7 @@ const Projectlist = styled.div`
     background-color: var(--color-bg-2);
     border-radius: var(--border-radius);
     color: var(--natural-white);
-    padding: 0.3rem .4rem;
+    padding: 0.3rem 0.4rem;
 
     .share,
     .icon,
@@ -129,7 +130,7 @@ const Projectlist = styled.div`
       margin-right: 8px;
     }
 
-    &:hover{
+    &:hover {
       .share,
       .icon,
       .icon-2 {
