@@ -73,16 +73,24 @@ const Dashboard = () => {
                 <img src={poc} className="image" alt="img" loading="lazy" />
               </div>
               <div className="Category">
-                <h4> How to create public shareable link for private user resources
-                  in MERN application...</h4>
-                <p> Now, I want to add a feature where the user can share their
+                <h4>
+                  {" "}
+                  How to create public shareable link for private user resources
+                  in MERN application...
+                </h4>
+                <p>
+                  {" "}
+                  Now, I want to add a feature where the user can share their
                   created list with anyone through a shareable link just like
-                 </p>
+                </p>
               </div>
               <div className="profile">
-                <span><img /></span>
-                <small>by <Link>Gody</Link></small>
-                
+                <span>
+                  <img />
+                </span>
+                <small>
+                  by <Link>Gody</Link>
+                </small>
               </div>
             </div>
           </div>
@@ -154,6 +162,14 @@ const Recentpost = styled.div`
           color: var(--natural-white);
           background-color: var(--natural-bk);
           padding: 0.7rem 1rem;
+          text-align: left;
+        }
+        &:hover {
+          .btn {
+            text-align: left;
+            letter-spacing: 0.5px;
+            transition: letter-spacing var(--transition);
+          }
         }
       }
 
@@ -163,7 +179,6 @@ const Recentpost = styled.div`
         align-items: center;
         flex: 1;
         height: 100%;
-        background-color: red;
         img {
           width: 100%;
           height: 100%;
