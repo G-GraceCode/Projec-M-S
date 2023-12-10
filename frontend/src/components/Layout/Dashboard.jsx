@@ -62,31 +62,79 @@ const Dashboard = () => {
         </Recentpost>
 
         <Mostrecent>
-          <div>
+          <div className="most-title">
             <h3>Most Projects</h3>
-            <Link to="/project">See more</Link>
+            <Link to="/project" className="link">
+              See more
+            </Link>
           </div>
 
           <div className="cart-list">
-            <div className="card">
-              <div>
-                <img src={poc} className="image" alt="img" loading="lazy" />
+            <div className="cart">
+              <div className="image">
+                <img src={poc} alt="img" loading="lazy" />
               </div>
               <div className="Category">
                 <h4>
-                  {" "}
                   How to create public shareable link for private user resources
-                  in MERN application...
+                  in MERN...
                 </h4>
                 <p>
-                  {" "}
                   Now, I want to add a feature where the user can share their
                   created list with anyone through a shareable link just like
                 </p>
               </div>
               <div className="profile">
                 <span>
-                  <img />
+                  <img src={poc} />
+                </span>
+                <small>
+                  by <Link>Gody</Link>
+                </small>
+              </div>
+            </div>
+
+            <div className="cart">
+              <div className="image">
+                <img src={poc} alt="img" loading="lazy" />
+              </div>
+              <div className="Category">
+                <h4>
+                  How to create public shareable link for private user resources
+                  in MERN...
+                </h4>
+                <p>
+                  Now, I want to add a feature where the user can share their
+                  created list with anyone through a shareable link just like
+                </p>
+              </div>
+              <div className="profile">
+                <span>
+                  <img src={poc} />
+                </span>
+                <small>
+                  by <Link>Gody</Link>
+                </small>
+              </div>
+            </div>
+
+            <div className="cart">
+              <div className="image">
+                <img src={poc} alt="img" loading="lazy" />
+              </div>
+              <div className="Category">
+                <h4>
+                  How to create public shareable link for private user resources
+                  in MERN...
+                </h4>
+                <p>
+                  Now, I want to add a feature where the user can share their
+                  created list with anyone through a shareable link just like
+                </p>
+              </div>
+              <div className="profile">
+                <span>
+                  <img src={poc} />
                 </span>
                 <small>
                   by <Link>Gody</Link>
@@ -111,6 +159,7 @@ const HomeSlide = styled.div`
 `;
 
 const Recentpost = styled.div`
+  margin-bottom: 4rem;
   h4 {
     color: var(--natural-white);
     font-size: 25px !important;
@@ -123,13 +172,13 @@ const Recentpost = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(min(460px), 1fr));
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
+    gap: 1rem;
 
     .carts {
       display: flex;
       align-items: flex-end;
-      flex-direction: row;
-      flex-wrap: wrap-reverse;
+      // flex-direction: row;
+      flex-wrap: wrap;
       background: var(--natural-white);
       border-radius: 10px;
       overflow: hidden;
@@ -164,13 +213,6 @@ const Recentpost = styled.div`
           padding: 0.7rem 1rem;
           text-align: left;
         }
-        &:hover {
-          .btn {
-            text-align: left;
-            letter-spacing: 0.5px;
-            transition: letter-spacing var(--transition);
-          }
-        }
       }
 
       .image {
@@ -189,4 +231,83 @@ const Recentpost = styled.div`
   }
 `;
 
-const Mostrecent = styled.div``;
+const Mostrecent = styled.div`
+  .most-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px double var(--natural-white);
+    color: var(--natural-white);
+    .link {
+      text-decoration: none;
+      color: var(--natural-white);
+    }
+  }
+
+  .cart-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px), 1fr));
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+
+    .cart {
+      padding: 0.6rem 0.6rem;
+      border: 2px double var(--natural-white);
+      border-radius: var(--border-radius);
+      height: 310px;
+      box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
+
+      min-height: 270px;
+      .image {
+        height: 120px;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+      .Category {
+        padding: 0.4rem;
+        color: var(--color-sec);
+        h4 {
+          font-size: 16px;
+          font-weight: 500;
+          margin: 0.7rem 0;
+          color: var(--natural-white);
+        }
+        p {
+          font-size: 12px;
+          word-spacing: 0.5px;
+        }
+      }
+      .profile {
+        margin-bottom: 1.1rem;
+        padding-left: 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--natural-white);
+        width: 100%;
+        margin-top: auto;
+
+        & > span {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-left: 0.2rem;
+
+          img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+      }
+    }
+  }
+`;
