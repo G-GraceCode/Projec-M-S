@@ -21,6 +21,9 @@ const userSchema = new Schema(
     profile: {
       type: String,
     },
+    $bio: String,
+    $Linkedin: String,
+    $instagram: String,
     password: {
       type: String,
       required: true,
