@@ -21,9 +21,9 @@ const userSchema = new Schema(
     profile: {
       type: String,
     },
-    $bio: String,
-    $linkedin: String,
-    $behance: String,
+    bio: {type: String,},
+    linkedin: {type:String,},
+    behance: {type:String,},
     password: {
       type: String,
       required: true,
