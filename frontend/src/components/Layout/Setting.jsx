@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
 import avatar from "../../assets/addAvatar.png";
+import AnimatedCircle from "../../AnimatedCircle";
 
 const Setting = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -19,6 +20,7 @@ const Setting = () => {
     profession: "",
     profile: "",
   });
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({});
   const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
@@ -42,6 +44,7 @@ const Setting = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
+        setLoading(true);
         const res = await fetch(
           "https://trrmmy-5000.csb.app/projec/user/profile",
           {
@@ -66,6 +69,8 @@ const Setting = () => {
         }
       } catch (e) {
         console.log("Could Not Edit the User", e.message);
+      } finally {
+        setLoading(false);
       }
     };
     getUser();
@@ -117,12 +122,11 @@ const Setting = () => {
         <Col className="image-replace">
           <label className="card" htmlFor="file">
             <div className="img-sec">
-              <img
-                src={
-                  profile ? `https://trrmmy-5000.csb.app/${profile}` : avatar
-                }
-                alt="avater"
-              />
+              {loading ? (
+                <AnimatedCircle />
+              ) : (
+                <img src={profile ? profile : avatar} alt="avater" />
+              )}
             </div>
 
             <Row className="row">
@@ -203,7 +207,12 @@ const Setting = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="success" className="mt-3 mx-2">
+          <Button
+            disabled={!username || !email || !password}
+            type="submit"
+            variant="success"
+            className="mt-3 mx-2"
+          >
             Save Changes
           </Button>
         </form>
@@ -253,6 +262,9 @@ const Edituser = styled.div`
     border: 1px solid var(--color-bg);
     border-radius: 50%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     img{
       display: block;
