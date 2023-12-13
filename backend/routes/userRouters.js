@@ -9,12 +9,14 @@ import {
 } from "../controllers/userController.js";
 import { createProject } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
-
 import multer from "multer";
+
+const storage = new multer.diskStorage({
+  destination: "uploads/",
+});
 const uploadMiddleware = multer({
-  dest: "./uploads/",
-  limits: { fileSize: 1024 * 1024 * 10 },
-}); // Limit file size to 10MB
+  storage,
+});
 
 const router = express.Router();
 
