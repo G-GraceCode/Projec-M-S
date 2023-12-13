@@ -37,11 +37,7 @@ const Navbar = () => {
           <div className="userimg">
             <img
               className="img"
-              src={
-                userInfo.profile
-                  ? `https://trrmmy-5000.csb.app/${userInfo.profile}`
-                  : avater
-              }
+              src={userInfo.profile ? userInfo.profile : avater}
               alt="user-photo"
               loading="lazy"
               title="Your Avater"
