@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import Project from "../models/projectModel.js";
 import bcrypt from "bcryptjs";
 import fs from "fs";
+import handleUpload from "../cloudinaryUpload/cloudUpload.js";
 
 // @des Auth user/set token
 // route POST /projec/users/auth
@@ -124,6 +125,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const user = await User.findById(req.user._id);
+    const userImage = await handleUpload(newPath);
 
     if (user) {
       user.username = req.body.username;
@@ -131,7 +133,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.profession = req.body.profession;
 
       if (req.file) {
-        user.profile = newPath;
+        user.profile = userImage.secure_url;
       }
 
       if (user.password) {
