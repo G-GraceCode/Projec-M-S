@@ -19,6 +19,9 @@ const Setting = () => {
     password: "",
     profession: "",
     profile: "",
+    $bio: "",
+    $linkedin: "",
+    $behance: "",
   });
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({});
@@ -26,14 +29,23 @@ const Setting = () => {
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { username, email, password, profession, profile } = userCredentail;
+  const {
+    username,
+    email,
+    password,
+    profession,
+    profile,
+    $bio,
+    $linkedin,
+    $behance,
+  } = userCredentail;
 
   const handleSuccess = () => {
-    enqueueSnackbar("User Updated Successfully", { variant: "success" });
+    enqueueSnackbar("user edited", { variant: "success" });
   };
 
   const handleError = () => {
-    enqueueSnackbar("Error Login", { variant: "Error" });
+    enqueueSnackbar(`${error}`, { variant: "Error" });
   };
 
   const handleChange = (e) => {
@@ -64,10 +76,14 @@ const Setting = () => {
               email: user.email,
               profession: user.prof,
               profile: user.profile,
+              $bio: user.$bio,
+              $linkedin: user.$linkedin,
+              $behance: user.$behance,
             });
           });
         }
       } catch (e) {
+        handleError(e.message);
         console.log("Could Not Edit the User", e.message);
       } finally {
         setLoading(false);
@@ -101,11 +117,12 @@ const Setting = () => {
           cors: "no-cors",
         },
       );
+      console.log("edit", res);
       if (res) {
         res.json().then((user) => {
           setUserInfo(user);
           handleSuccess();
-          navigate("/profile");
+          navigate("/setting");
         });
       } else {
         handleError();
@@ -177,6 +194,9 @@ const Setting = () => {
             <Form.Label>Bio: </Form.Label>
             <textarea
               className="textArea"
+              name="$bio"
+              value={$bio}
+              onChange={handleChange}
               placeholder="Write about you in 150 character word"
             ></textarea>
           </Form.Group>
@@ -184,14 +204,18 @@ const Setting = () => {
           <Form.Group className="my-2" controlId="Social Links">
             <Form.Label>Add Social Media Profiles Links:</Form.Label>
             <Form.Control
-              type="text"
-              name="profession"
+              type="link"
+              name="$linkedin"
+              value={$linkedin}
+              onChange={handleChange}
               placeholder="Enter Linkedin profile link"
             ></Form.Control>
             <Form.Control
               className="my-2"
               type="text"
-              name="profession"
+              name="$behance"
+              value={$behance}
+              onChange={handleChange}
               placeholder="Enter Behance profile link"
             ></Form.Control>
           </Form.Group>

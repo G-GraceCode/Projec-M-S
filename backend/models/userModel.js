@@ -22,8 +22,8 @@ const userSchema = new Schema(
       type: String,
     },
     $bio: String,
-    $Linkedin: String,
-    $instagram: String,
+    $linkedin: String,
+    $behance: String,
     password: {
       type: String,
       required: true,

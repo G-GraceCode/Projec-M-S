@@ -40,7 +40,10 @@ const authUser = asyncHandler(async (req, res) => {
 // route POST /projec/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
-  const profile = "";
+  let profile = "";
+  let $bio = "";
+  let $linkedin = "";
+  let $behance = "";
   try {
     const { username, email, password, profession } = req.body || req.params;
     const userExist = await User.findOne({ email });
@@ -56,6 +59,9 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
       profession,
       profile,
+      $bio,
+      $linkedin,
+      $behance,
     });
     console.log("user", newUser);
     if (newUser) {
@@ -106,6 +112,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
     email: user.email,
     prof: user.profession,
     profile: user.profile,
+    $bio: user.$bio,
+    $linkedin: user.$linkedin,
+    $behance: user.$behance,
   });
 });
 
@@ -131,12 +140,15 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.username = req.body.username;
       user.email = req.body.email;
       user.profession = req.body.profession;
+      user.$bio = req.body.bio;
+      user.$linkedin = req.body.$linkedin;
+      user.$behance = req.body.$behance;
 
       if (req.file) {
         user.profile = userImage.secure_url;
       }
 
-      if (user.password) {
+      if (req.body.password !== "") {
         user.password = req.body.password;
       }
 
@@ -149,6 +161,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         password: updatedUser.password,
         prof: updatedUser.profession,
         profile: updatedUser.profile,
+        $bio: updatedUser.$bio,
+        $linkedin: updatedUser.$linkedin,
+        $behance: updatedUser.$behance,
       });
     } else {
       res.status(401);
