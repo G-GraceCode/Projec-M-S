@@ -14,6 +14,8 @@ import avatar from "../../assets/addAvatar.png";
 import Posts from "../Posts";
 import linke from "../../assets/linkedin.png";
 import instagrm from "../../assets/instagrm.png";
+import AnimatedCircle from "../../AnimatedCircle";
+
 
 const Profile = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -22,13 +24,15 @@ const Profile = () => {
     password: "",
     profession: "",
     profile: "",
+    bio:"", linkedin:"", behance:""
   });
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({});
   const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { username, email, password, profession, profile } = userCredentail;
+  const { username, email, password, profession, profile, bio, linkedin, behance } = userCredentail;
 
   const handleSuccess = () => {
     enqueueSnackbar("User Updated Successfully", { variant: "success" });
@@ -40,12 +44,14 @@ const Profile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
     setUserCredentail({ ...userCredentail, [name]: value });
   };
 
   useEffect(() => {
     const getUser = async () => {
       try {
+        setLoading(true)
         const res = await fetch(
           "https://trrmmy-5000.csb.app/projec/user/profile",
           {
@@ -65,54 +71,21 @@ const Profile = () => {
               email: user.email,
               profession: user.prof,
               profile: user.profile,
+              bio: user.bio,
+              linkedin: user.linkedin,
+              behance: user.behance
             });
           });
         }
       } catch (e) {
         console.log("Could Not Edit the User", e.message);
+      } finally{
+        setLoading(false)
       }
     };
     getUser();
   }, [userInfo]);
 
-  const HandleUpdate = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.set("username", username);
-    data.set("email", email);
-    data.set("profession", profession);
-
-    if (password) {
-      data.set("password", password);
-    }
-
-    if (files) {
-      data.set("file", files);
-    }
-
-    try {
-      const res = await fetch(
-        "https://trrmmy-5000.csb.app/projec/user/profile",
-        {
-          method: "PUT",
-          body: data,
-          credentials: "include",
-          cors: "no-cors",
-        },
-      );
-      if (res) {
-        res.json().then((user) => {
-          setUserInfo(user);
-          handleSuccess();
-          navigate("/profile");
-        });
-      } else {
-        handleError();
-      }
-    } catch (e) {
-      console.log("bat", e.message);
-    }
-  };
 
   return (
     <div className="content">
@@ -120,33 +93,33 @@ const Profile = () => {
       <Userprofile className="edituser">
         <Col className="image-replace">
           <div className="img-sec">
-            <img
-              src={profile ? `https://trrmmy-5000.csb.app/${profile}` : avatar}
-              alt="avater"
-            />
+          {loading ? (
+                <AnimatedCircle />
+              ) : (
+                <img src={profile ? profile : avatar} alt="avater" />
+              )}
           </div>
           <Userinfo>
-            <h4>John Doe</h4>
-            <h6>A Full-stack-developer from usa</h6>
+            <h4>{username}</h4>
+            <h6>{profession}</h6>
             <p className="bio">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-              animi incidunt quibusdam tempora quaerat aliquam.
+              {bio}
             </p>
 
             <div className="social">
               <p className="mb-2"> Follow him on: </p>
               <div className="social-img">
                 <span>
-                  <img src={linke} />
+                  <img src={linkedin} />
                 </span>
                 <span>
-                  <img src={instagrm} />
+                  <img src={behance} />
                 </span>
               </div>
             </div>
           </Userinfo>
           <Link to="/edit" className="edit">
-            <FiEdit className="icon" /> Edit profile
+            <FiEdit className="icon" /> Edit
           </Link>
         </Col>
       </Userprofile>
