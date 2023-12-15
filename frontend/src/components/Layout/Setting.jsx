@@ -19,9 +19,9 @@ const Setting = () => {
     password: "",
     profession: "",
     profile: "",
-    $bio: "",
-    $linkedin: "",
-    $behance: "",
+    bio: "",
+    linkedin: "",
+    behance: "",
   });
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({});
@@ -35,9 +35,9 @@ const Setting = () => {
     password,
     profession,
     profile,
-    $bio,
-    $linkedin,
-    $behance,
+    bio,
+    linkedin,
+    behance,
   } = userCredentail;
 
   const handleSuccess = () => {
@@ -76,9 +76,9 @@ const Setting = () => {
               email: user.email,
               profession: user.prof,
               profile: user.profile,
-              $bio: user.$bio,
-              $linkedin: user.$linkedin,
-              $behance: user.$behance,
+              bio: user.bio,
+              linkedin: user.linkedin,
+              behance: user.behance,
             });
           });
         }
@@ -98,6 +98,9 @@ const Setting = () => {
     data.set("username", username);
     data.set("email", email);
     data.set("profession", profession);
+    data.set("bio", bio)
+    data.set('linkedin', linkedin)
+    data.set('behance', behance)
 
     if (password) {
       data.set("password", password);
@@ -194,27 +197,30 @@ const Setting = () => {
             <Form.Label>Bio: </Form.Label>
             <textarea
               className="textArea"
-              name="$bio"
-              value={$bio}
+              name="bio"
+              value={bio}
               onChange={handleChange}
               placeholder="Write about you in 150 character word"
             ></textarea>
           </Form.Group>
 
-          <Form.Group className="my-2" controlId="Social Links">
+          <Form.Group className="my-2" controlId="linkedin">
             <Form.Label>Add Social Media Profiles Links:</Form.Label>
             <Form.Control
-              type="link"
-              name="$linkedin"
-              value={$linkedin}
+              type="text"
+              name="linkedin"
+              value={linkedin}
               onChange={handleChange}
               placeholder="Enter Linkedin profile link"
             ></Form.Control>
+            
+          </Form.Group>
+
+          <Form.Group className="my-2" controlId="behance">
             <Form.Control
-              className="my-2"
               type="text"
-              name="$behance"
-              value={$behance}
+              name="behance"
+              value={behance}
               onChange={handleChange}
               placeholder="Enter Behance profile link"
             ></Form.Control>
