@@ -183,6 +183,7 @@ const Create = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
 `;
 
 const Content = styled.div`
@@ -193,12 +194,18 @@ const Content = styled.div`
   height: 100%;
   padding: 2rem;
   overflow-y: scroll;
+
+  
+
   .header {
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
     justify-content: space-between;
     padding: 0 0.5rem;
+    h2{
+      font-size: 20px;
+    }
     .logo {
       text-decoration: none;
       font-size: 30px;
@@ -242,5 +249,16 @@ const Content = styled.div`
         color: var(--natural-white);
       }
     }
+  }
+  
+  @media (max-width: 769px){
+    width: 100%;
+  padding: 1rem;
+
+  
+form{
+  padding: 1rem;
+
+}
   }
 `;
