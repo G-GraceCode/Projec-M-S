@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
         method: "Post",
       },
     );
-    console.log("logout", userOut);
     setUserInfo(null);
     navigate("/");
     enqueueSnackbar("user Successfully Logout", { variant: "success" });

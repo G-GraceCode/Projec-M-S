@@ -18,35 +18,12 @@ import AnimatedCircle from "../../AnimatedCircle";
 
 
 const Profile = () => {
-  const [userCredentail, setUserCredentail] = useState({
-    username: "",
-    email: "",
-    password: "",
-    profession: "",
-    profile: "",
-    bio:"", linkedin:"", behance:""
-  });
+ 
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState({});
-  const [delet, setDelet] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
-  const { username, email, password, profession, profile, bio, linkedin, behance } = userCredentail;
-
-  const handleSuccess = () => {
-    enqueueSnackbar("User Updated Successfully", { variant: "success" });
-  };
-
-  const handleError = () => {
-    enqueueSnackbar("Error Login", { variant: "Error" });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    setUserCredentail({ ...userCredentail, [name]: value });
-  };
+ 
+  const { username, profession, profile, bio, linkedin, behance } = userInfo;
 
   useEffect(() => {
     const getUser = async () => {
@@ -65,8 +42,8 @@ const Profile = () => {
         if (res.ok) {
           res.json().then((user) => {
             console.log("user", user);
-            setUserCredentail({
-              ...userCredentail,
+            setUserInfo({
+              ...userInfo,
               username: user.username,
               email: user.email,
               profession: user.prof,
@@ -84,7 +61,7 @@ const Profile = () => {
       }
     };
     getUser();
-  }, [userInfo]);
+  }, []);
 
 
   return (
@@ -118,7 +95,7 @@ const Profile = () => {
               </div>
             </div>
           </Userinfo>
-          <Link to="/edit" className="edit">
+          <Link to="/setting" className="edit">
             <FiEdit className="icon" /> Edit
           </Link>
         </Col>
