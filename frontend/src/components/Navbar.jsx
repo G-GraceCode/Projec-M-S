@@ -102,7 +102,7 @@ const User = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: 1rem;
+  gap: .8rem;
 
   & > .userprofile {
     display: flex;
@@ -153,19 +153,20 @@ const User = styled.div`
     border: 1px solid transparent;
     color: var(--natural-white);
     text-decoration: none;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
     margin-right: 10px;
     padding: 0.1rem 0.8rem;
     border-radius: var(--border-radius);
+    font-size: 14px;
 
     .icon {
       margin-right: 0.2rem;
     }
 
     &:hover {
-      background-color: var(--natural-white);
-      border: 1px solid var(--color-green);
-      color: var(--color-bg);
+      background-color: transparent;
+      border: 1px solid var(--natural-white);
+      color: var(--natural-white);
     }
   }
 `;

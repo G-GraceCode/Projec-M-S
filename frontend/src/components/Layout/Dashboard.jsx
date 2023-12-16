@@ -162,14 +162,15 @@ const Recentpost = styled.div`
   margin-bottom: 4rem;
   h4 {
     color: var(--natural-white);
-    font-size: 25px !important;
+    font-size: 22px !important;
     font-weight: 600;
     letter-spacing: 0.7px;
+    // margin-left: -5px;
     margin-bottom: 0.9rem !important;
   }
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(460px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(450px), 1fr));
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -177,19 +178,25 @@ const Recentpost = styled.div`
     .carts {
       display: flex;
       align-items: flex-end;
-      // flex-direction: row;
-      flex-wrap: wrap;
-      background: var(--natural-white);
-      border-radius: 10px;
+      // flex-direction: column;
+      flex-wrap: wrap-reveser;
+      border:2px double var(--natural-white);
+      border-radius: 15px;
       overflow: hidden;
+      min-width: 450px;
       height: 350px;
       max-height: 350px;
       box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
+     cursor: pointer;
+      position: relative;
+      z-index: -1;  
 
       .card-text {
         display: flex;
         flex-flow: column nowrap;
         height: 100%;
+        color: var(--natural-white);
+        cursor: pointer;
         h2 {
           font-size: 20px;
           font-weight: 600;
@@ -198,11 +205,12 @@ const Recentpost = styled.div`
           margin-bottom: 0.8rem;
         }
         h6 {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
           word-spacing: 0.6px;
           margin-bottom: 0.8rem;
-          text-align: justify;
+          text-align: left;
+          color: var(--color-sec);
         }
         .btn {
           margin-top: auto;
@@ -221,7 +229,14 @@ const Recentpost = styled.div`
         align-items: center;
         flex: 1;
         height: 100%;
+        min-height: 80%;
+        width: 100%;
+         z-index: 2;
+
+
         img {
+          margin: .1px;
+        border-radius: 13px;
           width: 100%;
           height: 100%;
           object-fit: cover;
