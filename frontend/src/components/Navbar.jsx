@@ -91,7 +91,7 @@ const Pagetitle = styled.div`
     cursor: pointer;
   }
   h2 {
-  margin: .4rem 0 0 .88rem;
+  margin: .4rem 0 0 .7rem;
     font-size: 25px;
     text-transform: capitalize;
   }
@@ -167,6 +167,14 @@ const User = styled.div`
       background-color: transparent;
       border: 1px solid var(--natural-white);
       color: var(--natural-white);
+    }
+  }
+
+  @media screen and (max-width: 599px){
+    .userprofile{
+      .info{
+        display: none;
+      }
     }
   }
 `;

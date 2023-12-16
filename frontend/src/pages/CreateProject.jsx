@@ -121,20 +121,16 @@ const CreateProject = ({ close }) => {
           <label htmlFor="complete">
             Choose whether your is a complete project or it a new Project
             <p>
-              Complete Project
+              
               <input
                 type="radio"
                 name="radio"
                 value={"complete"}
+                className="mx-2"
                 onChange={(e) => setComplete(e.target.value)}
               />
-              New Project
-              <input
-                type="radio"
-                name="radio"
-                value={"New"}
-                onChange={(e) => setComplete(e.target.value)}
-              />
+              Complete Project
+              
             </p>
           </label>
 
@@ -159,8 +155,8 @@ const CreateProject = ({ close }) => {
             <button type="button" style={{ marginTop: "5px" }} onClick={close}>
               Cancle
             </button>
-            <button type="submit" style={{ marginTop: "5px" }}>
-              {loading ? <AnimatedCircle /> : "Create Project"}
+            <button disabled={!title || !category || !summary || !content} type="submit" style={{ marginTop: "5px" }}>
+              {loading ? "Creating..." : "Create Project"}
             </button>
           </div>
         </form>
@@ -229,6 +225,7 @@ const Content = styled.div`
         outline: none;
         border: 0.8px solid var(--color-bg);
         padding: 0.7rem;
+        border-radius: 5px;
       }
     }
     .btn {

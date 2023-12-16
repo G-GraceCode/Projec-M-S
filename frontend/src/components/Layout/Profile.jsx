@@ -110,10 +110,10 @@ const Profile = () => {
               <p className="mb-2"> Follow him on: </p>
               <div className="social-img">
                 <span>
-                  <img src={linkedin} />
+                  <img src={linke} />
                 </span>
                 <span>
-                  <img src={behance} />
+                  <img src={instagrm} />
                 </span>
               </div>
             </div>
@@ -157,6 +157,8 @@ const Userprofile = styled.div`
 
     .img-sec{
     display: flex;
+    justify-content:center;
+    align-items: center;
     align-self: flex-start;
     width: 120px;
     height: 120px;
@@ -178,13 +180,32 @@ const Userprofile = styled.div`
   .edit {
     position: absolute;
     top: 5%;
-    right: 5%;
+    right: 3.5%;
   }
 
+  @media screen and (max-width: 599px){
+    .image-replace {
+text-align:  center;
+    }
+  }
 `;
 
 const Userinfo = styled.div`
   width: 50%;
+
+  @media screen and (max-width: 599px), (max-width: 769px){   
+    text-align: center !important;
+    width: 100% !important;
+    h4{
+      font-size: 32px;
+    }
+    .social {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+
   h4 {
     font-size: 30px;
     letter-spacing: 0.5px;
@@ -212,7 +233,6 @@ const Userinfo = styled.div`
 
     .social-img{
       display: flex;
-align-items: center;
       span{
         display: flex;
         width: 30px;
@@ -233,4 +253,6 @@ align-items: center;
       
     }
   }
+
+  
 `;
