@@ -59,11 +59,11 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem 0.7rem 1rem;
+  padding: .5rem 1rem;
   color: var(--natural-white);
   flex-wrap: nowrap;
-  margin-bottom: 1.6rem;
-  border-bottom: 1px solid var(--natural-white);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px double var(--natural-white);
   position: sticky;
   background: linear-gradient(
     135deg,
@@ -84,7 +84,6 @@ const Pagetitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 45px;
   letter-spacing: 1.4px;
   .icon {
     margin: 0 0.5rem 0.3rem 0;
@@ -92,6 +91,8 @@ const Pagetitle = styled.div`
     cursor: pointer;
   }
   h2 {
+  margin: .4rem 0 0 .88rem;
+    font-size: 25px;
     text-transform: capitalize;
   }
 `;
@@ -111,8 +112,8 @@ const User = styled.div`
     gap: 0.6rem;
     cursor: pointer;
     .userimg {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -137,11 +138,12 @@ const User = styled.div`
       justify-content: center;
       cursor: pointer;
       h4 {
+        font-size: 14px;
         letter-spacing: 0.8px;
       }
       small {
         margin-top: -10px;
-        font-size: 11px;
+        font-size: 10px;
       }
     }
   }
@@ -152,8 +154,8 @@ const User = styled.div`
     color: var(--natural-white);
     text-decoration: none;
     margin-bottom: 0.2rem;
-    margin-right: 16px;
-    padding: 0.15rem 0.8rem;
+    margin-right: 10px;
+    padding: 0.1rem 0.8rem;
     border-radius: var(--border-radius);
 
     .icon {
