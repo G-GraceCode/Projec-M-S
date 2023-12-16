@@ -160,6 +160,20 @@ const HomeSlide = styled.div`
 
 const Recentpost = styled.div`
   margin-bottom: 4rem;
+  @media screen and (max-width: 599px), (max-width: 769px){
+    .cards{
+      .carts{
+       flex-direction: column;
+        .image{
+          height: 40% !important;
+        }
+        .card-text {
+          max-height: 55%;
+        }
+       
+      }
+    }
+  }
   h4 {
     color: var(--natural-white);
     font-size: 22px !important;
@@ -177,8 +191,6 @@ const Recentpost = styled.div`
 
     .carts {
       display: flex;
-      align-items: flex-end;
-      // flex-direction: column;
       flex-wrap: wrap-reveser;
       border:2px double var(--natural-white);
       border-radius: 15px;
@@ -197,6 +209,7 @@ const Recentpost = styled.div`
         height: 100%;
         color: var(--natural-white);
         cursor: pointer;
+        z-index: 2;
         h2 {
           font-size: 20px;
           font-weight: 600;
@@ -231,7 +244,6 @@ const Recentpost = styled.div`
         height: 100%;
         min-height: 80%;
         width: 100%;
-         z-index: 2;
 
 
         img {
