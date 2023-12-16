@@ -54,8 +54,9 @@ const Projects = ({ present }) => {
           />
         </div>
         <Sortby>
+          Sort by: 
           <select>
-            <option value="hide">Select By: </option>
+            <option value="hide">Search For</option>
             <option>Complete</option>
             <option>Uncomplete</option>
             <option>Old Project</option>
@@ -137,22 +138,26 @@ const Searchproject = styled.div`
   text-align: center;
   margin-bottom: 2rem;
   padding: 0 1.5rem;
-  filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.1));
+  gap: .7rem;
+
   & > .searchbar {
     display: flex;
     align-items: center;
 
     input[type="search"] {
-      width: 290px;
-      min-width: 120px;
-      max-width: 290px;
+      width: 300px;
+      min-width: 200px;
       flex: 1;
-      padding: 0.4rem 0.6rem;
+      padding: 0.5rem 0.7rem;
       outline: none;
       border-radius: var(--border-radius-2);
-      margin-right: 16px;
       font-size: 12px;
       font-style: italic;
+    }
+    input[type="search"]:focus{
+      outline: 2px double var(--color-green);
+      outline-offset: 3px;
+      transition: outline var(--transition);
     }
   }
 `;
@@ -160,11 +165,13 @@ const Searchproject = styled.div`
 const Addproject = styled.button`
   border-radius: var(--border-radius-2);
   padding: 0.4rem 0.8rem;
+  font-size: 14px;
   border: none;
   background-color: var(--color-green);
   color: var(--natural-white);
   .icon {
-    font-size: 18px;
+    font-size: 14px;
+    margin-right: 0 3px 1px 0;
     transform: rotate(180deg);
     transition: transform var(--transition);
   }
@@ -211,13 +218,41 @@ const Projectfooter = styled.footer`
 const Sortby = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-right: auto;
+  margin: auto;
   border: none;
   color: var(--natural-white);
+  align-items: center;
   select {
-    padding: 0.4rem 1rem;
+    padding: 0.4rem .8rem;
     font-size: 12px;
     border: none;
+    outline: none;
     border-radius: var(--border-radius-2);
+    appearance: none; 
+
+    option{
+     background-color: var(--natural-white); 
+
+    }
+    option:selected {
+      font-weight: bold;
+    }
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:hover {
+      border-color: #ccc;
+    }
+  
+    &:active {
+      border-color: #bbb;
+    }
   }
+
+  select:hover {
+    background-color: #ddd;
+  }
+ 
+  
 `;
