@@ -85,7 +85,7 @@ const Delete = styled.div`
   color: var(--natural-white);
   text-align: center;
   padding: 0rem 1rem;
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   inset: 0%;
   background-color: rgba(0, 0, 0, 0.3);
