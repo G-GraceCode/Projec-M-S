@@ -55,7 +55,7 @@ const editProject = asyncHandler(async (req, res) => {
 
     // req for title, content, summary, category
     const { id } = req.params;
-    const { title, category, content, summary, coverImg } = req.body;
+    const { title, category, content, summary } = req.body;
     const project = await Project.findById(id);
     if (!project) {
       res.status(401).send("Preject Not Found");
@@ -66,7 +66,7 @@ const editProject = asyncHandler(async (req, res) => {
       project.summary = summary;
       project.category = category;
       project.content = content;
-      project.coverImg = newPath ? newPath : coverImg;
+      project.coverImg = newPath ? newPath : project.coverImg;
 
       const updatedProject = await project.save();
       console.log(updatedProject);
