@@ -55,7 +55,7 @@ const editProject = asyncHandler(async (req, res) => {
 
     // req for title, content, summary, category
     const { id } = req.params;
-    const { title, category, content,summary, coverImg } = req.body;
+    const { title, category, content, summary, coverImg } = req.body;
     const project = await Project.findById(id);
     if (!project) {
       res.status(401).send("Preject Not Found");
@@ -77,6 +77,7 @@ const editProject = asyncHandler(async (req, res) => {
         content: updatedProject.content,
         coverImg: updatedProject.coverImg,
       });
+      res.redirect("/projects");
     }
   } catch (e) {
     res.status(401);
@@ -95,6 +96,27 @@ const getProjects = asyncHandler(async (req, res) => {
     const projects = await Project.find({ author })
       .sort({ createdAt: -1 })
       .limit(5); //.populate("author", ["username"]);
+    if (projects.length >= 1) {
+      res.status(200).json(projects);
+    } else {
+      res.status(201).json({ message: "No Project Created" });
+    }
+  } catch (e) {
+    res.status(401);
+    throw new Error(e.message);
+  }
+});
+
+// Route get /getAllProject
+// @access Public projects from every users
+const getAllProjects = asyncHandler(async (req, res) => {
+  try {
+    const projects = await Project.find({})
+      .populate("author", ["username", "profile"])
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    console.log("projects", projects);
     if (projects.length >= 1) {
       res.status(200).json(projects);
     } else {
@@ -141,4 +163,11 @@ const deleteProject = asyncHandler(async (req, res) => {
   }
 });
 
-export { createProject, getProjects, getAproject, editProject, deleteProject };
+export {
+  createProject,
+  getAllProjects,
+  getProjects,
+  getAproject,
+  editProject,
+  deleteProject,
+};

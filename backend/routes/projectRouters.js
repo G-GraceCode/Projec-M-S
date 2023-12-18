@@ -3,6 +3,7 @@ import {
   createProject,
   getProjects,
   getAproject,
+  getAllProjects,
   editProject,
   deleteProject
 } from "../controllers/projectController.js";
@@ -19,6 +20,7 @@ router
   .post(protect, upLoadMiddleware.single("file"), createProject);
 router.put("/editproject/:id", upLoadMiddleware.single("file"), editProject);
 router.route("/projects").get(protect, getProjects);
+router.get('/allprojects', getAllProjects)
 router.get("/:id", getAproject);
 router.route('/deleteproject/:id').delete(protect, deleteProject)
 
