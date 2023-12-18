@@ -119,19 +119,14 @@ const CreateProject = ({ close }) => {
             <Editor value={content} name="content" onChange={setContent} />
           </label>
           <label htmlFor="complete">
-            Choose whether your is a complete project or it a new Project
-            <p>
-              
-              <input
-                type="radio"
-                name="radio"
-                value={"complete"}
-                className="mx-2"
-                onChange={(e) => setComplete(e.target.value)}
-              />
-              Complete Project
-              
-            </p>
+            <input
+              type="radio"
+              name="radio"
+              value={"complete"}
+              className="mx-2"
+              onChange={(e) => setComplete(e.target.value)}
+            />
+            I am currently working on this Projec
           </label>
 
           <label htmlFor="date">
@@ -155,7 +150,11 @@ const CreateProject = ({ close }) => {
             <button type="button" style={{ marginTop: "5px" }} onClick={close}>
               Cancle
             </button>
-            <button disabled={!title || !category || !summary || !content} type="submit" style={{ marginTop: "5px" }}>
+            <button
+              disabled={!title || !category || !summary || !content}
+              type="submit"
+              style={{ marginTop: "5px" }}
+            >
               {loading ? "Creating..." : "Create Project"}
             </button>
           </div>
@@ -179,7 +178,6 @@ const Create = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
 `;
 
 const Content = styled.div`
@@ -191,15 +189,13 @@ const Content = styled.div`
   padding: 2rem;
   overflow-y: scroll;
 
-  
-
   .header {
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
     justify-content: space-between;
     padding: 0 0.5rem;
-    h2{
+    h2 {
       font-size: 20px;
     }
     .logo {
@@ -247,15 +243,13 @@ const Content = styled.div`
       }
     }
   }
-  
-  @media (max-width: 769px){
+
+  @media (max-width: 769px) {
     width: 100%;
-  padding: 1rem;
+    padding: 1rem;
 
-  
-form{
-  padding: 1rem;
-
-}
+    form {
+      padding: 1rem;
+    }
   }
 `;

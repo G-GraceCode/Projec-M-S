@@ -47,6 +47,7 @@ const Edit = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
@@ -56,7 +57,6 @@ const Edit = () => {
     if (files) {
       data.set("file", files);
     }
-    console.log('setFile', files)
 
     try {
       setLoading(true);
@@ -65,12 +65,13 @@ const Edit = () => {
         {
           method: "PUT",
           body: data,
-          // credentials: "include",
+          credentials: "include",
           cors: "no-cors",
         },
       );
+      console.log("edit", res);
       if (res.status === 200) {
-        res.json().then((pro) => {
+        res.json().then(() => {
           setRedirect(true);
           setTimeout(() => {
             enqueueSnackbar("Project updated successful", {
@@ -196,13 +197,7 @@ const Edit = () => {
                 Cancle
               </button>
               <button style={{ marginTop: "5px" }} onClick={handleUpdate}>
-                {loading ? (
-                  <>
-                    <AnimatedCircle /> Publishing...
-                  </>
-                ) : (
-                  "Publish"
-                )}
+                {loading ? <>Publishing...</> : "Publish"}
               </button>
             </div>
           </form>

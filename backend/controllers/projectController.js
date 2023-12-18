@@ -55,27 +55,28 @@ const editProject = asyncHandler(async (req, res) => {
 
     // req for title, content, summary, category
     const { id } = req.params;
-    const { title, category, content, summary } = req.body;
-    console.log("put", id);
+    const { title, category, content,summary, coverImg } = req.body;
     const project = await Project.findById(id);
-
-    if (project) {
+    if (!project) {
+      res.status(401).send("Preject Not Found");
+      console.log("Project not found");
+      return;
+    } else {
       project.title = title;
       project.summary = summary;
       project.category = category;
       project.content = content;
-      project.coverImg = newPath ? newPath : data.coverImg;
+      project.coverImg = newPath ? newPath : coverImg;
 
-      const data = await project.save();
+      const updatedProject = await project.save();
+      console.log(updatedProject);
       res.status(200).json({
-        title: data.title,
-        summary: data.summary,
-        category: data.category,
-        content: data.content,
-        coverImg: data.coverImg,
+        title: updatedProject.title,
+        summary: updatedProject.summary,
+        category: updatedProject.category,
+        content: updatedProject.content,
+        coverImg: updatedProject.coverImg,
       });
-    } else {
-      console.log("Project not found");
     }
   } catch (e) {
     res.status(401);
@@ -126,15 +127,15 @@ const deleteProject = asyncHandler(async (req, res) => {
   try {
     const id = req.user._id;
     const author = id;
-    const project = await Project.deleteOne({author});
+    const project = await Project.deleteOne({ author });
 
     if (!project) {
       return res.status(404).json({ message: "Project not Not Found" });
     }
 
     res.status(200).json({
-        message: "Project Deleted Successfully",
-      });
+      message: "Project Deleted Successfully",
+    });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
