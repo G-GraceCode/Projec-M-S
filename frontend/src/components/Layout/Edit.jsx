@@ -47,7 +47,7 @@ const Edit = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    
+
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
@@ -65,7 +65,7 @@ const Edit = () => {
         {
           method: "PUT",
           body: data,
-          credentials: "include",
+          // credentials: "include",
           cors: "no-cors",
         },
       );
