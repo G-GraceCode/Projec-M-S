@@ -16,14 +16,17 @@ const Projects = ({ present }) => {
 
   const getProjects = async () => {
     try {
-      const res = await fetch("https://trrmmy-5000.csb.app/project/projects", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://trrmmy-5000.csb.app/project/allprojects",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          cors: "no-cors",
         },
-        credentials: "include",
-        cors: "no-cors",
-      });
+      );
       if (res.status === 200) {
         res.json().then((userProjects) => {
           setPosts(userProjects);
@@ -54,7 +57,7 @@ const Projects = ({ present }) => {
           />
         </div>
         <Sortby>
-          Sort by: 
+          Sort by:
           <select>
             <option value="hide">Search For</option>
             <option>Complete</option>
@@ -78,7 +81,6 @@ const Projects = ({ present }) => {
             <option value="november">November</option>
             <option value="december">December</option>
           </select>
-
           <select id="year">
             <option value="hide">-- Year --</option>
             <option value="2020">2020</option>
@@ -138,7 +140,7 @@ const Searchproject = styled.div`
   text-align: center;
   margin-bottom: 2rem;
   padding: 0 1.5rem;
-  gap: .7rem;
+  gap: 0.7rem;
 
   & > .searchbar {
     display: flex;
@@ -154,7 +156,7 @@ const Searchproject = styled.div`
       font-size: 12px;
       font-style: italic;
     }
-    input[type="search"]:focus{
+    input[type="search"]:focus {
       outline: 2px double var(--color-green);
       outline-offset: 3px;
       transition: outline var(--transition);
@@ -223,16 +225,15 @@ const Sortby = styled.div`
   color: var(--natural-white);
   align-items: center;
   select {
-    padding: 0.4rem .8rem;
+    padding: 0.4rem 0.8rem;
     font-size: 12px;
     border: none;
     outline: none;
     border-radius: var(--border-radius-2);
-    appearance: none; 
+    appearance: none;
 
-    option{
-     background-color: var(--natural-white); 
-
+    option {
+      background-color: var(--natural-white);
     }
     option:selected {
       font-weight: bold;
@@ -244,7 +245,7 @@ const Sortby = styled.div`
     &:hover {
       border-color: #ccc;
     }
-  
+
     &:active {
       border-color: #bbb;
     }
@@ -253,6 +254,4 @@ const Sortby = styled.div`
   select:hover {
     background-color: #ddd;
   }
- 
-  
 `;

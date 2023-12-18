@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -10,81 +10,60 @@ import { FaShareFromSquare } from "react-icons/fa6";
 
 const Posts = () => {
   const navigate = useNavigate();
+  const [projects, setProjects] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const getProjects = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("https://trrmmy-5000.csb.app/project/projects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        cors: "no-cors",
+      });
+      if (res.status === 200) {
+        res.json().then((userProjects) => {
+          setProjects(userProjects);
+        });
+      }
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   return (
     <Projectlist>
       <h4 className="my-2 text-left text-[14px]">List of Projects</h4>
       <div className="carts">
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-          <div className="Icons-i">
-            <FaShareFromSquare className="icon share" />
-            <FiEdit className="icon" />
-            <AiFillDelete className="icon-2" />
-          </div>
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
-        <Card>
-          <img src={post} className="image" alt="img" loading="lazy" />
-          <div className="Category">
-            <h4>post category</h4>
-          </div>
-
-          {/* <div className="Detail">
-            <h4>post title</h4>
-            <p>post summary</p>
-          </div> */}
-        </Card>
+        {loading
+          ? "Loading Content..."
+          : projects === null
+            ? "No Post Created"
+            : projects.map((project) => (
+                <Card key={project._id}>
+                  <img src={post} className="image" alt="img" loading="lazy" />
+                  <div className="Category">
+                    <h4>{project.category}</h4>
+                  </div>
+                  <div className="Icons-i">
+                    <FaShareFromSquare className="icon share" />
+                    <FiEdit className="icon" />
+                    <AiFillDelete className="icon-2" />
+                  </div>
+                  <div className="Detail">
+                    <h4>{project.title}</h4>
+                  </div>
+                </Card>
+              ))}
       </div>
     </Projectlist>
   );
