@@ -12,7 +12,9 @@ const CreateProject = ({ close }) => {
   const [summary, setSummary] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
-  const [complete, setComplete] = useState("");
+  const [complete, setComplete] = useState(true);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [files, setFiles] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -36,7 +38,9 @@ const CreateProject = ({ close }) => {
     data.set("summary", summary);
     data.set("category", category);
     data.set("content", content);
-    // data.set("complete", complete);
+    data.set("comProject", complete);
+    data.set("toDate", to);
+    data.set("fromDate", from);
     data.set("file", files);
 
     try {
@@ -120,30 +124,36 @@ const CreateProject = ({ close }) => {
           </label>
           <label htmlFor="complete">
             <input
-              type="radio"
+              type="checkbox"
               name="radio"
-              value={"complete"}
               className="mx-2"
-              onChange={(e) => setComplete(e.target.value)}
+              onChange={() => setComplete(!complete)}
             />
             I am currently working on this Projec
           </label>
 
           <label htmlFor="date">
-            {complete === "complete" ? (
-              <p>
-                <span>sset start and End Date of the Project</span>
-                Started <input type="date" name="from" />
-                Ended <input type="date" name="to" />
-              </p>
-            ) : complete === "New" ? (
-              <p>
-                <span>set start only of the Project</span>
-                <input type="date" name="to" />
-              </p>
-            ) : (
-              ""
-            )}
+            <p>
+              <span>
+                Start Date
+                <input
+                  type="date"
+                  name="from"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                />
+              </span>
+              <span className="ml-2">
+                Ended
+                <input
+                  disabled={complete === false}
+                  type="date"
+                  name="to"
+                  value={toDate}
+                  onChange={(e) => setToDate(e.target.value)}
+                />
+              </span>
+            </p>
           </label>
 
           <div className="btn">
@@ -222,6 +232,10 @@ const Content = styled.div`
         border: 0.8px solid var(--color-bg);
         padding: 0.7rem;
         border-radius: 5px;
+      }
+      &:nth-child(06) {
+        display: flex;
+        flex-flow: row nowrap;
       }
     }
     .btn {
