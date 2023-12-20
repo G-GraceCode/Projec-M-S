@@ -7,24 +7,24 @@ import { MdOutlineViewAgenda } from "react-icons/md";
 import Cards from "../Cards";
 import Tableview from "../Tableview";
 import DeleteProject from "../../pages/DeleteProject";
+import { IoIosSearch } from "react-icons/io";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
-
+  const [searchTerm, setSearchTerm] = useState("");
   const getProjects = async () => {
     try {
       const res = await fetch(
-        "https://trrmmy-5000.csb.app/project/allprojects",
+        `https://trrmmy-5000.csb.app/project/allprojects?&search=${searchTerm}`,
         {
           method: "GET",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
-          cors: "no-cors",
         },
       );
       if (res.status === 200) {
@@ -41,21 +41,13 @@ const Projects = ({ present }) => {
 
   useEffect(() => {
     getProjects();
-  }, [loading]);
+  }, [searchTerm, loading]);
 
   return (
     <div className="content">
       <Navbar />
 
       <Searchproject>
-        <div className="searchbar">
-          <input
-            type="search"
-            name="search"
-            className="search"
-            placeholder="Search by Project Category"
-          />
-        </div>
         <Sortby>
           Sort by:
           <select>
@@ -91,6 +83,17 @@ const Projects = ({ present }) => {
             <option value="2025">2025</option>
           </select>
         </Sortby>
+        <form onSubmit={(e) => e.preventDefault()} className="searchbar">
+          <IoIosSearch className="search_icon" />
+          <input
+            type="text"
+            name="search"
+            className="search"
+            placeholder="Search by Project Category"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
         <Addproject onClick={present}>
           <BsPlusCircleFill className="icon" /> Add Project
         </Addproject>
@@ -135,31 +138,45 @@ export default Projects;
 const Searchproject = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row wrap;
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0 1rem 2rem 1rem;
   padding: 0 1.5rem;
   gap: 0.7rem;
 
   & > .searchbar {
     display: flex;
     align-items: center;
+    padding: 0 0.5rem;
+    position: relative;
 
-    input[type="search"] {
-      width: 300px;
-      min-width: 200px;
-      flex: 1;
-      padding: 0.5rem 0.7rem;
-      outline: none;
-      border-radius: var(--border-radius-2);
-      font-size: 12px;
-      font-style: italic;
+    .search_icon {
+      border-right: 2px doudle var(--color-bg);
+      position: absolute;
+      left: 5%;
+      top: 30%;
     }
-    input[type="search"]:focus {
-      outline: 2px double var(--color-green);
+
+    input[type="text"] {
+      width: 400px;
+      min-width: 250px;
+      flex: 1;
+      padding: 0.5rem 0.7rem 0.5rem 2.3rem;
+      outline: none;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+      background-color: var(--natural-white);
+      outline: 2px solid transparent;
+      border-radius: var(--border-radius-2);
+    }
+    input[type="text"]:focus {
+      outline: 2px solid var(--color-green);
       outline-offset: 3px;
+      width: 430px;
       transition: outline var(--transition);
+      transition: width var(--transition);
     }
   }
 `;
@@ -220,7 +237,7 @@ const Projectfooter = styled.footer`
 const Sortby = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin: auto;
+  // margin: auto;
   border: none;
   color: var(--natural-white);
   align-items: center;
@@ -229,7 +246,7 @@ const Sortby = styled.div`
     font-size: 12px;
     border: none;
     outline: none;
-    border-radius: var(--border-radius-2);
+    border-radius: var(--border-radius);
     appearance: none;
 
     option {

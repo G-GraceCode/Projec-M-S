@@ -22,6 +22,8 @@ const projectSchema = new Schema(
   },
 );
 
+projectSchema.index({ title: "text", category: "text" });
+
 const Project = model("Project", projectSchema);
 
 export default Project;

@@ -110,13 +110,22 @@ const getProjects = asyncHandler(async (req, res) => {
 // Route get /getAllProject
 // @access Public projects from every users
 const getAllProjects = asyncHandler(async (req, res) => {
+  const searchTerm = req.query.search;
+  let projects;
   try {
-    const projects = await Project.find({})
+    projects = await Project.find({
+      $text: { $search: searchTerm, $caseSensitive: true, fuzzy: {} },
+    })
       .populate("author", ["username", "profile"])
       .sort({ createdAt: -1 })
       .limit(10);
 
-    console.log("projects", projects);
+    // projects = await Project.find({})
+    //   .populate("author", ["username", "profile"])
+    //   .sort({ createdAt: -1 })
+    //   .limit(10);
+
+    // console.log("projects", projects);
     if (projects.length >= 1) {
       res.status(200).json(projects);
     } else {
