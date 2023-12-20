@@ -111,10 +111,10 @@ const getProjects = asyncHandler(async (req, res) => {
 // @access Public projects from every users
 const getAllProjects = asyncHandler(async (req, res) => {
   const searchTerm = req.query.search;
-  let projects;
+
   try {
-    projects = await Project.find({
-      $text: { $search: searchTerm, $caseSensitive: true, fuzzy: {} },
+    const projects = await Project.find({
+      $text: { $search: searchTerm, $caseSensitive: true},
     })
       .populate("author", ["username", "profile"])
       .sort({ createdAt: -1 })
