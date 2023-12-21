@@ -39,8 +39,8 @@ const CreateProject = ({ close }) => {
     data.set("category", category);
     data.set("content", content);
     data.set("comProject", complete);
-    data.set("toDate", to);
-    data.set("fromDate", from);
+    data.set("toDate", toDate);
+    data.set("fromDate", fromDate);
     data.set("file", files);
 
     try {

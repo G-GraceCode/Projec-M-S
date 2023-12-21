@@ -13,7 +13,6 @@ const Search = ({ present, seachValue, value }) => {
           <option>Uncomplete</option>
           <option>Old Project</option>
           <option>New Projects</option>
-          <option>Best Projects</option>
         </select>
         <select id="mounth">
           <option value="hide">-- Month --</option>
