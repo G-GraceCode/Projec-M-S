@@ -16,10 +16,15 @@ const Projects = ({ present }) => {
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [month, setMonth] = useState("")
+  const [year, setYear] = useState("")
+  const [sort, setSort] = useState("")
+
   const getProjects = async () => {
+    let uri = `?&sort=${sort}?&search=${searchTerm}?&month=${month}?&year=${year}`;
     try {
       const res = await fetch(
-        `https://trrmmy-5000.csb.app/project/allprojects?&search=${searchTerm}`,
+        `https://trrmmy-5000.csb.app/project/allprojects${uri}`,
         {
           method: "GET",
           credentials: "include",
@@ -49,8 +54,14 @@ const Projects = ({ present }) => {
       <Navbar />
       <Search
         present={present}
-        value={searchTerm}
+        search={searchTerm}
+        year={year}
+        month={month}
+        sort={sort}
         seachValue={(e) => setSearchTerm(e.target.value)}
+        sortValue={(e) => setSort(e.target.value)}
+        yearValue={(e) => setYear(e.target.value)}
+        monthValue={(e) => setMonth(e.target.value)}
       />
 
       {showType === "table" ? (
