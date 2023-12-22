@@ -147,14 +147,14 @@ const getAllProjects = asyncHandler(async (req, res) => {
 
 const autoCompleteSearch = asyncHandler(async (req, res) => {
   try {
-    const searchTerm = req.query.search;
+    const searchTerm = "ux desi";
 
     const agg = [
       {
         $search: {
           autocomplete: {
             query: searchTerm,
-            path: "title category",
+            path: "title",
             fuzzy: {
               maxEdits: 2,
             },
@@ -166,6 +166,7 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
       },
       {
         $project: {
+          _id: 0,
           title: 1,
           category: 1,
         },
@@ -173,12 +174,12 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
     ];
 
     const projects = await Project.aggregate(agg);
-    /* .populate("author", ["username", "profile"])
-      .sort({ createdAt: -1 })
-     .limit(10); */
+    // .populate("author", ["username", "profile"])
+    // .sort({ createdAt: -1 })
+    // .limit(10);
 
     // console.log("projects", projects);
-    if (projects.length >= 1) {
+    if (projects.length > 0) {
       res.status(200).json(projects);
     } else {
       res.status(201).json({ message: "No Result Found" });
