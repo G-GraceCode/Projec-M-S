@@ -2,19 +2,29 @@ import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import { BsPlusCircleFill } from "react-icons/bs";
 
-const Search = ({ present, seachValue, search, year, month, sort }) => {
+const Search = ({
+  present,
+  seachValue,
+  search,
+  year,
+  month,
+  sort,
+  monthValue,
+  yearValue,
+  sortValue,
+}) => {
   return (
     <Searchproject>
       <Sortby>
         Sort by:
-        <select>
-          <option value="hide">Search For</option>
+        <select value={sort} onChange={sortValue}>
+          <option>Search For</option>
           <option>Complete</option>
           <option>Uncomplete</option>
           <option>Old Project</option>
           <option>New Projects</option>
         </select>
-        <select id="mounth">
+        <select id="mounth" value={month} onChange={monthValue}>
           <option value="hide">-- Month --</option>
           <option value="january">January</option>
           <option value="february">February</option>
@@ -29,7 +39,7 @@ const Search = ({ present, seachValue, search, year, month, sort }) => {
           <option value="november">November</option>
           <option value="december">December</option>
         </select>
-        <select id="year" >
+        <select id="year" value={year} onChange={yearValue}>
           <option value="hide">-- Year --</option>
           <option value="2020">2020</option>
           <option value="2021">2021</option>

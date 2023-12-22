@@ -115,6 +115,8 @@ const getAllProjects = asyncHandler(async (req, res) => {
   const year = req.query.year;
   const sort = req.query.sort;
 
+  console.log(month, year, sort);
+
   try {
     const projects = await Project.find({
       $text: { $search: searchTerm, $caseSensitive: true },
@@ -140,9 +142,55 @@ const getAllProjects = asyncHandler(async (req, res) => {
   }
 });
 
+//Rout get /autoCompleteSearch
+//@access public
+
+const autoCompleteSearch = asyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.query.search;
+
+    const agg = [
+      {
+        $search: {
+          autocomplete: {
+            query: searchTerm,
+            path: "title category",
+            fuzzy: {
+              maxEdits: 2,
+            },
+          },
+        },
+      },
+      {
+        $limit: 5,
+      },
+      {
+        $project: {
+          title: 1,
+          category: 1,
+        },
+      },
+    ];
+
+    const projects = await Project.aggregate(agg);
+    /* .populate("author", ["username", "profile"])
+      .sort({ createdAt: -1 })
+     .limit(10); */
+
+    // console.log("projects", projects);
+    if (projects.length >= 1) {
+      res.status(200).json(projects);
+    } else {
+      res.status(201).json({ message: "No Result Found" });
+    }
+  } catch (e) {
+    res.status(401);
+    throw new Error(e.message);
+  }
+});
+
 //route get/project/:id
 //@access public get a particular project  by id
-
 const getAproject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
@@ -182,4 +230,5 @@ export {
   getAproject,
   editProject,
   deleteProject,
+  autoCompleteSearch,
 };

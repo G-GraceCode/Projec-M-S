@@ -16,12 +16,14 @@ const Projects = ({ present }) => {
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [month, setMonth] = useState("")
-  const [year, setYear] = useState("")
-  const [sort, setSort] = useState("")
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [sort, setSort] = useState("");
+
+  console.log(month, year, sort);
 
   const getProjects = async () => {
-    let uri = `?&sort=${sort}?&search=${searchTerm}?&month=${month}?&year=${year}`;
+    let uri = `?&sort=${sort}&search=${searchTerm}&month=${month}&year=${year}`;
     try {
       const res = await fetch(
         `https://trrmmy-5000.csb.app/project/allprojects${uri}`,
