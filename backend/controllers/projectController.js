@@ -147,42 +147,47 @@ const getAllProjects = asyncHandler(async (req, res) => {
 
 const autoCompleteSearch = asyncHandler(async (req, res) => {
   try {
-    const searchTerm = "ux desi";
-
-    const agg = [
-      {
-        $search: {
-          autocomplete: {
-            query: searchTerm,
-            path: "title",
-            fuzzy: {
-              maxEdits: 2,
+    const searchTerm = req.query.search;
+    console.log("searchTerm", searchTerm);
+    if (searchTerm.length > 0) {
+      const agg = [
+        {
+          $search: {
+            index: "projectsSearch",
+            autocomplete: {
+              query: searchTerm,
+              path: "title",
+              fuzzy: {
+                maxEdits: 1,
+                prefixLength: 1,
+                maxExpansions: 256,
+              },
             },
           },
         },
-      },
-      {
-        $limit: 5,
-      },
-      {
-        $project: {
-          _id: 0,
-          title: 1,
-          category: 1,
+        {
+          $limit: 5,
         },
-      },
-    ];
+        {
+          $project: {
+            _id: 0,
+            title: 1,
+            category: 1,
+          },
+        },
+      ];
 
-    const projects = await Project.aggregate(agg);
-    // .populate("author", ["username", "profile"])
-    // .sort({ createdAt: -1 })
-    // .limit(10);
+      const projects = await Project.aggregate(agg);
+      // .populate("author", ["username", "profile"])
+      // .sort({ createdAt: -1 })
+      // .limit(10);
 
-    // console.log("projects", projects);
-    if (projects.length > 0) {
-      res.status(200).json(projects);
-    } else {
-      res.status(201).json({ message: "No Result Found" });
+      // console.log("projects", projects);
+      if (projects) {
+        res.status(200).json(projects);
+      } else {
+        res.status(201).json({ message: "No Result Found" });
+      }
     }
   } catch (e) {
     res.status(401);

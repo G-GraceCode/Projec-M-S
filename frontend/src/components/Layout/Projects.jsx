@@ -23,16 +23,14 @@ const Projects = ({ present }) => {
   console.log(month, year, sort);
 
   const getProjects = async () => {
-    let uri = `?&sort=${sort}&search=${searchTerm}&month=${month}&year=${year}`;
+    let uri = `?&sort=${searchTerm}&search=${sort}&month=${month}&year=${year}`;
     try {
       const res = await fetch(
         `https://trrmmy-5000.csb.app/project/allprojects${uri}`,
         {
           method: "GET",
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          cors: "no-cors",
         },
       );
       if (res.status === 200) {
@@ -47,9 +45,9 @@ const Projects = ({ present }) => {
     }
   };
 
-  useEffect(() => {
-    getProjects();
-  }, [searchTerm, loading]);
+  // useEffect(() => {
+  //   getProjects();
+  // }, [searchTerm, loading]);
 
   return (
     <div className="content">
@@ -64,6 +62,7 @@ const Projects = ({ present }) => {
         sortValue={(e) => setSort(e.target.value)}
         yearValue={(e) => setYear(e.target.value)}
         monthValue={(e) => setMonth(e.target.value)}
+        clicktosearch={getProjects}
       />
 
       {showType === "table" ? (

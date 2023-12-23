@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import { BsPlusCircleFill } from "react-icons/bs";
+import AutoCompleteSearch from "./AutoCompleteSearch";
+import { IoSend } from "react-icons/io5";
 
 const Search = ({
   present,
@@ -12,7 +15,36 @@ const Search = ({
   monthValue,
   yearValue,
   sortValue,
+  clicktosearch,
 }) => {
+  const [autoSearch, setAutoSearch] = useState([]);
+
+  const getProjects = async () => {
+    try {
+      const res = await fetch(
+        `https://trrmmy-5000.csb.app/project/autosearch?&search=${search}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      if (res.status === 200) {
+        res.json().then((userProjects) => {
+          setAutoSearch(userProjects);
+        });
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    getProjects();
+  }, [search]);
+
   return (
     <Searchproject>
       <Sortby>
@@ -51,14 +83,20 @@ const Search = ({
       </Sortby>
       <form onSubmit={(e) => e.preventDefault()} className="searchbar">
         <IoIosSearch className="search_icon" />
+        {search && (
+          <span className="search_icon_1" onClick={clicktosearch}>
+            <IoSend />
+          </span>
+        )}
         <input
           type="text"
           name="search"
           className="search"
-          placeholder="Search by Project Category"
+          placeholder="Search by Project title or Category"
           value={search}
           onChange={seachValue}
         />
+        {search && <AutoCompleteSearch projects={autoSearch} />}
       </form>
       <Addproject onClick={present}>
         <BsPlusCircleFill className="icon" /> Add Project
@@ -81,15 +119,35 @@ const Searchproject = styled.div`
 
   & > .searchbar {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-flow: column nowrap;
     padding: 0 0.5rem;
     position: relative;
+    z-index: 1000;
 
     .search_icon {
       border-right: 2px doudle var(--color-bg);
       position: absolute;
       left: 5%;
-      top: 30%;
+      top: 0%;
+      bottom: 0%;
+      margin: auto 0;
+    }
+    .search_icon_1 {
+      border-right: 2px doudle var(--color-bg);
+      position: absolute;
+      right: 5%;
+      top: 0%;
+      bottom: 0%;
+      margin: auto 0;
+      width: 30px;
+      color: var(--natural-white);
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--color-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     input[type="text"] {
