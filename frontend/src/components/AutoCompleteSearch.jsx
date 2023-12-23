@@ -1,14 +1,19 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const AutoCompleteSearch = ({ projects }) => {
   return (
     <Searchresult>
       {projects.length > 0 ? (
-        projects.map((project, index) => (
-          <div key={index} className="result">
+        projects.map((project) => (
+          <Link
+            key={project._id}
+            className="result"
+            to={`/viewing/${project._id}`}
+          >
             <p>{`Title: ${project.title}`}</p>
             <p>{`Category: ${project.category}`}</p>
-          </div>
+          </Link>
         ))
       ) : (
         <>No Result Found</>
@@ -25,12 +30,13 @@ const Searchresult = styled.div`
   flex-wrap: nowrap;
   align-items: flex-start;
   position: absolute;
+  gap: 1rem;
   left: 0;
   rigth: 0;
   top: 120%;
   width: 430px;
   min-width: 250px;
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 0.4rem;
   outline: none;
   font-size: 14px;
   font-weight: 400;
@@ -49,9 +55,16 @@ const Searchresult = styled.div`
     flex-wrap: nowrap;
     border-bottom: 2px double var(--color-green);
     width: 100%;
+    text-decoration: none;
+    color: var(--color-bg-2);
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 
     p {
       margin: 0;
+    }
+    &:hover {
+      background-color: var(--color-sec);
     }
   }
 `;

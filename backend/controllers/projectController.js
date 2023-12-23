@@ -170,7 +170,7 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
         },
         {
           $project: {
-            _id: 0,
+            _id: 1,
             title: 1,
             category: 1,
           },
@@ -178,9 +178,6 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
       ];
 
       const projects = await Project.aggregate(agg);
-      // .populate("author", ["username", "profile"])
-      // .sort({ createdAt: -1 })
-      // .limit(10);
 
       // console.log("projects", projects);
       if (projects) {

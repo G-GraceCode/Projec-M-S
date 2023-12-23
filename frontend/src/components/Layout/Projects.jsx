@@ -12,7 +12,7 @@ import Search from "../Search";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [delet, setDelet] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,10 +23,10 @@ const Projects = ({ present }) => {
   console.log(month, year, sort);
 
   const getProjects = async () => {
-    let uri = `?&sort=${searchTerm}&search=${sort}&month=${month}&year=${year}`;
     try {
+      setLoading(true);
       const res = await fetch(
-        `https://trrmmy-5000.csb.app/project/allprojects${uri}`,
+        `https://trrmmy-5000.csb.app/project/allprojects?&search=${searchTerm}`,
         {
           method: "GET",
           credentials: "include",
