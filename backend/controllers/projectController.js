@@ -110,14 +110,32 @@ const getProjects = asyncHandler(async (req, res) => {
 // Route get /getAllProject
 // @access Public projects from every users
 const getAllProjects = asyncHandler(async (req, res) => {
-  const searchTerm = req.query.search;
-  const month = req.query.month;
-  const year = req.query.year;
-  const sort = req.query.sort;
-
-  console.log(month, year, sort);
-
   try {
+    const projects = await Project.find({})
+      .populate("author", ["username", "profile"])
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    if (projects.length >= 1) {
+      res.status(200).json(projects);
+    } else {
+      res.status(201).json({ message: "No Project Created" });
+    }
+  } catch (e) {
+    res.status(401);
+    throw new Error(e.message);
+  }
+});
+
+// Route get /getAllProject
+// @access Public projects from every users
+const getProjectBySearch = asyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.query.search;
+    const month = req.query.month;
+    const year = req.query.year;
+    const sort = req.query.sort;
+
     const projects = await Project.find({
       $text: { $search: searchTerm, $caseSensitive: true },
     })
@@ -229,6 +247,7 @@ const deleteProject = asyncHandler(async (req, res) => {
 export {
   createProject,
   getAllProjects,
+  getProjectBySearch,
   getProjects,
   getAproject,
   editProject,

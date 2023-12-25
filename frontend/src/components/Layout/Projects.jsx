@@ -45,9 +45,29 @@ const Projects = ({ present }) => {
     }
   };
 
-  // useEffect(() => {
-  //   getProjects();
-  // }, [searchTerm, loading]);
+  const loadedProject = async () => {
+    try {
+      const res = await fetch(
+        "https://trrmmy-5000.csb.app/project/allprojects",
+        {
+          method: "GET",
+          credentials: "include",
+          cors: "no-cors",
+        },
+      );
+      if (res.status === 200) {
+        res.json().then((userProjects) => {
+          setPosts(userProjects);
+        });
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    loadedProject();
+  }, []);
 
   return (
     <div className="content">

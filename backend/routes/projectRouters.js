@@ -4,6 +4,7 @@ import {
   getProjects,
   getAproject,
   getAllProjects,
+  getProjectBySearch,
   editProject,
   autoCompleteSearch,
   deleteProject,
@@ -21,8 +22,9 @@ router
   .post(protect, upLoadMiddleware.single("file"), createProject);
 router.put("/editproject/:id", upLoadMiddleware.single("file"), editProject);
 router.route("/projects").get(protect, getProjects);
+router.get("/projectsearched", getProjectBySearch);
 router.get("/allprojects", getAllProjects);
-router.get('/autosearch', autoCompleteSearch);
+router.get("/autosearch", autoCompleteSearch);
 router.get("/:id", getAproject);
 router.route("/deleteproject/:id").delete(protect, deleteProject);
 
