@@ -154,6 +154,7 @@ const Content = styled.div`
         justify-content: flex-start;
         gap: 0.6rem;
         cursor: pointer;
+        margin-left: 0.6rem;
         .userimg {
           width: 2rem;
           height: 2rem;
@@ -194,6 +195,7 @@ const Content = styled.div`
       height: 400px;
       overflow: hidden;
       border-radius: var(--border-radius);
+      margin: 2rem 0;
       img {
         object-position: center center;
       }
