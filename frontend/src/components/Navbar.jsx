@@ -35,13 +35,19 @@ const Navbar = () => {
 
         <div className="userprofile">
           <div className="userimg">
-            <img
-              className="img"
-              src={!userInfo.profile ? avater : userInfo?.profile}
-              alt="user-photo"
-              loading="lazy"
-              title="Your Avater"
-            />
+            {!userInfo.profile ? (
+              <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
+                <span>{userInfo.username[0]}</span>
+              </div>
+            ) : (
+              <img
+                className="img"
+                src={userInfo?.profile}
+                alt="user-photo"
+                loading="lazy"
+                title="Your Avater"
+              />
+            )}
           </div>
           <div className="info">
             <h4>{userInfo?.username}</h4>
@@ -59,7 +65,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   color: var(--natural-white);
   flex-wrap: nowrap;
   margin-bottom: 1.5rem;
@@ -91,7 +97,7 @@ const Pagetitle = styled.div`
     cursor: pointer;
   }
   h2 {
-  margin: .4rem 0 0 .7rem;
+    margin: 0.4rem 0 0 0.7rem;
     font-size: 25px;
     text-transform: capitalize;
   }
@@ -102,7 +108,7 @@ const User = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: .8rem;
+  gap: 0.8rem;
 
   & > .userprofile {
     display: flex;
@@ -117,7 +123,6 @@ const User = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--color-bg-2);
 
       border-radius: 50%;
       overflow: hidden;
@@ -170,9 +175,9 @@ const User = styled.div`
     }
   }
 
-  @media screen and (max-width: 599px){
-    .userprofile{
-      .info{
+  @media screen and (max-width: 599px) {
+    .userprofile {
+      .info {
         display: none;
       }
     }

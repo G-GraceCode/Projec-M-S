@@ -16,19 +16,17 @@ import linke from "../../assets/linkedin.png";
 import instagrm from "../../assets/instagrm.png";
 import AnimatedCircle from "../../AnimatedCircle";
 
-
 const Profile = () => {
- 
   const [loading, setLoading] = useState(false);
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
- 
+
   const { username, profession, profile, bio, linkedin, behance } = userInfo;
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const res = await fetch(
           "https://trrmmy-5000.csb.app/projec/user/profile",
           {
@@ -50,19 +48,18 @@ const Profile = () => {
               profile: user.profile,
               bio: user.bio,
               linkedin: user.linkedin,
-              behance: user.behance
+              behance: user.behance,
             });
           });
         }
       } catch (e) {
         console.log("Could Not Edit the User", e.message);
-      } finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
     getUser();
   }, []);
-
 
   return (
     <div className="content">
@@ -70,18 +67,20 @@ const Profile = () => {
       <Userprofile className="edituser">
         <Col className="image-replace">
           <div className="img-sec">
-          {loading ? (
-                <AnimatedCircle />
-              ) : (
-                <img src={profile ? profile : avatar} alt="avater" />
-              )}
+            {loading ? (
+              <AnimatedCircle />
+            ) : !profile.includes("") ? (
+              <img src={profile ? profile : avatar} alt="avater" />
+            ) : (
+              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                <span className="text-bold">{username[0]}</span>
+              </div>
+            )}
           </div>
           <Userinfo>
             <h4>{username}</h4>
             <h6>{profession}</h6>
-            <p className="bio">
-              {bio}
-            </p>
+            <p className="bio">{bio}</p>
 
             <div className="social">
               <p className="mb-2"> Follow him on: </p>
@@ -152,6 +151,10 @@ const Userprofile = styled.div`
       object-fit: cover;
       object-position: center center;
     }
+  }
+
+  div span{
+    font-size: 25px;
   }
   
   .edit {

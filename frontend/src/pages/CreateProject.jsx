@@ -94,13 +94,19 @@ const CreateProject = ({ close }) => {
           </label>
           <label htmlFor="category">
             Project Category
-            <input
-              type="category"
-              name="category"
-              placeholder={"Example, Graphic design, UI/UX Design"}
+            <select
+              id="category"
               value={category}
               onChange={(ev) => setCategory(ev.target.value)}
-            />
+            >
+              <option value="hide">Select a Category</option>
+              <option value="Graphic design">Graphic design</option>
+              <option value="UX Design">UX Design</option>
+              <option value="Web Design">Web Design</option>
+              <option value="Web development">Web development</option>
+              <option value="App development">App development</option>
+              <option value="Web3">Web3</option>
+            </select>
           </label>
           <label htmlFor="summary">
             Summarise your Project
@@ -255,6 +261,37 @@ const Content = styled.div`
         background: var(--color-green);
         color: var(--natural-white);
       }
+    }
+
+    select {
+      padding: 0.7rem;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      appearance: none;
+      border: 0.8px solid var(--color-bg);
+
+      option {
+        background-color: var(--natural-white);
+      }
+      option:selected {
+        font-weight: bold;
+      }
+      &::-ms-expand {
+        display: none;
+      }
+
+      &:hover {
+        border-color: #ccc;
+      }
+
+      &:active {
+        border-color: #bbb;
+      }
+    }
+
+    select:hover {
+      background-color: #ddd;
     }
   }
 

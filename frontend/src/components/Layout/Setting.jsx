@@ -98,9 +98,9 @@ const Setting = () => {
     data.set("username", username);
     data.set("email", email);
     data.set("profession", profession);
-    data.set("bio", bio)
-    data.set('linkedin', linkedin)
-    data.set('behance', behance)
+    data.set("bio", bio);
+    data.set("linkedin", linkedin);
+    data.set("behance", behance);
 
     if (password) {
       data.set("password", password);
@@ -144,8 +144,12 @@ const Setting = () => {
             <div className="img-sec">
               {loading ? (
                 <AnimatedCircle />
-              ) : (
+              ) : !profile.includes("") ? (
                 <img src={profile ? profile : avatar} alt="avater" />
+              ) : (
+                <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                  <h3>{username[0]}</h3>
+                </div>
               )}
             </div>
 
@@ -213,7 +217,6 @@ const Setting = () => {
               onChange={handleChange}
               placeholder="Enter Linkedin profile link"
             ></Form.Control>
-            
           </Form.Group>
 
           <Form.Group className="my-2" controlId="behance">
@@ -289,21 +292,26 @@ const Edituser = styled.div`
     width: 120px;
     height: 120px;
     overflow: hidden;
-    border: 1px solid var(--color-bg);
+    border: 2px solid var(--color-sec);
     border-radius: 50%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    outline-offset: 2px;
+    font-size: 25px;
+    color: var(--color-bg-2);
+    
     img{
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       // object-position: center center;
-    }
+    
   }
+}
   .row {
     margin-top: 1.5rem;
     
