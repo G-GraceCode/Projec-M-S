@@ -6,10 +6,11 @@ import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
 import avater from "../assets/add.png";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 
 const Navbar = () => {
   const { userInfo } = userAuth();
-  // const { username } = user;
+  const { username } = userInfo;
   // console.log("user", user);
   // assigning location variable
   const location = useLocation();
@@ -24,20 +25,20 @@ const Navbar = () => {
         {splitLocation === "app" || pathname === "/app" ? (
           <h2>Dashboard</h2>
         ) : (
-          <h2>{splitLocation}</h2>
+          <h2>{splitLocation[1]}</h2>
         )}
       </Pagetitle>
 
       <User>
         <Link className="link" to="/project">
-          Create
+          <FiEdit /> Create
         </Link>
 
         <div className="userprofile">
           <div className="userimg">
             {!userInfo.profile ? (
               <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
-                <span>{userInfo.username[0]}</span>
+                <span>{`${username[0]}`}</span>
               </div>
             ) : (
               <img

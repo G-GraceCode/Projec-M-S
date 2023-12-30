@@ -11,6 +11,8 @@ const View = () => {
   const [loading, setLoading] = useState(true);
   const [projectInfo, setProjectInfo] = useState({});
   const { id } = useParams();
+  const { userInfo } = userAuth();
+  const { username } = userInfo;
 
   const getTheProject = async () => {
     try {
@@ -55,24 +57,48 @@ const View = () => {
                 <FiEdit /> Edit
               </Link>
             </div>
-            <div className="title">
-              <h1>{projectInfo.title}</h1>
-              <span>
-                {`A ${projectInfo.category} project, Created on  `}
-                <time>{new Date(projectInfo.createdAt).toDateString()}</time>
-              </span>
-            </div>
-            <div className="imgContainer">
-              <img
-                src={`https://trrmmy-5000.csb.app/${projectInfo.coverImg}`}
-                alt=""
-                loading="lazy"
+            <div className="text-info">
+              <div className="title">
+                <h1>{projectInfo.title}</h1>
+                <div className="userprofile">
+                  <div className="userimg">
+                    {!userInfo.profile ? (
+                      <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
+                        <span>{`${username[0]}`}</span>
+                      </div>
+                    ) : (
+                      <img
+                        className="img"
+                        src={userInfo?.profile}
+                        alt="user-photo"
+                        loading="lazy"
+                        title="Your Avater"
+                      />
+                    )}
+                  </div>
+                  <div className="info">
+                    <h4>{userInfo?.username}</h4>
+                    <small>
+                      {`A ${projectInfo.category} project, Created on  `}{" "}
+                      <time>
+                        {new Date(projectInfo.createdAt).toDateString()}
+                      </time>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div className="imgContainer">
+                <img
+                  src={`https://trrmmy-5000.csb.app/${projectInfo.coverImg}`}
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div
+                className="text"
+                dangerouslySetInnerHTML={{ __html: projectInfo.content }}
               />
             </div>
-            <div
-              className="text"
-              dangerouslySetInnerHTML={{ __html: projectInfo.content }}
-            />
           </Content>
         )}
       </Section>
@@ -88,8 +114,8 @@ const Content = styled.div`
   border-radius: var(--border-radius);
   color: var(--natural-white);
   padding: 0.5rem 1.7rem;
-  text-align: center;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
   .header {
     display: flex;
     align-items: center;
@@ -109,31 +135,77 @@ const Content = styled.div`
       padding: 0.4rem;
     }
   }
-  .title {
-    margin: 0.8rem 0;
+  .text-info {
+    .title {
+      margin: 1rem 0;
+      text-align: left;
 
-    h1 {
-      font-size: 40px;
-      font-weight: 600;
-      text-transform: uppercase;
+      h1 {
+        font-size: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 1rem 0;
+      }
+
+      & > .userprofile {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.6rem;
+        cursor: pointer;
+        .userimg {
+          width: 2rem;
+          height: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 50%;
+          overflow: hidden;
+          outline: 1px solid var(--natural-white);
+          outline-offset: 3px;
+
+          .img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+        .info {
+          display: flex;
+          flex-flow: column nowrap;
+          align-items: flex-start;
+          justify-content: center;
+          cursor: pointer;
+          h4 {
+            font-size: 14px;
+            letter-spacing: 0.8px;
+          }
+          small {
+            margin-top: -10px;
+            font-size: 10px;
+          }
+        }
+      }
     }
-  }
-  .imgContainer {
-    height: 400px;
-    overflow: hidden; 
-    border-radius: var(--border-radius);
-    img {
-      object-position: center center;
-     
+    .imgContainer {
+      height: 400px;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      img {
+        object-position: center center;
+      }
     }
-  }
-  .text {
-    text-align: left;
-    padding: 0.7rem;
-    line-height: 1.4rem;
-    text-align: justify;
-    font-size: 16px;
-    word-spacing: 1.4px;
-    letter-spacing: 0.8px;
+    .text {
+      text-align: left;
+      padding: 0.7rem;
+      line-height: 1.4rem;
+      text-align: justify;
+      font-size: 16px;
+      word-spacing: 1.4px;
+      letter-spacing: 0.8px;
+    }
   }
 `;
