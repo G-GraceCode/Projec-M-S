@@ -69,12 +69,14 @@ const Profile = () => {
           <div className="img-sec">
             {loading ? (
               <AnimatedCircle />
-            ) : !profile === "" ? (
-              <img src={profile ? profile : avatar} alt="avater" />
-            ) : (
+            ) : profile === "" ? (
               <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                <span className="text-bold">{username[0]}</span>
+                <span className="text-bold">
+                  {!username ? "" : username[0]}
+                </span>
               </div>
+            ) : (
+              <img src={profile ? profile : avatar} alt="avater" />
             )}
           </div>
           <Userinfo>

@@ -144,12 +144,12 @@ const Setting = () => {
             <div className="img-sec">
               {loading ? (
                 <AnimatedCircle />
-              ) : !profile.includes("") ? (
-                <img src={profile ? profile : avatar} alt="avater" />
-              ) : (
+              ) : profile === "" ? (
                 <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
                   <h3>{username[0]}</h3>
                 </div>
+              ) : (
+                <img src={profile ? profile : avatar} alt="avater" />
               )}
             </div>
 

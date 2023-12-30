@@ -36,9 +36,9 @@ const Navbar = () => {
 
         <div className="userprofile">
           <div className="userimg">
-            {!userInfo.profile ? (
+            {userInfo.profile === "" ? (
               <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
-                <span>{`${username[0]}`}</span>
+                <span>{`${!username ? "" : username[0]}`}</span>
               </div>
             ) : (
               <img
