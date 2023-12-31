@@ -19,6 +19,7 @@ const Projects = ({ present }) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState([]);
 
   console.log(month, year, sort);
 
@@ -26,7 +27,7 @@ const Projects = ({ present }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://trrmmy-5000.csb.app/project/allprojects?&search=${searchTerm}`,
+        `https://trrmmy-5000.csb.app/project/projectsearched?&search=${searchTerm}`,
         {
           method: "GET",
           credentials: "include",
@@ -62,6 +63,12 @@ const Projects = ({ present }) => {
       }
     } catch (e) {
       console.log(e.message);
+    }
+  };
+
+  const filterResult = () => {
+    if (month) {
+      const filterByMonth = posts.filter((project) => project.toFrom);
     }
   };
 

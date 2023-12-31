@@ -14,7 +14,7 @@ const projectSchema = new Schema(
     content: String,
     coverImg: String,
     comProject: Boolean,
-    fromData: Date,
+    fromDate: Date,
     toDate: Date,
   },
   {

@@ -17,7 +17,7 @@ const AutoCompleteSearch = ({ projects }) => {
         ))
       ) : (
         <>No Result Found</>
-      )}6
+      )}
     </Searchresult>
   );
 };

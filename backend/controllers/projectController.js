@@ -16,7 +16,8 @@ const createProject = asyncHandler(async (req, res) => {
     fs.renameSync(path, newPath);
 
     // req for title, content, summary, category
-    const { title, category, content, summary } = req.body;
+    const { title, category, content, summary, toDate, fromDate, comProject } =
+      req.body;
     const user = await User.findById(req.user._id);
 
     if (user) {
@@ -25,6 +26,9 @@ const createProject = asyncHandler(async (req, res) => {
         summary,
         category,
         content,
+        toDate,
+        fromDate,
+        comProject,
         coverImg: newPath,
         author: user._id,
       });
@@ -132,9 +136,6 @@ const getAllProjects = asyncHandler(async (req, res) => {
 const getProjectBySearch = asyncHandler(async (req, res) => {
   try {
     const searchTerm = req.query.search;
-    const month = req.query.month;
-    const year = req.query.year;
-    const sort = req.query.sort;
 
     const projects = await Project.find({
       $text: { $search: searchTerm, $caseSensitive: true },
