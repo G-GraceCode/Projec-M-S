@@ -115,12 +115,40 @@ const getProjects = asyncHandler(async (req, res) => {
 // @access Public projects from every users
 const getAllProjects = asyncHandler(async (req, res) => {
   try {
+    const { month, year, sort } = req.query;
+    console.log(month, year, sort);
     const projects = await Project.find({})
       .populate("author", ["username", "profile"])
       .sort({ createdAt: -1 })
       .limit(10);
 
     if (projects.length >= 1) {
+      if (sort) {
+        projects = projects.filter((project) => {
+          sort === "complete"
+            ? project.comProject == true
+            : sort === "New Projects"
+              ? new Date(project.createAt).getTime() <= new Date().getTime()
+              : sort === "Old Project"
+                ? new Date(project.fromDate) <= new Date()
+                : project.comProject == false;
+        });
+      }
+      if (month) {
+        projects = projects.filter(
+          (project) =>
+            new Date(project.toDate).getMonth() == month ||
+            new Date(project.fromDate).getMonth() == month,
+        );
+      }
+      if (year) {
+        projects = projects.filter(
+          (project) =>
+            new Date(project.toDate).getFullYear() == year ||
+            new Date(project.fromDate).getFullYear() == year,
+        );
+      }
+
       res.status(200).json(projects);
     } else {
       res.status(201).json({ message: "No Project Created" });

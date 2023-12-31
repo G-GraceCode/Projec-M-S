@@ -9,6 +9,7 @@ import Tableview from "../Tableview";
 import DeleteProject from "../../pages/DeleteProject";
 import { IoIosSearch } from "react-icons/io";
 import Search from "../Search";
+import { userAuth } from "../../ultContext/AuthContext";
 
 const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
@@ -20,6 +21,7 @@ const Projects = ({ present }) => {
   const [year, setYear] = useState("");
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState([]);
+  const { userInfo } = userAuth();
 
   console.log(month, year, sort);
 
@@ -49,7 +51,7 @@ const Projects = ({ present }) => {
   const loadedProject = async () => {
     try {
       const res = await fetch(
-        "https://trrmmy-5000.csb.app/project/allprojects",
+        `https://trrmmy-5000.csb.app/project/allprojects?sort=${sort}&month=${month}&year=${year}`,
         {
           method: "GET",
           credentials: "include",
@@ -66,15 +68,15 @@ const Projects = ({ present }) => {
     }
   };
 
-  const filterResult = () => {
-    if (month) {
-      const filterByMonth = posts.filter((project) => project.toFrom);
-    }
-  };
+  // const filterResult = () => {
+  //   if (month) {
+  //     const filterByMonth = posts.filter((project) => project.toFrom);
+  //   }
+  // };
 
   useEffect(() => {
     loadedProject();
-  }, []);
+  }, [month, year, sort, userInfo]);
 
   return (
     <div className="content">

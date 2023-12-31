@@ -50,14 +50,14 @@ const Search = ({
       <Sortby>
         Sort by:
         <select value={sort} onChange={sortValue}>
-          <option>Search For</option>
+          <option value="">Search For</option>
           <option>Complete</option>
           <option>Uncomplete</option>
           <option>Old Project</option>
           <option>New Projects</option>
         </select>
         <select id="mounth" value={month} onChange={monthValue}>
-          <option value="hide">-- Month --</option>
+          <option value="">-- Month --</option>
           <option value="january">January</option>
           <option value="february">February</option>
           <option value="march">March</option>
