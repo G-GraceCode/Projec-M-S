@@ -117,7 +117,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
   try {
     const { month, year, sort } = req.query;
     console.log(month, year, sort);
-    const projects = await Project.find({})
+    let projects = await Project.find({})
       .populate("author", ["username", "profile"])
       .sort({ createdAt: -1 })
       .limit(10);
@@ -125,30 +125,32 @@ const getAllProjects = asyncHandler(async (req, res) => {
     if (projects.length >= 1) {
       if (sort) {
         projects = projects.filter((project) => {
-          sort === "complete"
+          sort === "Complete"
             ? project.comProject == true
             : sort === "New Projects"
-              ? new Date(project.createAt).getTime() <= new Date().getTime()
+              ? new Date(project.createdAt).getTime() <= new Date().getTime()
               : sort === "Old Project"
                 ? new Date(project.fromDate) <= new Date()
                 : project.comProject == false;
         });
+        return;
       }
       if (month) {
         projects = projects.filter(
-          (project) =>
-            new Date(project.toDate).getMonth() == month ||
-            new Date(project.fromDate).getMonth() == month,
+          (project) => new Date(project.toDate).getMonth() == month,
+        );
+        console.log(
+          "month",
+          new Date("2022-12-31T00:00:00.000+00:00").getMonth(),
         );
       }
       if (year) {
         projects = projects.filter(
           (project) =>
             new Date(project.toDate).getFullYear() == year ||
-            new Date(project.fromDate).getFullYear() == year,
+            new Date(project.createdAt).getFullYear() == year,
         );
       }
-
       res.status(200).json(projects);
     } else {
       res.status(201).json({ message: "No Project Created" });

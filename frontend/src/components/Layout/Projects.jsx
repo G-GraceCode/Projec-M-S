@@ -51,10 +51,11 @@ const Projects = ({ present }) => {
   const loadedProject = async () => {
     try {
       const res = await fetch(
-        `https://trrmmy-5000.csb.app/project/allprojects?sort=${sort}&month=${month}&year=${year}`,
+        `https://trrmmy-5000.csb.app/project/allprojects?&sort=${sort}&month=${month}&year=${year}`,
         {
           method: "GET",
           credentials: "include",
+          headers: { "Content-Type": "application/json" },
           cors: "no-cors",
         },
       );
