@@ -6,10 +6,12 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import AnimatedCircle from "../AnimatedCircle";
 import poc from "../assets/pic.svg";
+import {AuthUser} from "../ultContext/AuthContext";
 
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
+  const {userInfo} = AuthUser()
 
   return (
     <Projectlist>

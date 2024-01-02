@@ -51,10 +51,10 @@ const Search = ({
         Sort by:
         <select value={sort} onChange={sortValue}>
           <option value="">Search For</option>
-          <option>Complete</option>
-          <option>Uncomplete</option>
-          <option>Old Project</option>
-          <option>New Projects</option>
+          <option value="true">Complete</option>
+          <option value="false">Uncomplete</option>
+          <option value="oldproject">Old Project</option>
+          <option value="newproject">New Projects</option>
         </select>
         <select id="mounth" value={month} onChange={monthValue}>
           <option value="">-- Month --</option>
