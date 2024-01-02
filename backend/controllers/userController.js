@@ -134,7 +134,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const user = await User.findById(req.user._id);
-    const userImage = await handleUpload(newPath);
 
     if (user) {
       user.username = req.body.username;
@@ -145,7 +144,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.behance = req.body.behance;
 
       if (req.file) {
-        user.profile = userImage.secure_url;
+        const userNewImage = await handleUpload(newPath);
+        user.profile =
+          newPath != undefined ? userNewImage.secure_url : user.profile;
       }
 
       if (req.body.password !== "") {
@@ -153,7 +154,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       }
 
       const updatedUser = await user.save();
-console.log('update', updatedUser)
+      console.log("update", updatedUser);
       res.status(200).json({
         _id: updatedUser._id,
         username: updatedUser.username,

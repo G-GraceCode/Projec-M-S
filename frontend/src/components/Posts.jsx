@@ -50,7 +50,12 @@ const Posts = () => {
             ? "No Post Created"
             : projects.map((project) => (
                 <Card key={project._id}>
-                  <img src={post} className="image" alt="img" loading="lazy" />
+                  <img
+                    src={project.coverImg}
+                    className="image"
+                    alt="img"
+                    loading="lazy"
+                  />
                   <div className="Category">
                     <h4>{project.category}</h4>
                   </div>
