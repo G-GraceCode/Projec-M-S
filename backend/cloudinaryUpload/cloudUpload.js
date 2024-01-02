@@ -16,7 +16,8 @@ const handleUpload = async (file) => {
 
     return imgRes;
   } catch (e) {
-    console.log(e.message);
+    res.status(500);
+    throw new Error({ message: e.message });
   }
 };
 

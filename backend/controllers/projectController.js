@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Project from "../models/projectModel.js";
 import User from "../models/userModel.js";
 import fs from "fs";
+import handleUpload from "../cloudinaryUpload/cloudUpload.js";
 
 // route POST /createproject
 // @access public
@@ -19,6 +20,7 @@ const createProject = asyncHandler(async (req, res) => {
     const { title, category, content, summary, toDate, fromDate, comProject } =
       req.body;
     const user = await User.findById(req.user._id);
+    const projectImage = await handleUpload(newPath);
 
     if (user) {
       const data = await Project.create({
@@ -29,11 +31,13 @@ const createProject = asyncHandler(async (req, res) => {
         toDate,
         fromDate,
         comProject,
-        coverImg: newPath,
+        coverImg: projectImage.secure_url,
         author: user._id,
       });
       res.status(200).json(data);
+      res.redirect("/allprojects");
     } else {
+      res.status(200).json({ message: "User not Found" });
       console.log("user not found");
     }
   } catch (e) {
@@ -47,7 +51,7 @@ const createProject = asyncHandler(async (req, res) => {
 
 const editProject = asyncHandler(async (req, res) => {
   try {
-    let newPath = null;
+    let newPath;
     // gettting the image and reanaming it parts when it is Uploaded
     if (req.file) {
       const { originalname, path } = req.file;
@@ -70,7 +74,12 @@ const editProject = asyncHandler(async (req, res) => {
       project.summary = summary;
       project.category = category;
       project.content = content;
-      project.coverImg = newPath ? newPath : project.coverImg;
+
+      if (req.file) {
+        const projectNewImage = await handleUpload(newPath);
+        project.coverImg =
+          newPath != undefined ? projectNewImage.secure_url : project.coverImg;
+      }
 
       const updatedProject = await project.save();
       console.log(updatedProject);
@@ -81,7 +90,7 @@ const editProject = asyncHandler(async (req, res) => {
         content: updatedProject.content,
         coverImg: updatedProject.coverImg,
       });
-      res.redirect("/projects");
+      res.redirect("/allprojects");
     }
   } catch (e) {
     res.status(401);
@@ -92,7 +101,7 @@ const editProject = asyncHandler(async (req, res) => {
 // route get /project
 // @access private getting projects of a particular user
 
-const getProjects = asyncHandler(async (req, res) => {
+const getUserProjects = asyncHandler(async (req, res) => {
   try {
     const author = req.user._id;
 
@@ -125,8 +134,8 @@ const getAllProjects = asyncHandler(async (req, res) => {
     if (projects.length >= 1) {
       if (sort) {
         projects = projects.filter((project) => {
-          project.comProject === true
-            ? project
+          sort === true
+            ? project.comProject == true
             : sort === "newproject"
               ? new Date(project.createdAt).getTime() <= new Date().getTime()
               : sort === "oldproject"
@@ -279,7 +288,7 @@ export {
   createProject,
   getAllProjects,
   getProjectBySearch,
-  getProjects,
+  getUserProjects,
   getAproject,
   editProject,
   deleteProject,

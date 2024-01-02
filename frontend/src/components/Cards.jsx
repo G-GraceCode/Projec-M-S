@@ -6,12 +6,12 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import AnimatedCircle from "../AnimatedCircle";
 import poc from "../assets/pic.svg";
-import {AuthUser} from "../ultContext/AuthContext";
+import { userAuth } from "../ultContext/AuthContext";
 
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
-  const {userInfo} = AuthUser()
+  const { userInfo } = userAuth();
 
   return (
     <Projectlist>
@@ -20,14 +20,14 @@ const Cards = ({ posts, show, loading }) => {
           <div className="circle">
             <AnimatedCircle /> Searching ...
           </div>
-        ) : !totalPost.length ? (
+        ) : !totalPost ? (
           <h4> No Project Created</h4>
         ) : (
           posts.map((post) => (
             <Card key={post._id}>
               <div className="image">
                 <img
-                  src={`https://trrmmy-5000.csb.app/${post?.coverImg}`}
+                  src={`${post?.coverImg}`}
                   onClick={() => navigate("/viewing/" + post._id)}
                   alt="img"
                   loading="lazy"
@@ -50,13 +50,17 @@ const Cards = ({ posts, show, loading }) => {
                   <span>{`by ${post.author.username}`}</span>
                 </div>
 
-                <div className="Icons">
-                  <FiEdit
-                    className="icon"
-                    onClick={() => navigate("/editproject/" + post._id)}
-                  />
-                  <AiFillDelete className="icon-2" onClick={show} />
-                </div>
+                {userInfo?._id === post.author?._id ? (
+                  <div className="Icons">
+                    <FiEdit
+                      className="icon"
+                      onClick={() => navigate("/editproject/" + post._id)}
+                    />
+                    <AiFillDelete className="icon-2" onClick={show} />
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </Card>
           ))

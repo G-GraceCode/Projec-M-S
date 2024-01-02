@@ -15,6 +15,7 @@ const CreateProject = ({ close }) => {
   const [complete, setComplete] = useState(true);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [url, setUrl] = useState("");
   const [files, setFiles] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -41,6 +42,7 @@ const CreateProject = ({ close }) => {
     data.set("comProject", complete);
     data.set("toDate", toDate);
     data.set("fromDate", fromDate);
+    data.set("projectUrl", url);
     data.set("file", files);
 
     try {
@@ -56,6 +58,7 @@ const CreateProject = ({ close }) => {
         setTimeout(() => {
           handleSuccess();
         }, 1500);
+        navigate("/project");
         return;
       } else {
         setLoading(false);
@@ -66,7 +69,7 @@ const CreateProject = ({ close }) => {
     } catch (e) {
       console.log("message", e);
     } finally {
-      navigate("/app");
+      close();
     }
   };
 
@@ -87,7 +90,7 @@ const CreateProject = ({ close }) => {
             <input
               type="title"
               name="title"
-              placeholder={"Title"}
+              placeholder={"Title, Please in 8 character words max"}
               value={title}
               onChange={(ev) => setTitle(ev.target.value)}
             />
@@ -113,11 +116,14 @@ const CreateProject = ({ close }) => {
             <input
               type="summary"
               name="summary"
-              placeholder={"Summary of the project"}
+              placeholder={
+                "Summary of the project, Please in 150 character words max"
+              }
               value={summary}
               onChange={(ev) => setSummary(ev.target.value)}
             />
           </label>
+
           <label htmlFor="file">
             Cover Image
             <input
@@ -125,17 +131,32 @@ const CreateProject = ({ close }) => {
               onChange={(ev) => setFiles(ev.target.files[0])}
             />
           </label>
-          <label htmlFor="content">
+
+          <label htmlFor="url">
+            Project URL Link
+            <input
+              type="url"
+              name="url"
+              placeholder={"Live project url Link"}
+              value={url}
+              onChange={(ev) => setUrl(ev.target.value)}
+            />
+          </label>
+          <label htmlFor="url">
             <Editor value={content} name="content" onChange={setContent} />
           </label>
-          <label htmlFor="complete">
+
+          <label
+            htmlFor="complete"
+            className="d-flex align-items-center flex-row"
+          >
             <input
               type="checkbox"
               name="radio"
               className="mx-2"
               onChange={() => setComplete(!complete)}
             />
-            I am currently working on this Projec
+            <span> I am currently working on this Project </span>
           </label>
 
           <label htmlFor="date">

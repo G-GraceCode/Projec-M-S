@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createProject,
-  getProjects,
+  getUserProjects,
   getAproject,
   getAllProjects,
   getProjectBySearch,
@@ -21,7 +21,7 @@ router
   .route("/create")
   .post(protect, upLoadMiddleware.single("file"), createProject);
 router.put("/editproject/:id", upLoadMiddleware.single("file"), editProject);
-router.route("/projects").get(protect, getProjects);
+router.route("/projects").get(protect, getUserProjects);
 router.get("/projectsearched", getProjectBySearch);
 router.get("/allprojects", getAllProjects);
 router.get("/autosearch", autoCompleteSearch);
