@@ -14,6 +14,7 @@ import avatar from "../../assets/addAvatar.png";
 import Posts from "../Posts";
 import linke from "../../assets/linkedin.png";
 import instagrm from "../../assets/instagrm.png";
+import { CiShare1 } from "react-icons/ci";
 import AnimatedCircle from "../../AnimatedCircle";
 
 const Profile = () => {
@@ -21,7 +22,8 @@ const Profile = () => {
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { username, profession, profile, bio, linkedin, behance } = userInfo;
+  const { username, profession, profile, bio, linkedin, behance, folioLink } =
+    userInfo;
 
   useEffect(() => {
     const getUser = async () => {
@@ -49,6 +51,7 @@ const Profile = () => {
               bio: user.bio,
               linkedin: user.linkedin,
               behance: user.behance,
+              folioLink: user.folioLink,
             });
           });
         }
@@ -83,9 +86,16 @@ const Profile = () => {
             <h4>{username}</h4>
             <h6>{profession}</h6>
             <p className="bio">{bio}</p>
-
+            <p>
+              {" "}
+              Link to site:
+              <a href={folioLink} target="_blank">
+                {folioLink} <CiShare1 />
+              </a>
+            </p>
             <div className="social">
               <p className="mb-2"> Follow him on: </p>
+
               <div className="social-img">
                 <span>
                   <img src={linke} />
