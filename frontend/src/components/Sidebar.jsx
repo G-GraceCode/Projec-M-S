@@ -22,7 +22,7 @@ import { IoMdSettings } from "react-icons/io";
 
 const Sidebar = () => {
   const { userInfo } = userAuth();
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleToggle = () => {
     setIsCollapsed(!isCollapsed);
@@ -46,9 +46,7 @@ const Sidebar = () => {
               style={{
                 left: `${isCollapsed ? "0%" : "2.8%"}`,
                 transition: "left 700ms ease-in-out",
-                backgroundColor: `${
-                  isCollapsed ? "var(--color-bg-2)" : "var(--color-bg)"
-                }`,
+                backgroundColor: `${isCollapsed ? "" : "var(--color-bg-2)"}`,
               }}
             >
               <div className="logo"> Projec</div>

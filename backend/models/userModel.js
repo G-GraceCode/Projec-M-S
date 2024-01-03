@@ -21,9 +21,10 @@ const userSchema = new Schema(
     profile: {
       type: String,
     },
-    bio: {type: String,},
-    linkedin: {type:String,},
-    behance: {type:String,},
+    folioLink: String,
+    bio: { type: String },
+    linkedin: { type: String },
+    behance: { type: String },
     password: {
       type: String,
       required: true,

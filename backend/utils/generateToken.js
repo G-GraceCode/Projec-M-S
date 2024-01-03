@@ -16,6 +16,7 @@ const generateToken = (res, userId) => {
     });
   } else {
     res.status(402).json({ message: "No user Id found" });
+    res.redirect("/auth");
   }
 };
 

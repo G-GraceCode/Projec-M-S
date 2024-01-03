@@ -19,6 +19,7 @@ const Setting = () => {
     password: "",
     profession: "",
     profile: "",
+    folioLink: "",
     bio: "",
     linkedin: "",
     behance: "",
@@ -38,6 +39,7 @@ const Setting = () => {
     bio,
     linkedin,
     behance,
+    folioLink,
   } = userCredentail;
 
   const handleSuccess = () => {
@@ -99,6 +101,7 @@ const Setting = () => {
     data.set("email", email);
     data.set("profession", profession);
     data.set("bio", bio);
+    data.set("folioLink", folioLink);
     data.set("linkedin", linkedin);
     data.set("behance", behance);
 
@@ -206,6 +209,16 @@ const Setting = () => {
               onChange={handleChange}
               placeholder="Write about you in 150 character word"
             ></textarea>
+          </Form.Group>
+
+          <Form.Group className="my-2" controlId="folioLink">
+            <Form.Control
+              type="text"
+              name="folioLink"
+              placeholder="Enter portfolio or website link"
+              value={folioLink}
+              onChange={handleChange}
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group className="my-2" controlId="linkedin">

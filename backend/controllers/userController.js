@@ -14,11 +14,8 @@ const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    //checking the password in the userModel section
-    // const passwordCheck = await user.matchPassword(password);
-    // console.log("pass", passwordCheck);
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    console.log("userpass", isPasswordValid);
+
     if (user && isPasswordValid) {
       generateToken(res, user._id);
       res.status(201).json({

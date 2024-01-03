@@ -27,6 +27,8 @@ export const AuthProvider = ({ children }) => {
           res.json().then((user) => {
             setUserInfo(user);
           });
+        } else{
+          navigate("/login")
         }
       } catch (e) {
         enqueueSnackbar("user Couldn't Logout", { variant: "error" });
