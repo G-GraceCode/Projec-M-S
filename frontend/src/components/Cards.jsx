@@ -10,6 +10,7 @@ import { userAuth } from "../ultContext/AuthContext";
 import AuserProfile from "./AuserProfile";
 
 const HandlePopup = (id, currentUserId) => {
+  console.log("id", id)
   return (
     <>
       {id === currentUserId ? (

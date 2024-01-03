@@ -18,7 +18,7 @@ const AuserProfile = ({ userId }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const res = await fetch(
           `https://trrmmy-5000.csb.app/projec/user/auserprofile/${userId}`,
           {
@@ -40,7 +40,7 @@ const AuserProfile = ({ userId }) => {
       } catch (e) {
         console.log("Could Not Edit the User", e.message);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
     getUser();
@@ -49,50 +49,46 @@ const AuserProfile = ({ userId }) => {
   return (
     <>
       <User className="edituser">
-        {loading ? (
-          <AnimatedCircle />
-        ) : (
-          <div className="image-replace">
-            <div className="img-sec">
-              {loading ? (
-                ""
-              ) : //   <AnimatedCircle />
-              true ? (
-                <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                  <span className="text-bold">Y</span>
-                </div>
-              ) : (
-                <img src={avatar} alt="avater" />
-              )}
-            </div>
-            <Userinfo>
-              <h4>username</h4>
-              <h6>profession</h6>
-              <p className="bio">bio</p>
-              <p>
-                Link to site:{" "}
-                <a href="folioLink" target="_blank">
-                  folioLink <CiShare1 />
-                </a>
-              </p>
-              <div className="social">
-                <p className="mb-2"> Follow him on: </p>
-
-                <div className="social-img">
-                  <span>
-                    <img src={linke} />
-                  </span>
-                  <span>
-                    <img src={instagrm} />
-                  </span>
-                </div>
+        <div className="image-replace">
+          <div className="img-sec">
+            {loading ? (
+              ""
+            ) : //   <AnimatedCircle />
+            true ? (
+              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                <span className="text-bold">Y</span>
               </div>
-            </Userinfo>
-            <p className="edit">
-              <IoCloseSharp className="icon" />
-            </p>
+            ) : (
+              <img src={avatar} alt="avater" />
+            )}
           </div>
-        )}
+          <Userinfo>
+            <h4>username</h4>
+            <h6>profession</h6>
+            <p className="bio">bio</p>
+            <p>
+              Link to site:{" "}
+              <a href="folioLink" target="_blank">
+                folioLink <CiShare1 />
+              </a>
+            </p>
+            <div className="social">
+              <p className="mb-2"> Follow him on: </p>
+
+              <div className="social-img">
+                <span>
+                  <img src={linke} />
+                </span>
+                <span>
+                  <img src={instagrm} />
+                </span>
+              </div>
+            </div>
+          </Userinfo>
+          <p className="edit">
+            <IoCloseSharp className="icon" />
+          </p>
+        </div>
       </User>
     </>
   );
