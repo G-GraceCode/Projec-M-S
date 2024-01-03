@@ -7,6 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 import AnimatedCircle from "../AnimatedCircle";
 import poc from "../assets/pic.svg";
 import { userAuth } from "../ultContext/AuthContext";
+import AuserProfile from "./AuserProfile";
 
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
@@ -50,7 +51,9 @@ const Cards = ({ posts, show, loading }) => {
                   <span>{`by ${post.author.username}`}</span>
                 </div>
 
-                {userInfo?._id === post.author?._id ? (
+                <AuserProfile userPost={post} />
+
+                {userInfo?._id === post.author._id ? (
                   <div className="Icons">
                     <FiEdit
                       className="icon"
