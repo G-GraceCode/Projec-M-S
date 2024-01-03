@@ -12,7 +12,17 @@ import AuserProfile from "./AuserProfile";
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
+  const [viewProfile, setViewProfile] = useState(false);
   const { userInfo } = userAuth();
+
+  const handlePopup = (id) => {
+    if (id === userInfo._id) {
+      return navigate("/profile");
+    }
+    if (id !== userInfo._id) {
+      setViewProfile(true);
+    }
+  };
 
   return (
     <Projectlist>
@@ -46,12 +56,20 @@ const Cards = ({ posts, show, loading }) => {
               </div>
 
               <div className="profile">
-                <div className="user">
+                <div
+                  className="user"
+                  onClick={() => handlePopup(post.author._id)}
+                >
                   <img src={post.author.profile} />
                   <span>{`by ${post.author.username}`}</span>
                 </div>
 
-                <AuserProfile userPost={post} />
+                {viewProfile ? (
+                  <AuserProfile
+                    userPost={post.author}
+                    close={setViewProfile(false)}
+                  />
+                ) : ""}
 
                 {userInfo?._id === post.author._id ? (
                   <div className="Icons">
@@ -168,6 +186,9 @@ const Card = styled.div`
         border-radius: 50%;
         border: 1px solid var(--natural-white);
         outline-offset: 3px;
+      }
+      span {
+        text-decoration: underline;
       }
     }
     .Icons {
