@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
   let bio = "";
   let linkedin = "";
   let behance = "";
+  let folioLink = "";
   try {
     const { username, email, password, profession } = req.body || req.params;
     const userExist = await User.findOne({ email });
@@ -56,6 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
       profession,
       profile,
+      folioLink,
       bio,
       linkedin,
       behance,
@@ -110,6 +112,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     prof: user.profession,
     profile: user.profile,
     bio: user.bio,
+    folioLink: user.folioLink,
     linkedin: user.linkedin,
     behance: user.behance,
   });
@@ -139,6 +142,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.bio = req.body.bio;
       user.linkedin = req.body.linkedin;
       user.behance = req.body.behance;
+      user.folioLink = req.body.folioLink;
 
       if (req.file) {
         const userNewImage = await handleUpload(newPath);
@@ -159,6 +163,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         password: updatedUser.password,
         prof: updatedUser.profession,
         profile: updatedUser.profile,
+        folioLink: updatedUser.folioLink,
         bio: updatedUser.bio,
         linkedin: updatedUser.linkedin,
         behance: updatedUser.behance,

@@ -259,7 +259,7 @@ const Setting = () => {
             variant="success"
             className="mt-3 mx-2"
           >
-            Save Changes
+            {loading ? "Saving" : "Save Changes"}
           </Button>
         </form>
       </Edituser>
