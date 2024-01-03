@@ -9,55 +9,90 @@ import avatar from "../assets/addAvatar.png";
 import instagrm from "../assets/instagrm.png";
 import linke from "../assets/linkedin.png";
 import { IoCloseSharp } from "react-icons/io5";
+import AnimatedCircle from "../AnimatedCircle";
 
-const AuserProfile = ({ username, profession, close }) => {
+const AuserProfile = ({ userId }) => {
   const [loading, setLoading] = useState(false);
-
-  const { userInfo, handleLogout } = userAuth();
+  const [aUser, setAUser] = useState(null);
+  console.log("user", userId);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(
+          `https://trrmmy-5000.csb.app/projec/user/auserprofile/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (res.ok) {
+          res.json().then((user) => {
+            console.log("user", user);
+            setAUser({
+              user,
+            });
+          });
+        }
+      } catch (e) {
+        console.log("Could Not Edit the User", e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getUser();
+  }, []);
 
   return (
     <>
       <User className="edituser">
-        <div className="image-replace">
-          <div className="img-sec">
-            {loading ? (
-              ""
-            ) : //   <AnimatedCircle />
-            true ? (
-              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                <span className="text-bold">Y</span>
-              </div>
-            ) : (
-              <img src={avatar} alt="avater" />
-            )}
-          </div>
-          <Userinfo>
-            <h4>{username}</h4>
-            <h6>{profession}</h6>
-            <p className="bio">bio</p>
-            <p>
-              Link to site:{" "}
-              <a href="folioLink" target="_blank">
-                folioLink <CiShare1 />
-              </a>
-            </p>
-            <div className="social">
-              <p className="mb-2"> Follow him on: </p>
-
-              <div className="social-img">
-                <span>
-                  <img src={linke} />
-                </span>
-                <span>
-                  <img src={instagrm} />
-                </span>
-              </div>
+        {loading ? (
+          <AnimatedCircle />
+        ) : (
+          <div className="image-replace">
+            <div className="img-sec">
+              {loading ? (
+                ""
+              ) : //   <AnimatedCircle />
+              true ? (
+                <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                  <span className="text-bold">Y</span>
+                </div>
+              ) : (
+                <img src={avatar} alt="avater" />
+              )}
             </div>
-          </Userinfo>
-          <p onClick={close} className="edit">
-            <IoCloseSharp className="icon" />
-          </p>
-        </div>
+            <Userinfo>
+              <h4>username</h4>
+              <h6>profession</h6>
+              <p className="bio">bio</p>
+              <p>
+                Link to site:{" "}
+                <a href="folioLink" target="_blank">
+                  folioLink <CiShare1 />
+                </a>
+              </p>
+              <div className="social">
+                <p className="mb-2"> Follow him on: </p>
+
+                <div className="social-img">
+                  <span>
+                    <img src={linke} />
+                  </span>
+                  <span>
+                    <img src={instagrm} />
+                  </span>
+                </div>
+              </div>
+            </Userinfo>
+            <p className="edit">
+              <IoCloseSharp className="icon" />
+            </p>
+          </div>
+        )}
       </User>
     </>
   );

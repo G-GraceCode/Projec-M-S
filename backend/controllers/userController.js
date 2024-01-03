@@ -118,6 +118,28 @@ const getUserProfile = asyncHandler(async (req, res) => {
   });
 });
 
+// @des get user profile
+// route POST /projec/users/profile
+// @access private
+const diffUserprofile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  console.log("dif", user);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  return res.status(200).json({
+    username: user.username,
+    prof: user.profession,
+    profile: user.profile,
+    bio: user.bio,
+    folioLink: user.folioLink,
+    linkedin: user.linkedin,
+    behance: user.behance,
+  });
+});
+
 // @des Get user profile
 // route Get /projec/users/profile
 // @access private
@@ -212,4 +234,5 @@ export {
   getUserProfile,
   deletUser,
   updateUserProfile,
+  diffUserprofile,
 };

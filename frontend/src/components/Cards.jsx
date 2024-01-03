@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
@@ -9,20 +9,25 @@ import poc from "../assets/pic.svg";
 import { userAuth } from "../ultContext/AuthContext";
 import AuserProfile from "./AuserProfile";
 
+const HandlePopup = (id, currentUserId) => {
+  return (
+    <>
+      {id === currentUserId ? (
+        <Navigate to="/profile" />
+      ) : id !== currentUserId ? (
+        <AuserProfile userId={id} />
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
   const [viewProfile, setViewProfile] = useState(false);
   const { userInfo } = userAuth();
-
-  const handlePopup = (id) => {
-    if (id === userInfo._id) {
-      return navigate("/profile");
-    }
-    if (id !== userInfo._id) {
-      setViewProfile(true);
-    }
-  };
 
   return (
     <Projectlist>
@@ -58,18 +63,16 @@ const Cards = ({ posts, show, loading }) => {
               <div className="profile">
                 <div
                   className="user"
-                  onClick={() => handlePopup(post.author._id)}
+                  onClick={() => {
+                    HandlePopup(post.author._id, userInfo._id),
+                      setViewProfile(true);
+                  }}
                 >
                   <img src={post.author.profile} />
                   <span>{`by ${post.author.username}`}</span>
                 </div>
 
-                {viewProfile ? (
-                  <AuserProfile
-                    userPost={post.author}
-                    close={setViewProfile(false)}
-                  />
-                ) : ""}
+                {viewProfile && <HandlePopup />}
 
                 {userInfo?._id === post.author._id ? (
                   <div className="Icons">

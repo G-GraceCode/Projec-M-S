@@ -6,6 +6,7 @@ import {
   updateUserProfile,
   deletUser,
   logOutUser,
+  diffUserprofile,
 } from "../controllers/userController.js";
 import { createProject } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
@@ -28,5 +29,6 @@ router
   .put(protect, uploadMiddleware.single("file"), updateUserProfile)
   .get(protect, uploadMiddleware.single("file"), getUserProfile);
 router.route("/:id").delete(protect, deletUser);
+router.get("/auserprofile/:id", diffUserprofile);
 
 export default router;
