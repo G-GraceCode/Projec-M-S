@@ -53,23 +53,25 @@ const View = () => {
               <Link to="/project" className="h2">
                 <FaArrowLeftLong /> Back
               </Link>
-              <Link to={`/editproject/${id}`} className="edit">
-                <FiEdit /> Edit
-              </Link>
+              {userInfo?._id === projectInfo.author && (
+                <Link to={`/editproject/${id}`} className="edit">
+                  <FiEdit /> Edit
+                </Link>
+              )}
             </div>
             <div className="text-info">
               <div className="title">
                 <h1>{projectInfo.title}</h1>
                 <div className="userprofile">
                   <div className="userimg">
-                    {!userInfo.profile ? (
+                    {!projectInfo.author.profile ? (
                       <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
-                        <span>{`${username[0]}`}</span>
+                        <span>{`${projectInfo.author?.username[0]}`}</span>
                       </div>
                     ) : (
                       <img
                         className="img"
-                        src={userInfo?.profile}
+                        src={projectInfo?.author.profile}
                         alt="user-photo"
                         loading="lazy"
                         title="Your Avater"
@@ -77,7 +79,7 @@ const View = () => {
                     )}
                   </div>
                   <div className="info">
-                    <h4>{userInfo?.username}</h4>
+                    <h4>{projectInfo.author?.username}</h4>
                     <small>
                       {`A ${projectInfo.category} project, Created on  `}{" "}
                       <time>
@@ -89,7 +91,7 @@ const View = () => {
               </div>
               <div className="imgContainer">
                 <img
-                  src={`https://trrmmy-5000.csb.app/${projectInfo.coverImg}`}
+                  src={`${projectInfo.coverImg}`}
                   alt=""
                   loading="lazy"
                 />

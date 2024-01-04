@@ -271,7 +271,10 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
 const getAproject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const theProject = await Project.findById(id);
+    const theProject = await Project.findById(id).populate("author", [
+      "username",
+      "profile",
+    ]);
     res.status(200).json(theProject);
   } catch (e) {
     res.status(500).send(e.message);
