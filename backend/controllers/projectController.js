@@ -127,7 +127,15 @@ const getAllProjects = asyncHandler(async (req, res) => {
     const { month, year, sort } = req.query;
     console.log(month, year, sort);
     let projects = await Project.find({})
-      .populate("author", ["username", "profile", "bio", "folioLink"])
+      .populate("author", [
+        "username",
+        "profile",
+        "bio",
+        "folioLink",
+        "linkedin",
+        "behance",
+        "profession",
+      ])
       .sort({ createdAt: -1 })
       .limit(10);
 
@@ -179,7 +187,15 @@ const getProjectBySearch = asyncHandler(async (req, res) => {
     const projects = await Project.find({
       $text: { $search: searchTerm, $caseSensitive: true },
     })
-      .populate("author", ["username", "profile", "bio", "folioLink"])
+      .populate("author", [
+        "username",
+        "profile",
+        "bio",
+        "folioLink",
+        "linkedin",
+        "behance",
+        "profession",
+      ])
       .sort({ createdAt: -1 })
       .limit(10);
 

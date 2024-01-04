@@ -1,95 +1,72 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
 import { CiShare1 } from "react-icons/ci";
 import avatar from "../assets/addAvatar.png";
 import instagrm from "../assets/instagrm.png";
 import linke from "../assets/linkedin.png";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseCircleOutline, IoCloseSharp } from "react-icons/io5";
 import AnimatedCircle from "../AnimatedCircle";
 
-const AuserProfile = ({ userId }) => {
-  const [loading, setLoading] = useState(false);
-  const [aUser, setAUser] = useState(null);
-  console.log("user", userId);
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        // setLoading(true);
-        const res = await fetch(
-          `https://trrmmy-5000.csb.app/projec/user/auserprofile/${userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          },
-        );
-        if (res.ok) {
-          res.json().then((user) => {
-            console.log("user", user);
-            setAUser({
-              user,
-            });
-          });
-        }
-      } catch (e) {
-        console.log("Could Not Edit the User", e.message);
-      } finally {
-        // setLoading(false);
-      }
-    };
-    getUser();
-  }, []);
+const AuserProfile = ({ user, close }) => {
+  const { userInfo } = userAuth();
+  const navigate = useNavigate();
+  
+
+  // useEffect(() => {
+    if (user?._id === userInfo._id) {
+       navigate("/profile");
+    }
+  // }, [user._id]);
 
   return (
     <>
-      <User className="edituser">
-        <div className="image-replace">
-          <div className="img-sec">
-            {loading ? (
-              ""
-            ) : //   <AnimatedCircle />
-            true ? (
-              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                <span className="text-bold">Y</span>
-              </div>
-            ) : (
-              <img src={avatar} alt="avater" />
-            )}
-          </div>
-          <Userinfo>
-            <h4>username</h4>
-            <h6>profession</h6>
-            <p className="bio">bio</p>
-            <p>
-              Link to site:{" "}
-              <a href="folioLink" target="_blank">
-                folioLink <CiShare1 />
-              </a>
-            </p>
-            <div className="social">
-              <p className="mb-2"> Follow him on: </p>
-
-              <div className="social-img">
-                <span>
-                  <img src={linke} />
-                </span>
-                <span>
-                  <img src={instagrm} />
-                </span>
-              </div>
+      {user?._id !== userInfo._id && (
+        <User className="edituser" onClick={close}>
+          <div className="image-replace">
+            <div className="img-sec">
+              {!user.username ? (
+                <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                  <span className="text-bold">
+                    {user.username ? user.username[0] : ""}
+                  </span>
+                </div>
+              ) : (
+                <img src={user.profile} alt="avater" />
+              )}
             </div>
-          </Userinfo>
-          <p className="edit">
-            <IoCloseSharp className="icon" />
-          </p>
-        </div>
-      </User>
+            <Userinfo>
+              <h4>{user.username}</h4>
+              <h6>{user.profession}</h6>
+              <p className="bio">{user.bio}</p>
+              <p>
+                Link to site:{" "}
+                <a href="folioLink" target="_blank">
+                  {user.folioLink} <CiShare1 />
+                </a>
+              </p>
+              <div className="social">
+                <p className="mb-2"> Follow him on: </p>
+
+                <div className="social-img">
+                  <a href={user.linkedin} target="_blank">
+                    <img src={linke} />
+                  </a>
+                  <a href={user.behance} target="_blank">
+                    <img src={instagrm} />
+                  </a>
+                </div>
+              </div>
+            </Userinfo>
+            <p onClick={close} className="edit">
+              <IoCloseSharp className="icon" />
+            </p>
+          </div>
+        </User>
+      )}
     </>
   );
 };
@@ -148,7 +125,7 @@ const User = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-flow:column  nowrap;
   gap: 1.6rem;
   background-color: var(--color-bg-2);
   color: var(--natural-white);
@@ -202,13 +179,13 @@ text-align:  center;
 `;
 
 const Userinfo = styled.div`
-text-align: left !important;
-
+text-align: center !important;
+width: 70%;
   @media screen and (max-width: 599px), (max-width: 769px){   
     text-align: center !important;
     width: 100% !important;
     h4{
-      font-size: 32px;
+      font-size: 28px;
     }
     .social {
       align-items: center;
@@ -245,7 +222,7 @@ text-align: left !important;
 
     .social-img{
       display: flex;
-      span{
+      a{
         display: flex;
         width: 30px;
         height: 30px;

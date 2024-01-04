@@ -123,7 +123,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access private
 const diffUserprofile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  console.log("dif", user);
   if (!user) {
     res.status(404);
     throw new Error("User not found");

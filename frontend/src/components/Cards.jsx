@@ -9,26 +9,21 @@ import poc from "../assets/pic.svg";
 import { userAuth } from "../ultContext/AuthContext";
 import AuserProfile from "./AuserProfile";
 
-const HandlePopup = (id, currentUserId) => {
-  console.log("id", id)
-  return (
-    <>
-      {id === currentUserId ? (
-        <Navigate to="/profile" />
-      ) : id !== currentUserId ? (
-        <AuserProfile userId={id} />
-      ) : (
-        ""
-      )}
-    </>
-  );
-};
-
 const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
-  const [viewProfile, setViewProfile] = useState(false);
+  const [viewProfile, setViewProfile] = useState("");
   const { userInfo } = userAuth();
+
+  // const HandlePopup = (user) => {
+  //   console.log("id", user);
+  //   if (user._id === userInfo._id) {
+  //     navigate("/profile");
+  //   }
+  //   if  (viewProfile === "active" && user._id !== userInfo._id) {
+  //     return <AuserProfile user={user} close={() => setViewProfile("")} />;
+  //   }
+  // };
 
   return (
     <Projectlist>
@@ -65,15 +60,19 @@ const Cards = ({ posts, show, loading }) => {
                 <div
                   className="user"
                   onClick={() => {
-                    HandlePopup(post.author._id, userInfo._id),
-                      setViewProfile(true);
+                    setViewProfile("active");
                   }}
                 >
                   <img src={post.author.profile} />
                   <span>{`by ${post.author.username}`}</span>
                 </div>
 
-                {viewProfile && <HandlePopup />}
+                {viewProfile && (
+                  <AuserProfile
+                    user={post.author}
+                    close={() => setViewProfile("")}
+                  />
+                )}
 
                 {userInfo?._id === post.author._id ? (
                   <div className="Icons">
