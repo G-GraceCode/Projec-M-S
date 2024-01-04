@@ -14,59 +14,51 @@ import AnimatedCircle from "../AnimatedCircle";
 const AuserProfile = ({ user, close }) => {
   const { userInfo } = userAuth();
   const navigate = useNavigate();
-  
-
-  // useEffect(() => {
-    if (user?._id === userInfo._id) {
-       navigate("/profile");
-    }
-  // }, [user._id]);
+  const [present, setPresent] = useState(false);
 
   return (
     <>
-      {user?._id !== userInfo._id && (
-        <User className="edituser" onClick={close}>
-          <div className="image-replace">
-            <div className="img-sec">
-              {!user.username ? (
-                <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                  <span className="text-bold">
-                    {user.username ? user.username[0] : ""}
-                  </span>
-                </div>
-              ) : (
-                <img src={user.profile} alt="avater" />
-              )}
-            </div>
-            <Userinfo>
-              <h4>{user.username}</h4>
-              <h6>{user.profession}</h6>
-              <p className="bio">{user.bio}</p>
-              <p>
-                Link to site:{" "}
-                <a href="folioLink" target="_blank">
-                  {user.folioLink} <CiShare1 />
-                </a>
-              </p>
-              <div className="social">
-                <p className="mb-2"> Follow him on: </p>
-
-                <div className="social-img">
-                  <a href={user.linkedin} target="_blank">
-                    <img src={linke} />
-                  </a>
-                  <a href={user.behance} target="_blank">
-                    <img src={instagrm} />
-                  </a>
-                </div>
+      <User className="edituser" onClick={close}>
+        <div className="image-replace">
+          <div className="img-sec">
+            {!user.username ? (
+              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                <span className="text-bold">
+                  {user.username ? user.username[0] : ""}
+                </span>
               </div>
-            </Userinfo>
-            <p onClick={close} className="edit">
-              <IoCloseSharp className="icon" />
-            </p>
+            ) : (
+              <img src={user.profile} alt="avater" />
+            )}
           </div>
-        </User>
-      )}
+          <Userinfo>
+            <h4>{user.username}</h4>
+            <h6>{user.profession}</h6>
+            <p className="bio">{user.bio}</p>
+            <p>
+              Link to site:{" "}
+              <a href="folioLink" target="_blank">
+                {user.folioLink} <CiShare1 />
+              </a>
+            </p>
+            <div className="social">
+              <p className="mb-2"> Follow him on: </p>
+
+              <div className="social-img">
+                <a href={user.linkedin} target="_blank">
+                  <img src={linke} />
+                </a>
+                <a href={user.behance} target="_blank">
+                  <img src={instagrm} />
+                </a>
+              </div>
+            </div>
+          </Userinfo>
+          <p onClick={close} className="edit">
+            <IoCloseSharp className="icon" />
+          </p>
+        </div>
+      </User>
     </>
   );
 };
