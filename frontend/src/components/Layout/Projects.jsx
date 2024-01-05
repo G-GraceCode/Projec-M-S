@@ -136,11 +136,9 @@ const Projectfooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  padding: 0 1.5rem;
   position: fixed;
   background-color: var(--color-green);
-  // width: calc(100% - 15%);
-  padding: 1rem 0.8rem;
+  padding: 1rem;
   bottom: 0%;
   left: 0%;
   right: 0;
@@ -159,8 +157,8 @@ const Projectfooter = styled.footer`
     cursor: pointer;
 
     .icon {
-      margin: 0.4rem 0.7rem;
-      font-size: 30px;
+      margin: 0.4rem 0.5rem;
+      font-size: 25px;
       color: var(--color-sec);
     }
     .color {
