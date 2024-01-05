@@ -13,17 +13,8 @@ const Cards = ({ posts, show, loading }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
   const [viewProfile, setViewProfile] = useState("");
+  const [userId, setUserId] = useState(null);
   const { userInfo } = userAuth();
-
-  // const HandlePopup = (user) => {
-  //   console.log("id", user);
-  //   if (user._id === userInfo._id) {
-  //     navigate("/profile");
-  //   }
-  //   if  (viewProfile === "active" && user._id !== userInfo._id) {
-  //     return <AuserProfile user={user} close={() => setViewProfile("")} />;
-  //   }
-  // };
 
   return (
     <Projectlist>
@@ -60,6 +51,7 @@ const Cards = ({ posts, show, loading }) => {
                 <div
                   className="user"
                   onClick={() => {
+                    setUserId(post.author._id);
                     setViewProfile("active");
                   }}
                 >
@@ -68,10 +60,7 @@ const Cards = ({ posts, show, loading }) => {
                 </div>
 
                 {viewProfile && (
-                  <AuserProfile
-                    user={post.author}
-                    close={() => setViewProfile("")}
-                  />
+                  <AuserProfile key={userId} id={userId} close={() => setViewProfile("")} />
                 )}
 
                 {userInfo?._id === post.author._id ? (

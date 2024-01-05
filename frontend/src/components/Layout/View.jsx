@@ -64,14 +64,14 @@ const View = () => {
                 <h1>{projectInfo.title}</h1>
                 <div className="userprofile">
                   <div className="userimg">
-                    {!projectInfo.author.profile ? (
+                    {!projectInfo.author?.profile ? (
                       <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
                         <span>{`${projectInfo.author?.username[0]}`}</span>
                       </div>
                     ) : (
                       <img
                         className="img"
-                        src={projectInfo?.author.profile}
+                        src={projectInfo.author?.profile}
                         alt="user-photo"
                         loading="lazy"
                         title="Your Avater"
@@ -90,11 +90,7 @@ const View = () => {
                 </div>
               </div>
               <div className="imgContainer">
-                <img
-                  src={`${projectInfo.coverImg}`}
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={`${projectInfo.coverImg}`} alt="" loading="lazy" />
               </div>
               <div
                 className="text"

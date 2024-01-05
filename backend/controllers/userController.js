@@ -122,21 +122,25 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // route POST /projec/users/profile
 // @access private
 const diffUserprofile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found");
-  }
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      res.status(401);
+      throw new Error("User not found");
+    }
 
-  return res.status(200).json({
-    username: user.username,
-    prof: user.profession,
-    profile: user.profile,
-    bio: user.bio,
-    folioLink: user.folioLink,
-    linkedin: user.linkedin,
-    behance: user.behance,
-  });
+    return res.status(200).json({
+      username: user.username,
+      prof: user.profession,
+      profile: user.profile,
+      bio: user.bio,
+      folioLink: user.folioLink,
+      linkedin: user.linkedin,
+      behance: user.behance,
+    });
+  } catch (e) {
+    res.status(500).send({ message: e.message });
+  }
 });
 
 // @des Get user profile

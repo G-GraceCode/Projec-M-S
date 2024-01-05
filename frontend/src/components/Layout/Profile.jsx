@@ -87,7 +87,6 @@ const Profile = () => {
             <h6>{profession}</h6>
             <p className="bio">{bio}</p>
             <p>
-              
               Link to site:{" "}
               <a href={folioLink} target="_blank">
                 {folioLink} <CiShare1 />

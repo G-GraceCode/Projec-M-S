@@ -17,8 +17,16 @@ const createProject = asyncHandler(async (req, res) => {
     fs.renameSync(path, newPath);
 
     // req for title, content, summary, category
-    const { title, category, content, summary, toDate, fromDate, comProject } =
-      req.body;
+    const {
+      title,
+      category,
+      content,
+      summary,
+      toDate,
+      fromDate,
+      comProject,
+      projectUrl,
+    } = req.body;
     const user = await User.findById(req.user._id);
     const projectImage = await handleUpload(newPath);
 
@@ -31,6 +39,7 @@ const createProject = asyncHandler(async (req, res) => {
         toDate,
         fromDate,
         comProject,
+        projectUrl,
         coverImg: projectImage.secure_url,
         author: user._id,
       });
@@ -63,7 +72,16 @@ const editProject = asyncHandler(async (req, res) => {
 
     // req for title, content, summary, category
     const { id } = req.params;
-    const { title, category, content, summary } = req.body;
+    const {
+      title,
+      category,
+      content,
+      summary,
+      projectUrl,
+      toDate,
+      fromDate,
+      comProject,
+    } = req.body;
     const project = await Project.findById(id);
     if (!project) {
       res.status(401).send("Preject Not Found");
@@ -74,6 +92,10 @@ const editProject = asyncHandler(async (req, res) => {
       project.summary = summary;
       project.category = category;
       project.content = content;
+      project.projectUrl = projectUrl;
+      project.toDate = toDate;
+      project.fromDate = fromDate;
+      project.comProject = comProject;
 
       if (req.file) {
         const projectNewImage = await handleUpload(newPath);
@@ -89,6 +111,10 @@ const editProject = asyncHandler(async (req, res) => {
         category: updatedProject.category,
         content: updatedProject.content,
         coverImg: updatedProject.coverImg,
+        projectUrl: updatedProject.projectUrl,
+        projectUrl: updatedProject.toDate,
+        projectUrl: updatedProject.fromDate,
+        projectUrl: updatedProject.comProject,
       });
       res.redirect("/allprojects");
     }
@@ -292,7 +318,7 @@ const deleteProject = asyncHandler(async (req, res) => {
     const project = await Project.deleteOne({ author });
 
     if (!project) {
-      return res.status(404).json({ message: "Project not Not Found" });
+      return res.status(401).json({ message: "Project not Not Found" });
     }
 
     res.status(200).json({

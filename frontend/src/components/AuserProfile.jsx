@@ -11,53 +11,97 @@ import linke from "../assets/linkedin.png";
 import { IoCloseCircleOutline, IoCloseSharp } from "react-icons/io5";
 import AnimatedCircle from "../AnimatedCircle";
 
-const AuserProfile = ({ user, close }) => {
+const AuserProfile = ({ id, close }) => {
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({});
   const { userInfo } = userAuth();
   const navigate = useNavigate();
-  const [present, setPresent] = useState(false);
+
+  const getUser = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(
+        `https://trrmmy-5000.csb.app/projec/user/auserprofile/${id}`,
+        {
+          method: "GET",
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
+          // credentials: "include",
+        },
+      );
+      if (res.ok) {
+        res.json().then((user) => {
+          setUserData({
+            username: user.username,
+            email: user.email,
+            profession: user.prof,
+            profile: user.profile,
+            bio: user.bio,
+            linkedin: user.linkedin,
+            behance: user.behance,
+            folioLink: user.folioLink,
+          });
+        });
+      }
+    } catch (e) {
+      console.log("Could Not Edit the User", e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    id && getUser();
+  }, [id]);
 
   return (
     <>
       <User className="edituser" onClick={close}>
-        <div className="image-replace">
-          <div className="img-sec">
-            {!user.username ? (
-              <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
-                <span className="text-bold">
-                  {user.username ? user.username[0] : ""}
-                </span>
+        {loading ? (
+          <AnimatedCircle />
+        ) : (
+          <>
+            <div className="image-replace">
+              <div className="img-sec">
+                {!userData.profile ? (
+                  <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
+                    <span className="text-bold">
+                      {userData.username ? userData.username[0] : ""}
+                    </span>
+                  </div>
+                ) : (
+                  <img src={userData.profile} alt="avater" />
+                )}
               </div>
-            ) : (
-              <img src={user.profile} alt="avater" />
-            )}
-          </div>
-          <Userinfo>
-            <h4>{user.username}</h4>
-            <h6>{user.profession}</h6>
-            <p className="bio">{user.bio}</p>
-            <p>
-              Link to site:{" "}
-              <a href="folioLink" target="_blank">
-                {user.folioLink} <CiShare1 />
-              </a>
-            </p>
-            <div className="social">
-              <p className="mb-2"> Follow him on: </p>
+              <Userinfo>
+                <h4>{userData.username}</h4>
+                <h6>{userData.profession}</h6>
+                <p className="bio">{userData.bio}</p>
+                <p>
+                  Link to site:{" "}
+                  <a href={userData.folioLink} target="_blank">
+                    Portfolio site <CiShare1 />
+                  </a>
+                </p>
+                <div className="social">
+                  <p className="mb-2"> Follow him on: </p>
 
-              <div className="social-img">
-                <a href={user.linkedin} target="_blank">
-                  <img src={linke} />
-                </a>
-                <a href={user.behance} target="_blank">
-                  <img src={instagrm} />
-                </a>
-              </div>
+                  <div className="social-img">
+                    <a href={userData.linkedin} target="_blank">
+                      <img src={linke} />
+                    </a>
+                    <a href={userData.behance} target="_blank">
+                      <img src={instagrm} />
+                    </a>
+                  </div>
+                </div>
+              </Userinfo>
+              <p onClick={close} className="edit">
+                <IoCloseSharp className="icon" />
+              </p>
             </div>
-          </Userinfo>
-          <p onClick={close} className="edit">
-            <IoCloseSharp className="icon" />
-          </p>
-        </div>
+          </>
+        )}
       </User>
     </>
   );
@@ -125,7 +169,7 @@ const User = styled.div`
   margin: 0 auto;
   padding: 1.5rem;
   position: relative;
-  width: fit-content;
+  width: 500px;
   min-height: 300px;
   border-radius: 10px;
 

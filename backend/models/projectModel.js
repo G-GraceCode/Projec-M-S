@@ -10,6 +10,7 @@ const projectSchema = new Schema(
     },
     title: String,
     category: String,
+    projectUrl: String,
     summary: String,
     content: String,
     coverImg: String,
