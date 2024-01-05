@@ -168,23 +168,21 @@ const getAllProjects = asyncHandler(async (req, res) => {
     if (projects.length >= 1) {
       if (sort) {
         projects = projects.filter((project) => {
-          sort === true
-            ? project.comProject == true
+          project.comProject === sort
+            ? project
             : sort === "newproject"
               ? new Date(project.createdAt).getTime() <= new Date().getTime()
               : sort === "oldproject"
                 ? new Date(project.fromDate) <= new Date()
-                : project.comProject == false;
+                : project.comProject === false;
         });
         return;
       }
       if (month) {
         projects = projects.filter(
-          (project) => new Date(project.toDate).getMonth() == month,
-        );
-        console.log(
-          "month",
-          new Date("2022-12-31T00:00:00.000+00:00").getMonth(),
+          (project) =>
+            new Date(project.toDate).getMonth() == month ||
+            new Date(project.fromDate).getMonth() == month,
         );
       }
       if (year) {
@@ -253,7 +251,7 @@ const autoCompleteSearch = asyncHandler(async (req, res) => {
       const agg = [
         {
           $search: {
-            index: "projectsSearch",
+            index: "projectsSeach",
             autocomplete: {
               query: searchTerm,
               path: "title",
