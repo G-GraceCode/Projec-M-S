@@ -167,16 +167,15 @@ const getAllProjects = asyncHandler(async (req, res) => {
 
     if (projects.length >= 1) {
       if (sort) {
-        projects = projects.filter((project) => {
-          project.comProject === sort
-            ? project
+        projects = projects.filter((project) =>
+          sort == "true"
+            ? project.comProject === true
             : sort === "newproject"
               ? new Date(project.createdAt).getTime() <= new Date().getTime()
               : sort === "oldproject"
-                ? new Date(project.fromDate) <= new Date()
-                : project.comProject === false;
-        });
-        return;
+                ? new Date(project.fromDate) <= new Date().now()
+                : project.comProject === false,
+        );
       }
       if (month) {
         projects = projects.filter(
