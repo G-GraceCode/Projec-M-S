@@ -137,8 +137,8 @@ const Projectfooter = styled.footer`
   justify-content: space-between;
   flex: 1;
   position: fixed;
-  background-color: var(--color-green);
-  padding: 1rem;
+  // background-color: var(--color-green);
+  padding: 1rem .8rem;
   bottom: 0%;
   left: 0%;
   right: 0;
