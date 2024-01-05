@@ -6,6 +6,7 @@ import AnimatedCircle from "../../AnimatedCircle";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { useParams, Link } from "react-router-dom";
+import { CiShare1 } from "react-icons/ci";
 
 const View = () => {
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,12 @@ const View = () => {
                 dangerouslySetInnerHTML={{ __html: projectInfo.content }}
               />
             </div>
+            <small className="small">
+              <a href={projectInfo.projectUrl} target="_blank">
+                Visit the Live Project
+              </a>
+              <CiShare1 />
+            </small>
           </Content>
         )}
       </Section>
@@ -114,6 +121,50 @@ const Content = styled.div`
   padding: 0.5rem 1.7rem;
   width: 70%;
   margin: 0 auto;
+  margin-bottom: 4rem;
+
+  .small {
+    display: flex;
+    align-self: center;
+    margin: 0 auto;
+    width: fit-content;
+    background: var(--natural-white);
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    color: var(--color-bg-2);
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+      color: var(--color-bg-2);
+      margin-right: 0.4rem;
+    }
+  }
+
+  @media (max-width: 769px) {
+    width: 100%;
+    .header {
+      .h2 {
+        color: var(--natural-white);
+        font-size: 16px;
+      }
+    }
+
+    .text-info {
+      .title {
+        margin: 1rem 0;
+        text-align: left;
+
+        h1 {
+          font-size: 45px !important;
+          font-weight: 600;
+          margin-bottom: 0.9rem 0;
+        }
+      }
+    }
+  }
+
   .header {
     display: flex;
     align-items: center;
@@ -190,12 +241,15 @@ const Content = styled.div`
       }
     }
     .imgContainer {
-      height: 400px;
+      min-height: 400px;
       overflow: hidden;
       border-radius: var(--border-radius);
-      margin: 2rem 0;
+      margin-top: 2rem;
       img {
         object-position: center center;
+        object-fit: cover;
+        width: 100%;
+        display: block;
       }
     }
     .text {

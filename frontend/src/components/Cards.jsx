@@ -60,7 +60,11 @@ const Cards = ({ posts, show, loading }) => {
                 </div>
 
                 {viewProfile && (
-                  <AuserProfile key={userId} id={userId} close={() => setViewProfile("")} />
+                  <AuserProfile
+                    key={userId}
+                    id={userId}
+                    close={() => setViewProfile("")}
+                  />
                 )}
 
                 {userInfo?._id === post.author._id ? (
