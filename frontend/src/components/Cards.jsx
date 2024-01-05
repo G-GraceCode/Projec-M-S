@@ -91,6 +91,7 @@ export default Cards;
 
 const Projectlist = styled.div`
   padding: 0.4rem 1.5rem;
+  margin-bottom: 5rem;
   text-align: center;
   & > .carts {
     display: grid;

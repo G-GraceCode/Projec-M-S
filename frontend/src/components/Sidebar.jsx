@@ -45,7 +45,6 @@ const Sidebar = () => {
               className="nav-controler"
               style={{
                 left: `${isCollapsed ? "0%" : "2.8%"}`,
-                transition: "left 700ms ease-in-out",
                 backgroundColor: `${isCollapsed ? "" : "var(--color-bg-2)"}`,
               }}
             >

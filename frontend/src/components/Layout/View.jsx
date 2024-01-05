@@ -54,7 +54,7 @@ const View = () => {
               <Link to="/project" className="h2">
                 <FaArrowLeftLong /> Back
               </Link>
-              {userInfo?._id === projectInfo.author && (
+              {userInfo?._id === projectInfo.author._id && (
                 <Link to={`/editproject/${id}`} className="edit">
                   <FiEdit /> Edit
                 </Link>

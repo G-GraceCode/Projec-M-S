@@ -14,6 +14,9 @@ const Edit = () => {
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [complete, setComplete] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [url, setUrl] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,6 +39,11 @@ const Edit = () => {
           setSummary(pro.summary);
           setCategory(pro.category);
           setContent(pro.content);
+          setComplete(pro.comProject);
+          setFromDate(pro.fromDate);
+          setToDate(pro.toDate);
+          setUrl(pro.projectUrl);
+          setFiles(pro.coverImg);
         });
       }
     } catch (e) {}
@@ -53,7 +61,10 @@ const Edit = () => {
     data.set("summary", summary);
     data.set("category", category);
     data.set("content", content);
-    // data.set("complete", complete);
+    data.set("comProject", complete);
+    data.set("toDate", toDate);
+    data.set("fromDate", fromDate);
+    data.set("projectUrl", url);
     if (files) {
       data.set("file", files);
     }
@@ -117,20 +128,28 @@ const Edit = () => {
             </label>
             <label htmlFor="category">
               Project Category
-              <input
-                type="category"
-                name="category"
-                placeholder={"Example, Graphic design, UI/UX Design"}
+              <select
+                id="category"
                 value={category}
                 onChange={(ev) => setCategory(ev.target.value)}
-              />
+              >
+                <option value="hide">Select a Category</option>
+                <option value="Graphic design">Graphic design</option>
+                <option value="UX Design">UX Design</option>
+                <option value="Web Design">Web Design</option>
+                <option value="Web development">Web development</option>
+                <option value="App development">App development</option>
+                <option value="Web3">Web3</option>
+              </select>
             </label>
             <label htmlFor="summary">
               Summarise your Project
               <input
                 type="summary"
                 name="summary"
-                placeholder={"Summary of the project"}
+                placeholder={
+                  "Summary of the project, Please in 150 character words max"
+                }
                 value={summary}
                 onChange={(ev) => setSummary(ev.target.value)}
               />
@@ -142,8 +161,17 @@ const Edit = () => {
                 onChange={(ev) => setFiles(ev.target.files[0])}
               />
             </label>
+            <label htmlFor="url">
+              Project URL Link
+              <input
+                type="url"
+                name="url"
+                placeholder={"Live project url Link"}
+                value={url}
+                onChange={(ev) => setUrl(ev.target.value)}
+              />
+            </label>
             <label htmlFor="content" className="editorLabel">
-              Write more about your project
               <Editor
                 value={content}
                 name="content"
@@ -151,47 +179,48 @@ const Edit = () => {
                 className="editor"
               />
             </label>
-            <label htmlFor="complete">
-              Choose whether your is a complete project or it a new Project
-              <p>
-                Complete Project
-                <input
-                  type="radio"
-                  name="radio"
-                  value={"complete"}
-                  onChange={(e) => setComplete(e.target.value)}
-                />
-                New Project
-                <input
-                  type="radio"
-                  name="radio"
-                  value={"New"}
-                  onChange={(e) => setComplete(e.target.value)}
-                />
-              </p>
+
+            <label
+              htmlFor="complete"
+              className="d-flex align-items-center flex-row"
+            >
+              <input
+                type="checkbox"
+                name="radio"
+                className="mx-2"
+                onChange={() => setComplete(!complete)}
+              />
+              <span> I am currently working on this Project </span>
             </label>
 
             <label htmlFor="date">
-              {complete === "complete" ? (
-                <p>
-                  <span>sset start and End Date of the Project</span>
-                  Started <input type="date" name="from" />
-                  Ended <input type="date" name="to" />
-                </p>
-              ) : complete === "New" ? (
-                <p>
-                  <span>set start only of the Project</span>
-                  <input type="date" name="to" />
-                </p>
-              ) : (
-                ""
-              )}
+              <p>
+                <span>
+                  Start Date
+                  <input
+                    type="date"
+                    name="from"
+                    value={fromDate}
+                    onChange={(e) => setFromDate(e.target.value)}
+                  />
+                </span>
+                <span className="ml-2">
+                  Ended
+                  <input
+                    disabled={complete === false}
+                    type="date"
+                    name="to"
+                    value={toDate}
+                    onChange={(e) => setToDate(e.target.value)}
+                  />
+                </span>
+              </p>
             </label>
 
             <div className="btn">
               <button
                 type="button"
-                style={{ marginTop: "5px" }}
+                style={{ marginTop: "5px", color: "var(--natural-white)" }}
                 onClick={() => navigate("/project")}
               >
                 Cancle
@@ -261,6 +290,39 @@ const Content = styled.div`
       .editor {
         background: white;
       }
+
+
+      select {
+        padding: 0.7rem;
+        font-size: 12px;
+        border: none;
+        outline: none;
+        appearance: none;
+        border: 0.8px solid var(--color-bg);
+  
+        option {
+          background-color: var(--natural-white);
+        }
+        option:selected {
+          font-weight: bold;
+        }
+        &::-ms-expand {
+          display: none;
+        }
+  
+        &:hover {
+          border-color: #ccc;
+        }
+  
+        &:active {
+          border-color: #bbb;
+        }
+      }
+  
+      select:hover {
+        background-color: #ddd;
+      }
+    }
     }
     .editorLabel {
       color: var(--natural-black);
