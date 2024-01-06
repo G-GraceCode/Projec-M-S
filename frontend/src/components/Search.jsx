@@ -163,12 +163,12 @@ const Searchproject = styled.div`
       outline: 2px solid transparent;
       border-radius: var(--border-radius-2);
     }
-    input[type="text"]:focus {{
+    input[type="text"]:focus {
       outline: 2px solid var(--color-green);
       outline-offset: 3px;
       width: 430px;
       transition: outline var(--transition);
-      transition: width var(--transition);}
+      transition: width var(--transition);
     }
   }
 `;
