@@ -9,9 +9,11 @@ import poc from "../assets/pic.svg";
 import { userAuth } from "../ultContext/AuthContext";
 import AuserProfile from "./AuserProfile";
 import { IoIosArrowBack } from "react-icons/io";
+import DeleteProject from "../pages/DeleteProject";
 
-const Cards = ({ posts, show, loading, search, result, goBack }) => {
+const Cards = ({ posts, loading, search, result, goBack }) => {
   const navigate = useNavigate();
+  const [delet, setDelet] = useState("");
   const [totalPost, setTotalPost] = useState([posts]);
   const [viewProfile, setViewProfile] = useState("");
   const [userId, setUserId] = useState(null);
@@ -80,11 +82,17 @@ const Cards = ({ posts, show, loading, search, result, goBack }) => {
                       className="icon"
                       onClick={() => navigate("/editproject/" + post._id)}
                     />
-                    <AiFillDelete className="icon-2" onClick={show} />
+
+                    <AiFillDelete
+                      className="icon-2"
+                      onClick={() => setDelet("active")}
+                    />
                   </div>
                 ) : (
                   ""
                 )}
+
+                {delet && <DeleteProject close={() => setDelet("")} projectId={post._id} />}
               </div>
             </Card>
           ))}

@@ -57,12 +57,15 @@ const Posts = () => {
                     loading="lazy"
                   />
                   <div className="Category">
-                    <h4>{project.category}</h4>
+                    <span>{project.category}</span>
                   </div>
                   <div className="Icons-i">
-                    <FaShareFromSquare className="icon share" />
-                    <FiEdit className="icon" />
-                    <AiFillDelete className="icon-2" />
+                    <FiEdit
+                      className="icon"
+                      onClick={() => navigate("/editproject/" + project._id)}
+                    />
+
+                    <AiFillDelete className="icon-2" deleteById={project._id}/>
                   </div>
                   <div className="Detail">
                     <h4>{project.title}</h4>
@@ -165,9 +168,9 @@ const Card = styled.div`
     top: 2%;
     text-align: center;
     background-color: var(--color-green);
-    padding: 0.4rem 0.5rem 0 0.5rem;
+    padding: 0.4rem;
     border-radius: var(--border-radius);
-    h4 {
+    span {
       color: var(--natural-white);
       font-size: 18px;
     }
@@ -199,6 +202,7 @@ const Card = styled.div`
     border-radius: 10px 10px 0 0;
     background-color: var(--natural-white);
     transition: bottom var(--transition);
+    color: var(--color-bg-2);
     h4 {
       font-size: 18px;
       text-align: left;

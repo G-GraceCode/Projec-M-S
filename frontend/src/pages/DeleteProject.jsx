@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { userAuth } from "../ultContext/AuthContext";
 import { useSnackbar } from "notistack";
 
-const DeleteProject = ({ close }) => {
+const DeleteProject = ({ close, projectId, deleteById }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  console.log("id", projectId);
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `https://trrmmy-5000.csb.app/project/deleteproject/${userInfo?._id}`,
+        `https://trrmmy-5000.csb.app/project/deleteproject/${projectId}`,
         {
           method: "DELETE",
           headers: {

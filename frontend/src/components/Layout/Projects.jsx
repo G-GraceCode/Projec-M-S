@@ -6,7 +6,6 @@ import { MdGridView } from "react-icons/md";
 import { MdOutlineViewAgenda } from "react-icons/md";
 import Cards from "../Cards";
 import Tableview from "../Tableview";
-import DeleteProject from "../../pages/DeleteProject";
 import { IoIosSearch } from "react-icons/io";
 import Search from "../Search";
 import { userAuth } from "../../ultContext/AuthContext";
@@ -15,7 +14,6 @@ const Projects = ({ present }) => {
   const [showType, setShowType] = useState("");
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [delet, setDelet] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -102,14 +100,9 @@ const Projects = ({ present }) => {
       />
 
       {showType === "table" ? (
-        <Tableview
-          show={() => setDelet("active")}
-          posts={posts}
-          loading={loading}
-        />
+        <Tableview posts={posts} loading={loading} />
       ) : (
         <Cards
-          show={() => setDelet("active")}
           result={resultSearch}
           search={searchTerm}
           posts={posts}
@@ -132,10 +125,6 @@ const Projects = ({ present }) => {
           />
         </div>
       </Projectfooter>
-
-      {delet && (
-        <DeleteProject close={() => (setDelet(""), setLoading(true))} />
-      )}
     </div>
   );
 };

@@ -26,6 +26,6 @@ router.get("/projectsearched", getProjectBySearch);
 router.get("/allprojects", getAllProjects);
 router.get("/autosearch", autoCompleteSearch);
 router.get("/:id", getAproject);
-router.route("/deleteproject/:id").delete(protect, deleteProject);
+router.delete("/deleteproject/:id", deleteProject);
 
 export default router;

@@ -331,9 +331,8 @@ const getAproject = asyncHandler(async (req, res) => {
 
 const deleteProject = asyncHandler(async (req, res) => {
   try {
-    const id = req.user._id;
-    const author = id;
-    const project = await Project.deleteOne({ author });
+    const { id } = req.params;
+    const project = await Project.findByIdAndDelete(id);
 
     if (!project) {
       return res.status(401).json({ message: "Project not Not Found" });
