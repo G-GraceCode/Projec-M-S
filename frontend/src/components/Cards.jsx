@@ -17,6 +17,7 @@ const Cards = ({ posts, loading, search, result, goBack }) => {
   const [totalPost, setTotalPost] = useState([posts]);
   const [viewProfile, setViewProfile] = useState("");
   const [userId, setUserId] = useState(null);
+  const [deleteProjectId, setDeleteProjectId]= useState(null);
   const { userInfo } = userAuth();
 
   return (
@@ -85,14 +86,23 @@ const Cards = ({ posts, loading, search, result, goBack }) => {
 
                     <AiFillDelete
                       className="icon-2"
-                      onClick={() => setDelet("active")}
+                      onClick={() => {setDelet("active"), setDeleteProjectId(post._id)}}
+
                     />
                   </div>
                 ) : (
                   ""
                 )}
 
-                {delet && <DeleteProject close={() => setDelet("")} projectId={post._id} />}
+                {delet && (
+                  <DeleteProject
+                    key={post._id}
+                    close={() => {
+                      setDelet(""), goBack();
+                    }}
+                    projectId={deleteProjectId}
+                  />
+                )}
               </div>
             </Card>
           ))}

@@ -100,7 +100,15 @@ const Projects = ({ present }) => {
       />
 
       {showType === "table" ? (
-        <Tableview posts={posts} loading={loading} />
+        <Tableview
+          posts={posts}
+          result={resultSearch}
+          search={searchTerm}
+          loading={loading}
+          goBack={() => {
+            setGoBack("go"), setSearchTerm(""), setResultSearch("");
+          }}
+        />
       ) : (
         <Cards
           result={resultSearch}
