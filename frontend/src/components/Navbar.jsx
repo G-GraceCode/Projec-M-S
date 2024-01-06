@@ -84,8 +84,7 @@ const Nav = styled.nav`
   left: 0%;
   right: 0%;
   min-width: 85%;
-
-  z-index: var(--z-modal);
+  z-index: var(--z-tooltip);
 `;
 const Pagetitle = styled.div`
   display: flex;
