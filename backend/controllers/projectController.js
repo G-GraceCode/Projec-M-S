@@ -206,9 +206,13 @@ const getAllProjects = asyncHandler(async (req, res) => {
 const getProjectBySearch = asyncHandler(async (req, res) => {
   try {
     const searchTerm = req.query.search;
+    console.log("searchTerm", searchTerm);
 
     const projects = await Project.find({
-      $text: { $search: searchTerm, $caseSensitive: true },
+      $text: {
+        $search: searchTerm,
+        $caseSensitive: true,
+      },
     })
       .populate("author", [
         "username",
@@ -245,20 +249,37 @@ const getProjectBySearch = asyncHandler(async (req, res) => {
 const autoCompleteSearch = asyncHandler(async (req, res) => {
   try {
     const searchTerm = req.query.search;
-    console.log("searchTerm", searchTerm);
     if (searchTerm.length > 0) {
       const agg = [
         {
           $search: {
             index: "projectsSeach",
-            autocomplete: {
-              query: searchTerm,
-              path: "title",
-              fuzzy: {
-                maxEdits: 1,
-                prefixLength: 1,
-                maxExpansions: 256,
-              },
+            compound: {
+              should: [
+                {
+                  autocomplete: {
+                    query: searchTerm,
+                    path: "title",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      maxExpansions: 256,
+                    },
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: searchTerm,
+                    path: "category",
+                    fuzzy: {
+                      maxEdits: 1,
+                      prefixLength: 1,
+                      maxExpansions: 256,
+                    },
+                  },
+                },
+              ],
+              minimumShouldMatch: 1,
             },
           },
         },

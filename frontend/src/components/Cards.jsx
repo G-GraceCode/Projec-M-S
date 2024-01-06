@@ -8,8 +8,9 @@ import AnimatedCircle from "../AnimatedCircle";
 import poc from "../assets/pic.svg";
 import { userAuth } from "../ultContext/AuthContext";
 import AuserProfile from "./AuserProfile";
+import { IoIosArrowBack } from "react-icons/io";
 
-const Cards = ({ posts, show, loading }) => {
+const Cards = ({ posts, show, loading, search, result, goBack }) => {
   const navigate = useNavigate();
   const [totalPost, setTotalPost] = useState([posts]);
   const [viewProfile, setViewProfile] = useState("");
@@ -18,15 +19,21 @@ const Cards = ({ posts, show, loading }) => {
 
   return (
     <Projectlist>
-      <div className="carts">
-        {loading ? (
-          <div className="circle">
-            <AnimatedCircle /> Searching ...
-          </div>
-        ) : !totalPost ? (
-          <h4> No Project Created</h4>
-        ) : (
-          posts.map((post) => (
+      {result.length > 0 && (
+        <h5 className="text-white mx-2 my-3 cursor-pointer">
+          <IoIosArrowBack onClick={goBack} /> {`Search Result for: ${result}`}
+        </h5>
+      )}
+
+      {loading ? (
+        <div className="circle">
+          <AnimatedCircle /> Searching ...
+        </div>
+      ) : !totalPost ? (
+        <h4> No Project Created</h4>
+      ) : (
+        <div className="carts">
+          {posts.map((post) => (
             <Card key={post._id}>
               <div className="image">
                 <img
@@ -80,9 +87,9 @@ const Cards = ({ posts, show, loading }) => {
                 )}
               </div>
             </Card>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </Projectlist>
   );
 };
@@ -92,7 +99,7 @@ export default Cards;
 const Projectlist = styled.div`
   padding: 0.4rem 1.5rem;
   margin-bottom: 5rem;
-  text-align: center;
+  text-align: left;
   & > .carts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(300px), 1fr));

@@ -20,6 +20,8 @@ const Projects = ({ present }) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [sort, setSort] = useState("");
+  const [resultSearch, setResultSearch] = useState("");
+  const [goBack, setGoBack] = useState("");
   const [filter, setFilter] = useState([]);
   const { userInfo } = userAuth();
 
@@ -28,6 +30,7 @@ const Projects = ({ present }) => {
   const getProjects = async () => {
     try {
       setLoading(true);
+
       const res = await fetch(
         `https://trrmmy-5000.csb.app/project/projectsearched?&search=${searchTerm}`,
         {
@@ -45,6 +48,8 @@ const Projects = ({ present }) => {
       console.log(e.message);
     } finally {
       setLoading(false);
+      setResultSearch(searchTerm);
+      setSearchTerm("");
     }
   };
 
@@ -64,6 +69,7 @@ const Projects = ({ present }) => {
           setPosts(userProjects);
         });
       }
+      setGoBack("");
     } catch (e) {
       console.log(e.message);
     }
@@ -77,7 +83,7 @@ const Projects = ({ present }) => {
 
   useEffect(() => {
     loadedProject();
-  }, [month, year, sort, userInfo]);
+  }, [month, year, sort, userInfo, goBack]);
 
   return (
     <div className="content">
@@ -104,8 +110,13 @@ const Projects = ({ present }) => {
       ) : (
         <Cards
           show={() => setDelet("active")}
+          result={resultSearch}
+          search={searchTerm}
           posts={posts}
           loading={loading}
+          goBack={() => {
+            setGoBack("go"), setSearchTerm(""), setResultSearch("");
+          }}
         />
       )}
       <Projectfooter>
