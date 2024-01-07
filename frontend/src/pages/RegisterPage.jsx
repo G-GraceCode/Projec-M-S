@@ -96,7 +96,8 @@ const RegisterPage = () => {
           <select
             id="category"
             class="form-select"
-            aria-label="Disabled select example"
+            aria-label="Default select example"
+            name="profession"
             value={profession}
             onChange={handleChange}
           >

@@ -100,11 +100,11 @@ const CreateProject = ({ close }) => {
             <select
               id="category"
               class="form-select"
-              aria-label="Disabled select example"
+              aria-label="Default select example"
               value={category}
               onChange={(ev) => setCategory(ev.target.value)}
             >
-              <option value="hide">Select a Category</option>
+              <option value="">Select a Category</option>
               <option value="Graphic design">Graphic design</option>
               <option value="UX Design">UX Design</option>
               <option value="Web Design">Web Design</option>

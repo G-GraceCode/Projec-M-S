@@ -81,7 +81,7 @@ const Setting = () => {
               bio: user.bio,
               linkedin: user.linkedin,
               behance: user.behance,
-              folioLink: user.folioLink
+              folioLink: user.folioLink,
             });
           });
         }
@@ -193,13 +193,13 @@ const Setting = () => {
 
           <Form.Group className="my-2" controlId="profession">
             <select
-              id="category"
-              class="form-select"
-              aria-label="Disabled select example"
+              className="form-select"
+              aria-label="Default select example"
               value={profession}
+              name="profession"
               onChange={handleChange}
             >
-              <option selected>Select a Category</option>
+              <option value="">Select a Category</option>
               <option value="Graphic design">Graphic design</option>
               <option value="UX Design">UX Design</option>
               <option value="Web Design">Web Design</option>
