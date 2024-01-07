@@ -72,6 +72,7 @@ const Nav = styled.nav`
   margin-bottom: 1.5rem;
   border-bottom: 2px double var(--natural-white);
   position: sticky;
+  top: 0%;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.06),
