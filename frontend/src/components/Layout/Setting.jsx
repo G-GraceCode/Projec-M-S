@@ -81,6 +81,7 @@ const Setting = () => {
               bio: user.bio,
               linkedin: user.linkedin,
               behance: user.behance,
+              folioLink: user.folioLink
             });
           });
         }
@@ -204,6 +205,9 @@ const Setting = () => {
               <option value="Web Design">Web Design</option>
               <option value="Web development">Web development</option>
               <option value="App development">App development</option>
+              <option value="Full Stack Developement">
+                Full Stack development
+              </option>
               <option value="Web3">Web3</option>
             </select>
           </Form.Group>

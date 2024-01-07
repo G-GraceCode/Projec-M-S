@@ -353,21 +353,25 @@ const displayDashboard = asyncHandler(async (req, res) => {
     const { profession } = user;
     console.log(user);
 
-    const projects = await Project.find({})
-      .populate("author", ["username", "profile"])
-      .sort({ createdAt: -1, comProject: true })
-      .limit(2);
+    const projects = await Project.find({}).populate("author", [
+      "username",
+      "profile",
+    ]);
 
+    console.log("project", projects);
     const projectByprof = await Project.findOne({ profession })
       .populate("author", ["username", "profile"])
       .sort({ createdAt: -1 })
       .limit(5);
+    console.log("projectByprof", projectByprof);
 
-    res.status(200).json({
+    const projectResult = {
       success: true,
       topRecent: projects,
-      topProjectByProf: projectByprof,
-    });
+      topProjectByPro: projectByprof,
+    };
+
+    res.status(200).json(projectResult);
   } catch (e) {
     res.status(500);
     throw new Error({ message: e.message });
