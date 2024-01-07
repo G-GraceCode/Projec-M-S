@@ -348,13 +348,26 @@ const deleteProject = asyncHandler(async (req, res) => {
 
 const displayDashboard = asyncHandler(async (req, res) => {
   try {
-    // const id = req.user._id;
-    // const User = await User.findById(id);
-    const projects = await Project.find({}).populate("author", [
-      "username",
-      "profile",
-    ]);
-    res.status(200).json(projects);
+    const id = req.user._id;
+    const user = await User.findById(id);
+    const { profession } = user;
+    console.log(user);
+
+    const projects = await Project.find({})
+      .populate("author", ["username", "profile"])
+      .sort({ createdAt: -1, comProject: true })
+      .limit(2);
+
+    const projectByprof = await Project.findOne({ profession })
+      .populate("author", ["username", "profile"])
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    res.status(200).json({
+      success: true,
+      topRecent: projects,
+      topProjectByProf: projectByprof,
+    });
   } catch (e) {
     res.status(500);
     throw new Error({ message: e.message });

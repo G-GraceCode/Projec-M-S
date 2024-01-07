@@ -10,6 +10,28 @@ import poc from "../../assets/pic.svg";
 
 const Dashboard = () => {
   const { userInfo } = userAuth();
+  const [loading, setLoading] = useState(false);
+
+  const dashboardProject = async () => {
+    try {
+      const res = await fetch(`https://trrmmy-5000.csb.app/project`, {
+        method: "Get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      if (res.status === 200) {
+        res.json().then((projects) => {
+          console.log(projects);
+        });
+      }
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    dashboardProject();
+  }, [userInfo._id]);
 
   return (
     <div className="content">
@@ -160,17 +182,16 @@ const HomeSlide = styled.div`
 
 const Recentpost = styled.div`
   margin-bottom: 4rem;
-  @media screen and (max-width: 599px), (max-width: 769px){
-    .cards{
-      .carts{
-       flex-direction: column;
-        .image{
+  @media screen and (max-width: 599px), (max-width: 769px) {
+    .cards {
+      .carts {
+        flex-direction: column;
+        .image {
           height: 40% !important;
         }
         .card-text {
           max-height: 55%;
         }
-       
       }
     }
   }
@@ -192,16 +213,16 @@ const Recentpost = styled.div`
     .carts {
       display: flex;
       flex-wrap: wrap-reveser;
-      border:2px double var(--natural-white);
+      border: 2px double var(--natural-white);
       border-radius: 15px;
       overflow: hidden;
       min-width: 450px;
       height: 350px;
       max-height: 350px;
       box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
-     cursor: pointer;
+      cursor: pointer;
       position: relative;
-      z-index: -1;  
+      z-index: -1;
 
       .card-text {
         display: flex;
@@ -245,10 +266,9 @@ const Recentpost = styled.div`
         min-height: 80%;
         width: 100%;
 
-
         img {
-          margin: .1px;
-        border-radius: 13px;
+          margin: 0.1px;
+          border-radius: 13px;
           width: 100%;
           height: 100%;
           object-fit: cover;
