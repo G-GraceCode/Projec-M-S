@@ -90,7 +90,7 @@ const Dashboard = () => {
                 </div>
                 <div className="Category">
                   <h4>{project.title}...</h4>
-                  <p>{project.summery}...</p>
+                  <p>{project.summary}...</p>
                 </div>
                 <div className="profile">
                   <span>
