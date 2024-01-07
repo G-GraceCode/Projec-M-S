@@ -367,15 +367,12 @@ const displayDashboard = asyncHandler(async (req, res) => {
         (project) => project.category === profession,
       );
 
-      console.log("pro", projects);
       const projectResult = {
         success: true,
         topRecent: projects.splice(0, Number(2)),
         topProjectByPro:
           projectByprof.length !== 0 ? projectByprof : categoryPj,
       };
-
-      console.log("pro", projectResult);
 
       res.status(200).json(projectResult);
     }

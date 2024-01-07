@@ -8,6 +8,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import poc from "../../assets/pic.svg";
+import AnimatedCircle from "../../AnimatedCircle";
 
 const Dashboard = () => {
   const { userInfo } = userAuth();
@@ -51,27 +52,37 @@ const Dashboard = () => {
           <h4 className="text-left text-[18px] text-[var(--natural-white)]">
             Top Recent Pojects
           </h4>
-          <div className="cards">
-            {topRecent.map((project) => (
-              <div className="carts" key={project._id}>
-                <Col className="p-4 card-text">
-                  <h2 className="text-left text-[18px] text-[var(--natural-white)]">
-                    {project.title}
-                  </h2>
-                  <h6>{project.summary}</h6>
-                  <button
-                    className="btn"
-                    onClick={() => navigate("/viewing/" + project._id)}
-                  >
-                    Read More <RiArrowRightSLine />
-                  </button>
-                </Col>
-                <div className="image">
-                  <img src={project.coverImg} />
+          {loading ? (
+            <AnimatedCircle />
+          ) : (
+            <div className="cards">
+              {topRecent.map((project) => (
+                <div className="carts" key={project._id}>
+                  <Col className="p-4 card-text">
+                    <h2 className="text-left text-[18px]">
+                      <Link
+                        to={"/viewing/" + project._id}
+                        className="text-white"
+                      >
+                        {project.title}
+                      </Link>
+                    </h2>
+                    <h6>{project.summary}</h6>
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() => navigate("/viewing/" + project._id)}
+                    >
+                      Read More <RiArrowRightSLine />
+                    </button>
+                  </Col>
+                  <div className="image">
+                    <img src={project.coverImg} />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </Recentpost>
 
         <Mostrecent>
@@ -81,28 +92,44 @@ const Dashboard = () => {
               See more
             </Link>
           </div>
-
-          <div className="cart-list">
-            {categoryProject.map((project) => (
-              <div className="cart" key={project._id}>
-                <div className="image">
-                  <img src={project.coverImg} alt="img" loading="lazy" />
+          {loading ? (
+            <AnimatedCircle />
+          ) : (
+            <div className="cart-list">
+              {categoryProject.map((project) => (
+                <div className="cart" key={project._id}>
+                  <div className="image">
+                    <img src={project.coverImg} alt="img" loading="lazy" />
+                  </div>
+                  <div
+                    className="Category"
+                    onClick={() => navigate("/viewing/" + project._id)}
+                  >
+                    <h4>{project.title}...</h4>
+                    <p>{project.summary}...</p>
+                  </div>
+                  <div className="profile">
+                    <span>
+                      {project.author.profile === "" ? (
+                        <div className="w-100 h-100 bg-success text-uppercase font-weight-medium d-flex align-items-center justify-content-center">
+                          <span>{`${
+                            !project.author.username
+                              ? ""
+                              : project.author.username[0]
+                          }`}</span>
+                        </div>
+                      ) : (
+                        <img src={project.author.profile} />
+                      )}
+                    </span>
+                    <small>
+                      by <Link>{project.author.username}</Link>
+                    </small>
+                  </div>
                 </div>
-                <div className="Category">
-                  <h4>{project.title}...</h4>
-                  <p>{project.summary}...</p>
-                </div>
-                <div className="profile">
-                  <span>
-                    <img src={project.author.profile} />
-                  </span>
-                  <small>
-                    by <Link>{project.author.username}</Link>
-                  </small>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </Mostrecent>
       </HomeSlide>
     </div>
@@ -159,23 +186,22 @@ const Recentpost = styled.div`
       height: 350px;
       max-height: 350px;
       box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
+
       position: relative;
-      z-index: -1;
 
       .card-text {
         display: flex;
         flex-flow: column nowrap;
         height: 100%;
         color: var(--natural-white);
-        cursor: pointer;
-        z-index: 2;
+
         h2 {
           font-size: 20px;
           font-weight: 600;
           letter-spacing: 0.5px;
           word-spacing: 0.6px;
           margin-bottom: 0.8rem;
+          cursor: pointer;
         }
         h6 {
           font-size: 12px;
@@ -193,6 +219,7 @@ const Recentpost = styled.div`
           background-color: var(--natural-bk);
           padding: 0.7rem 1rem;
           text-align: left;
+          cursor: pointer;
         }
       }
 
@@ -200,17 +227,17 @@ const Recentpost = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 1;
         height: 100%;
         min-height: 80%;
+        flex: 1;
         width: 100%;
-
         img {
           margin: 0.1px;
           border-radius: 13px;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center center;
         }
       }
     }
@@ -254,6 +281,7 @@ const Mostrecent = styled.div`
         img {
           width: 100%;
           object-fit: cover;
+          object-position: center center;
         }
       }
       .Category {
