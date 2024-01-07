@@ -99,6 +99,8 @@ const CreateProject = ({ close }) => {
             Project Category
             <select
               id="category"
+              class="form-select"
+              aria-label="Disabled select example"
               value={category}
               onChange={(ev) => setCategory(ev.target.value)}
             >

@@ -92,13 +92,22 @@ const RegisterPage = () => {
         </Form.Group>
         <Form.Group className="my-2" controlId="profession">
           <Form.Label>Profession</Form.Label>
-          <Form.Control
-            type="text"
-            name="profession"
-            placeholder="Enter profession"
+
+          <select
+            id="category"
+            class="form-select"
+            aria-label="Disabled select example"
             value={profession}
             onChange={handleChange}
-          ></Form.Control>
+          >
+            <option selected>Select a Category</option>
+            <option value="Graphic design">Graphic design</option>
+            <option value="UX Design">UX Design</option>
+            <option value="Web Design">Web Design</option>
+            <option value="Web development">Web development</option>
+            <option value="App development">App development</option>
+            <option value="Web3">Web3</option>
+          </select>
         </Form.Group>
         <Form.Group className="my-2" controlId="password">
           <Form.Label>password</Form.Label>

@@ -346,8 +346,24 @@ const deleteProject = asyncHandler(async (req, res) => {
   }
 });
 
+const displayDashboard = asyncHandler(async (req, res) => {
+  try {
+    // const id = req.user._id;
+    // const User = await User.findById(id);
+    const projects = await Project.find({}).populate("author", [
+      "username",
+      "profile",
+    ]);
+    res.status(200).json(projects);
+  } catch (e) {
+    res.status(500);
+    throw new Error({ message: e.message });
+  }
+});
+
 export {
   createProject,
+  displayDashboard,
   getAllProjects,
   getProjectBySearch,
   getUserProjects,

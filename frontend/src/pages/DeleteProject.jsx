@@ -8,8 +8,6 @@ const DeleteProject = ({ close, projectId, deleteById }) => {
   const { userInfo, handleLogout } = userAuth();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-
-  console.log("id", projectId);
   const handleDelete = async (e) => {
     e.preventDefault();
     try {

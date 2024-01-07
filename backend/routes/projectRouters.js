@@ -4,6 +4,7 @@ import {
   getUserProjects,
   getAproject,
   getAllProjects,
+  displayDashboard,
   getProjectBySearch,
   editProject,
   autoCompleteSearch,
@@ -26,6 +27,7 @@ router.get("/projectsearched", getProjectBySearch);
 router.get("/allprojects", getAllProjects);
 router.get("/autosearch", autoCompleteSearch);
 router.get("/:id", getAproject);
+router.route("/").get(protect, displayDashboard);
 router.delete("/deleteproject/:id", deleteProject);
 
 export default router;

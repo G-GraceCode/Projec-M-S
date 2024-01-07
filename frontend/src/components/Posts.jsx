@@ -7,11 +7,16 @@ import { AiFillDelete } from "react-icons/ai";
 import AnimatedCircle from "../AnimatedCircle";
 import post from "../assets/pic.svg";
 import { FaShareFromSquare } from "react-icons/fa6";
+import DeleteProject from "../pages/DeleteProject";
+
 
 const Posts = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [delet, setDelet] = useState("");
+  const [deleteProjectId, setDeleteProjectId]= useState(null);
+ 
 
   const getProjects = async () => {
     try {
@@ -42,7 +47,9 @@ const Posts = () => {
 
   return (
     <Projectlist>
-      <h4 className="my-2 text-left text-[14px]">List of Projects</h4>
+      <h4 className="my-2 text-left text-[14px] text-white">
+        List of Projects
+      </h4>
       <div className="carts">
         {loading
           ? "Loading Content..."
@@ -65,7 +72,8 @@ const Posts = () => {
                       onClick={() => navigate("/editproject/" + project._id)}
                     />
 
-                    <AiFillDelete className="icon-2" deleteById={project._id}/>
+                      
+                    <AiFillDelete className="icon-2" onClick={() => {setDelet("active"), setDeleteProjectId(project._id)}}/>
                   </div>
                   <div className="Detail">
                     <h4>{project.title}</h4>
@@ -73,6 +81,15 @@ const Posts = () => {
                 </Card>
               ))}
       </div>
+      {delet && (
+                  <DeleteProject
+                    key={post._id}
+                    close={() => {
+                      setDelet(""), goBack();
+                    }}
+                    projectId={deleteProjectId}
+                  />
+                )}
     </Projectlist>
   );
 };
@@ -94,7 +111,7 @@ const Projectlist = styled.div`
     margin: 0.85rem;
   }
   h4 {
-    color: var(--natural-white);
+    // color: var(--natural-white);
   }
   .Icons-i {
     display: flex;
@@ -144,7 +161,7 @@ const Card = styled.div`
   min-height: 150px;
   cursor: pointer;
   border: 2px solid transparent;
-  border-radius: var(--border-radius);
+  border-radius: 5px;
   z-index: 1;
   box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.2);
 
@@ -166,10 +183,12 @@ const Card = styled.div`
   .Category {
     position: absolute;
     top: 2%;
-    text-align: center;
+    text-align: left;
     background-color: var(--color-green);
-    padding: 0.4rem;
-    border-radius: var(--border-radius);
+    padding: 0 0.4rem;
+    // border-radius: var(--border-radius);
+    border-radius: 5px;
+
     span {
       color: var(--natural-white);
       font-size: 18px;
@@ -221,6 +240,7 @@ const Card = styled.div`
     transition: border var(--transition);
 
     .Detail {
+      height: 100px;
       bottom: 0;
       transition: bottom var(--transition);
     }
