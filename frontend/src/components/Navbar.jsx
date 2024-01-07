@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { FaSignOutAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { userAuth } from "../ultContext/AuthContext";
@@ -11,6 +11,8 @@ import { FiEdit } from "react-icons/fi";
 const Navbar = () => {
   const { userInfo } = userAuth();
   const { username } = userInfo;
+  const navigate = useNavigate();
+
   // console.log("user", user);
   // assigning location variable
   const location = useLocation();
@@ -35,7 +37,7 @@ const Navbar = () => {
         </Link>
 
         <div className="userprofile">
-          <div className="userimg">
+          <div className="userimg" onClick={() => navigate("/profile")}>
             {userInfo.profile === "" ? (
               <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
                 <span>{`${!username ? "" : username[0]}`}</span>
