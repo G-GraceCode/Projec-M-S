@@ -351,7 +351,7 @@ const displayDashboard = asyncHandler(async (req, res) => {
     const id = req.user._id;
     const user = await User.findById(id);
     const { profession } = user;
-
+    console.log("prof", profession);
     let projects = await Project.find({}).populate("author", [
       "username",
       "profile",
@@ -364,7 +364,7 @@ const displayDashboard = asyncHandler(async (req, res) => {
     const projectResult = {
       success: true,
       topRecent: projects.splice(0, Number(2)),
-      topProjectByPro: !projectByprof ? projectByprof : projects,
+      topProjectByPro: projectByprof.length === 0 ? projects : projectByprof,
     };
 
     console.log("pro", projectResult);
