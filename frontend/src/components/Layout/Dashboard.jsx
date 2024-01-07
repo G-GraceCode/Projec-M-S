@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userAuth } from "../../ultContext/AuthContext";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -11,10 +11,14 @@ import poc from "../../assets/pic.svg";
 
 const Dashboard = () => {
   const { userInfo } = userAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [topRecent, setTopRecent] = useState([]);
+  const [categoryProject, setCategoryProject] = useState([]);
 
   const dashboardProject = async () => {
     try {
+      setLoading(true);
       const res = await fetch(`https://trrmmy-5000.csb.app/project`, {
         method: "Get",
         headers: {
@@ -23,11 +27,16 @@ const Dashboard = () => {
         credentials: "include",
       });
       if (res.status === 200) {
-        res.json().then((projects) => {
-          console.log(projects);
+        res.json().then((project) => {
+          setTopRecent(project.topRecent);
+          setCategoryProject(project.topProjectByPro);
+          console.log(project);
         });
       }
-    } catch (e) {}
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -43,127 +52,56 @@ const Dashboard = () => {
             Top Recent Pojects
           </h4>
           <div className="cards">
-            <div className="carts">
-              <Col className="p-4 card-text">
-                <h2>
-                  How to create public shareable link for private user resources
-                  in MERN application
-                </h2>
-                <h6>
-                  Now, I want to add a feature where the user can share their
-                  created list with anyone through a shareable link just like
-                  how we give access to files on google drive
-                </h6>
-                <button className="btn">
-                  Read More <RiArrowRightSLine />
-                </button>
-              </Col>
-              <div className="image">
-                <img src={poc} />
+            {topRecent.map((project) => (
+              <div className="carts" key={project._id}>
+                <Col className="p-4 card-text">
+                  <h2 className="text-left text-[18px] text-[var(--natural-white)]">
+                    {project.title}
+                  </h2>
+                  <h6>{project.summary}</h6>
+                  <button
+                    className="btn"
+                    onClick={() => navigate("/viewing/" + project._id)}
+                  >
+                    Read More <RiArrowRightSLine />
+                  </button>
+                </Col>
+                <div className="image">
+                  <img src={project.coverImg} />
+                </div>
               </div>
-            </div>
-            <div className="carts">
-              <Col className="p-4 card-text">
-                <h2 className="text-left text-[18px] text-[var(--natural-white)]">
-                  How to create public shareable link for private user resources
-                  in MERN application
-                </h2>
-                <h6>
-                  Now, I want to add a feature where the user can share their
-                  created list with anyone through a shareable link just like
-                  how we give access to files on google drive
-                </h6>
-                <button className="btn">
-                  Read More <RiArrowRightSLine />
-                </button>
-              </Col>
-              <div className="image">
-                <img src={poc} />
-              </div>
-            </div>
+            ))}
           </div>
         </Recentpost>
 
         <Mostrecent>
           <div className="most-title">
-            <h3>Most Projects</h3>
+            <h3>Projects By Category</h3>
             <Link to="/project" className="link">
               See more
             </Link>
           </div>
 
           <div className="cart-list">
-            <div className="cart">
-              <div className="image">
-                <img src={poc} alt="img" loading="lazy" />
+            {categoryProject.map((project) => (
+              <div className="cart" key={project._id}>
+                <div className="image">
+                  <img src={project.coverImg} alt="img" loading="lazy" />
+                </div>
+                <div className="Category">
+                  <h4>{project.title}...</h4>
+                  <p>{project.summery}...</p>
+                </div>
+                <div className="profile">
+                  <span>
+                    <img src={project.author.profile} />
+                  </span>
+                  <small>
+                    by <Link>{project.author.username}</Link>
+                  </small>
+                </div>
               </div>
-              <div className="Category">
-                <h4>
-                  How to create public shareable link for private user resources
-                  in MERN...
-                </h4>
-                <p>
-                  Now, I want to add a feature where the user can share their
-                  created list with anyone through a shareable link just like
-                </p>
-              </div>
-              <div className="profile">
-                <span>
-                  <img src={poc} />
-                </span>
-                <small>
-                  by <Link>Gody</Link>
-                </small>
-              </div>
-            </div>
-
-            <div className="cart">
-              <div className="image">
-                <img src={poc} alt="img" loading="lazy" />
-              </div>
-              <div className="Category">
-                <h4>
-                  How to create public shareable link for private user resources
-                  in MERN...
-                </h4>
-                <p>
-                  Now, I want to add a feature where the user can share their
-                  created list with anyone through a shareable link just like
-                </p>
-              </div>
-              <div className="profile">
-                <span>
-                  <img src={poc} />
-                </span>
-                <small>
-                  by <Link>Gody</Link>
-                </small>
-              </div>
-            </div>
-
-            <div className="cart">
-              <div className="image">
-                <img src={poc} alt="img" loading="lazy" />
-              </div>
-              <div className="Category">
-                <h4>
-                  How to create public shareable link for private user resources
-                  in MERN...
-                </h4>
-                <p>
-                  Now, I want to add a feature where the user can share their
-                  created list with anyone through a shareable link just like
-                </p>
-              </div>
-              <div className="profile">
-                <span>
-                  <img src={poc} />
-                </span>
-                <small>
-                  by <Link>Gody</Link>
-                </small>
-              </div>
-            </div>
+            ))}
           </div>
         </Mostrecent>
       </HomeSlide>

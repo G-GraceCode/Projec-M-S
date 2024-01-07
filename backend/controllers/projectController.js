@@ -351,25 +351,23 @@ const displayDashboard = asyncHandler(async (req, res) => {
     const id = req.user._id;
     const user = await User.findById(id);
     const { profession } = user;
-    console.log(user);
 
-    const projects = await Project.find({}).populate("author", [
+    let projects = await Project.find({}).populate("author", [
       "username",
       "profile",
     ]);
 
-    console.log("project", projects);
-    const projectByprof = await Project.findOne({ profession })
-      .populate("author", ["username", "profile"])
-      .sort({ createdAt: -1 })
-      .limit(5);
-    console.log("projectByprof", projectByprof);
+    let projectByprof = projects.filter(
+      (project) => project.category === profession,
+    );
 
     const projectResult = {
       success: true,
-      topRecent: projects,
-      topProjectByPro: projectByprof,
+      topRecent: projects.splice(0, Number(2)),
+      topProjectByPro: !projectByprof ? projectByprof : projects,
     };
+
+    console.log("pro", projectResult);
 
     res.status(200).json(projectResult);
   } catch (e) {
