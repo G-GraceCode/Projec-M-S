@@ -19,8 +19,8 @@ const Search = ({
 }) => {
   const [autoSearch, setAutoSearch] = useState([]);
   const searchFocus = useRef(null);
+
   const handleFocus = () => {
-    ns;
     searchFocus.current.focus();
   };
   const getProjects = async () => {
@@ -86,26 +86,27 @@ const Search = ({
         </select>
       </Sortby>
       <form onSubmit={(e) => e.preventDefault()} className="searchbar">
-        <IoIosSearch className="search_icon" onClick={handleFocus} />
+        <IoIosSearch className="search_icon" />
         {search && (
           <span className="search_icon_1" onClick={clicktosearch}>
             <IoSend />
           </span>
         )}
-        <input
-          ref={searchFocus}
-          type="text"
-          name="search"
-          className="search"
-          placeholder="Search by Project title or Category"
-          value={search}
-          onChange={seachValue}
-        />
-        {searchFocus ? (
-          search.length > 0 && <AutoCompleteSearch projects={autoSearch} />
-        ) : (
-          <></>
-        )}
+        <label htmlFor="search" onClick={handleFocus}>
+          <input
+            ref={searchFocus}
+            type="text"
+            id="search"
+            name="search"
+            className="search"
+            placeholder="Search by Project title or Category"
+            value={search}
+            onChange={seachValue}
+          />
+        </label>
+        {!searchFocus
+          ? search.length > 0 && <AutoCompleteSearch projects={autoSearch} />
+          : search.length > 0 && <AutoCompleteSearch projects={autoSearch} />}
       </form>
       <Addproject onClick={present}>
         <BsPlusCircleFill className="icon" /> Add Project
