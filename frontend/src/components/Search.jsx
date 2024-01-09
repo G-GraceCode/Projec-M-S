@@ -19,11 +19,10 @@ const Search = ({
 }) => {
   const [autoSearch, setAutoSearch] = useState([]);
   const searchFocus = useRef(null);
-
   const handleFocus = () => {
+    ns;
     searchFocus.current.focus();
   };
-
   const getProjects = async () => {
     try {
       const res = await fetch(
@@ -87,7 +86,7 @@ const Search = ({
         </select>
       </Sortby>
       <form onSubmit={(e) => e.preventDefault()} className="searchbar">
-        <IoIosSearch className="search_icon" />
+        <IoIosSearch className="search_icon" onClick={handleFocus} />
         {search && (
           <span className="search_icon_1" onClick={clicktosearch}>
             <IoSend />
@@ -101,9 +100,12 @@ const Search = ({
           placeholder="Search by Project title or Category"
           value={search}
           onChange={seachValue}
-          onClick={handleFocus}
         />
-        {search.length > 0 && <AutoCompleteSearch projects={autoSearch} />}
+        {searchFocus ? (
+          search.length > 0 && <AutoCompleteSearch projects={autoSearch} />
+        ) : (
+          <></>
+        )}
       </form>
       <Addproject onClick={present}>
         <BsPlusCircleFill className="icon" /> Add Project
@@ -170,13 +172,13 @@ const Searchproject = styled.div`
       outline: 2px solid transparent;
       border-radius: var(--border-radius-2);
     }
-    // input[type="text"]:focus {
-    //   outline: 2px solid var(--color-green);
-    //   outline-offset: 3px;
-    //   width: 430px;
-    //   transition: outline var(--transition);
-    //   transition: width var(--transition);
-    // }
+    input[type="text"]:focus {
+      outline: 2px solid var(--color-green);
+      outline-offset: 3px;
+      width: 430px;
+      transition: outline var(--transition);
+      transition: width var(--transition);
+    }
   }
 `;
 
