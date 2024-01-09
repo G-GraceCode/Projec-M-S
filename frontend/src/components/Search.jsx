@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { IoIosSearch } from "react-icons/io";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -18,6 +18,11 @@ const Search = ({
   clicktosearch,
 }) => {
   const [autoSearch, setAutoSearch] = useState([]);
+  const searchFocus = useRef(null);
+
+  const handleFocus = () => {
+    searchFocus.current.focus();
+  };
 
   const getProjects = async () => {
     try {
@@ -89,12 +94,14 @@ const Search = ({
           </span>
         )}
         <input
+          ref={searchFocus}
           type="text"
           name="search"
           className="search"
           placeholder="Search by Project title or Category"
           value={search}
           onChange={seachValue}
+          onClick={handleFocus}
         />
         {search.length > 0 && <AutoCompleteSearch projects={autoSearch} />}
       </form>
@@ -155,7 +162,7 @@ const Searchproject = styled.div`
       min-width: 250px;
       flex: 1;
       padding: 0.5rem 0.7rem 0.5rem 2.3rem;
-      outline: none;
+      // outline: none;
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.4px;
@@ -163,13 +170,13 @@ const Searchproject = styled.div`
       outline: 2px solid transparent;
       border-radius: var(--border-radius-2);
     }
-    input[type="text"]:focus {
-      outline: 2px solid var(--color-green);
-      outline-offset: 3px;
-      width: 430px;
-      transition: outline var(--transition);
-      transition: width var(--transition);
-    }
+    // input[type="text"]:focus {
+    //   outline: 2px solid var(--color-green);
+    //   outline-offset: 3px;
+    //   width: 430px;
+    //   transition: outline var(--transition);
+    //   transition: width var(--transition);
+    // }
   }
 `;
 
