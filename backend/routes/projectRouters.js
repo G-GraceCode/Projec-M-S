@@ -8,6 +8,7 @@ import {
   getProjectBySearch,
   editProject,
   autoCompleteSearch,
+  uploadPic,
   deleteProject,
 } from "../controllers/projectController.js";
 import { protect } from "../middlewares/authMiddleware.js";
@@ -26,6 +27,7 @@ router.route("/projects").get(protect, getUserProjects);
 router.get("/projectsearched", getProjectBySearch);
 router.get("/allprojects", getAllProjects);
 router.get("/autosearch", autoCompleteSearch);
+router.post("/upload", upLoadMiddleware.single("file"), uploadPic);
 router.get("/:id", getAproject);
 router.route("/").get(protect, displayDashboard);
 router.delete("/deleteproject/:id", deleteProject);

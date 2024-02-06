@@ -6,6 +6,7 @@ import {
   updateUserProfile,
   deletUser,
   logOutUser,
+  uploadPic,
   diffUserprofile,
 } from "../controllers/userController.js";
 import { createProject } from "../controllers/projectController.js";
@@ -24,10 +25,14 @@ const router = express.Router();
 router.post("/auth", authUser);
 router.post("/register", registerUser);
 router.post("/logout", logOutUser);
+
 router
   .route("/profile")
   .put(protect, uploadMiddleware.single("file"), updateUserProfile)
   .get(protect, uploadMiddleware.single("file"), getUserProfile);
+
+router.post("/upload", uploadMiddleware.single("file"), uploadPic);
+
 router.route("/:id").delete(protect, deletUser);
 router.get("/auserprofile/:id", diffUserprofile);
 

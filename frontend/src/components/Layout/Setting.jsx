@@ -9,8 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 // import FormContainer from "../components/FormContainer";
 import { userAuth } from "../../ultContext/AuthContext";
 import DeleteUser from "../../pages/DeleteUser";
-import avatar from "../../assets/addAvatar.png";
 import AnimatedCircle from "../../AnimatedCircle";
+import toast from "react-hot-toast";
 
 const Setting = () => {
   const [userCredentail, setUserCredentail] = useState({
@@ -25,8 +25,8 @@ const Setting = () => {
     behance: "",
   });
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState({});
   const [delet, setDelet] = useState("");
+  const [avater, setAvater] = useState("");
   const { userInfo, setUserInfo } = userAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -105,13 +105,10 @@ const Setting = () => {
     data.set("folioLink", folioLink);
     data.set("linkedin", linkedin);
     data.set("behance", behance);
+    data.set("profile", avater);
 
     if (password) {
       data.set("password", password);
-    }
-
-    if (files) {
-      data.set("file", files);
     }
 
     try {
@@ -139,6 +136,47 @@ const Setting = () => {
     }
   };
 
+  const handleFileChange = async (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      try {
+        const data = new FormData();
+        data.set("file", files[0]);
+
+        const uploadingPromise = new Promise(async (resolve, reject) => {
+          const res = await fetch(
+            "https://trrmmy-5000.csb.app/projec/user/upload",
+            {
+              method: "POST",
+              body: data,
+              credentials: "include",
+            },
+          );
+          if (res.ok) {
+            res.json().then((data) => {
+              setAvater(data.secure_url);
+              // setUserCredentail({
+              //   ...userCredentail,
+              //   profile: data.secure_url
+              // });
+            });
+            resolve();
+          } else {
+            reject();
+          }
+        });
+
+        await toast.promise(uploadingPromise, {
+          loading: "Uploading",
+          success: "Profile Saved",
+          error: "Profile Not Saved",
+        });
+      } catch (e) {
+        toast.error(e);
+      }
+    }
+  };
+
   return (
     <div className="content">
       <Navbar />
@@ -148,24 +186,30 @@ const Setting = () => {
             <div className="img-sec">
               {loading ? (
                 <AnimatedCircle />
-              ) : profile === "" ? (
+              ) : profile || avater ? (
+                <img src={avater ? avater : profile} alt="avater" />
+              ) : (
                 <div className="w-100 h-100 bg-success d-flex align-items-center justify-content-center text-uppercase font-weight-bold">
                   <h3>{username[0]}</h3>
                 </div>
-              ) : (
-                <img src={profile ? profile : avatar} alt="avater" />
               )}
             </div>
 
             <Row className="row">
-              <input
-                type="file"
-                name="file"
-                id="file"
-                onChange={(e) => setFiles(e.target.files[0])}
-              />
-              <label htmlFor="file" className="file-input">
-                Replace Image
+              <label htmlFor="file">
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  className="hidden"
+                  style={{ display: "none" }}
+                  onChange={(e) => handleFileChange(e)}
+                />
+
+                <span id="file" className="file-input">
+                  {" "}
+                  Replace Image
+                </span>
               </label>
             </Row>
           </label>

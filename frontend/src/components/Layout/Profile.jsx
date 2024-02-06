@@ -79,7 +79,7 @@ const Profile = () => {
                 </span>
               </div>
             ) : (
-              <img src={profile ? profile : avatar} alt="avater" />
+              <img src={profile} alt="avater" />
             )}
           </div>
           <Userinfo>

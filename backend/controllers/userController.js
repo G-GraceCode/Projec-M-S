@@ -5,7 +5,7 @@ import Project from "../models/projectModel.js";
 import bcrypt from "bcryptjs";
 import fs from "fs";
 import handleUpload from "../cloudinaryUpload/cloudUpload.js";
-
+import { v2 as cloudinary } from "cloudinary";
 // @des Auth user/set token
 // route POST /projec/users/auth
 // @access public
@@ -147,16 +147,8 @@ const diffUserprofile = asyncHandler(async (req, res) => {
 // route Get /projec/users/profile
 // @access private
 const updateUserProfile = asyncHandler(async (req, res) => {
-  let newPath;
 
   try {
-    if (req.file) {
-      const { originalname, path } = req.file;
-      const part = originalname.split(".");
-      const ext = part[part.length - 1];
-      newPath = `${path}.${ext}`;
-      fs.renameSync(path, newPath);
-    }
 
     const user = await User.findById(req.user._id);
 
@@ -168,12 +160,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.linkedin = req.body.linkedin;
       user.behance = req.body.behance;
       user.folioLink = req.body.folioLink;
-
-      if (req.file) {
-        const userNewImage = await handleUpload(newPath);
-        user.profile =
-          newPath != undefined ? userNewImage.secure_url : user.profile;
-      }
+      user.profile = req.body.profile
 
       if (req.body.password !== "") {
         user.password = req.body.password;
@@ -230,6 +217,25 @@ const deletUser = asyncHandler(async (req, res) => {
   }
 });
 
+const uploadPic = asyncHandler(async (req, res) => {
+  try {
+    if (req.file) {
+      const { originalname, path } = req.file;
+      const part = originalname.split(".");
+      const ext = part[part.length - 1];
+      const newPath = `${path}.${ext}`;
+      fs.renameSync(path, newPath);
+      const userNewImage = await handleUpload(newPath);
+      userNewImage.width = 400;
+      userNewImage.height = 400;
+      const { width, height, secure_url } = userNewImage;
+      return res.status(200).json({ width, height, secure_url });
+    }
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
 export {
   authUser,
   registerUser,
@@ -238,4 +244,5 @@ export {
   deletUser,
   updateUserProfile,
   diffUserprofile,
+  uploadPic,
 };

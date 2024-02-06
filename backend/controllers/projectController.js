@@ -382,8 +382,25 @@ const displayDashboard = asyncHandler(async (req, res) => {
   }
 });
 
+const uploadPic = asyncHandler(async (req, res) => {
+  try {
+    if (req.file) {
+      const { originalname, path } = req.file;
+      const part = originalname.split(".");
+      const ext = part[part.length - 1];
+      const newPath = `${path}.${ext}`;
+      fs.renameSync(path, newPath);
+      const userNewImage = await handleUpload(newPath);
+      const { secure_url } = userNewImage;
+      return res.status(200).json({ width, height, secure_url });
+    }
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 export {
   createProject,
+  uploadPic,
   displayDashboard,
   getAllProjects,
   getProjectBySearch,

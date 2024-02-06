@@ -6,6 +6,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import Editor from "../components/Editor";
 import { useSnackbar } from "notistack";
 import AnimatedCircle from "../AnimatedCircle";
+import toast from "react-hot-toast";
 
 const CreateProject = ({ close }) => {
   const [title, setTitle] = useState("");
@@ -16,7 +17,7 @@ const CreateProject = ({ close }) => {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [url, setUrl] = useState("");
-  const [files, setFiles] = useState("");
+  const [projectImage, setProjectImage] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const CreateProject = ({ close }) => {
     data.set("toDate", toDate);
     data.set("fromDate", fromDate);
     data.set("projectUrl", url);
-    data.set("file", files);
+    data.set("coverImg", projectImage);
 
     try {
       const res = await fetch("https://trrmmy-5000.csb.app/project/create", {
@@ -70,6 +71,43 @@ const CreateProject = ({ close }) => {
       console.log("message", e);
     } finally {
       close();
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const files = e.target.files;
+    if (files.length > 0) {
+      try {
+        const data = new FormData();
+        data.set("file", files[0]);
+
+        const uploadingPromise = new Promise(async (resolve, reject) => {
+          const res = await fetch(
+            "https://trrmmy-5000.csb.app/projec/user/upload",
+            {
+              method: "POST",
+              body: data,
+              credentials: "include",
+            },
+          );
+          if (res.ok) {
+            res.json().then((data) => {
+              setProjectImage(data.secure_url);
+            });
+            resolve();
+          } else {
+            reject();
+          }
+        });
+
+        await toast.promise(uploadingPromise, {
+          loading: "Uploading",
+          success: "Image Saved",
+          error: "Image Not Saved",
+        });
+      } catch (e) {
+        toast.error(e);
+      }
     }
   };
 
@@ -129,12 +167,15 @@ const CreateProject = ({ close }) => {
             />
           </label>
 
-          <label htmlFor="file">
+          <label htmlFor="file" style={{ border: "1px solid gray" }}>
             Cover Image
             <input
               type="file"
-              onChange={(ev) => setFiles(ev.target.files[0])}
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e)}
             />
+            <span>Select Project Image</span>
+            {projectImage && <img src={projectImage} alt="img" />}
           </label>
 
           <label htmlFor="url">

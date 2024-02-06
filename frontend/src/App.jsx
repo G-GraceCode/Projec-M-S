@@ -13,11 +13,13 @@ import ViewProfile from "./pages/ViewProfile";
 // import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./ultContext/AuthContext";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <Router>
       <AuthProvider>
+        <Toaster />
         <Routes>
           <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<LoginPage />} />
