@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
@@ -27,76 +27,76 @@ const Tableview = ({ posts, loading, show, result, goBack }) => {
           projectId={deleteProjectId}
         />
       )}
-    
-    <Tablecontent>
-      {result.length > 0 && (
-        <h5 className="text-white mx-2 my-3 cursor-pointer">
-          <IoIosArrowBack onClick={goBack} /> {`Search Result for: ${result}`}
-        </h5>
-      )}
-      {loading ? (
-        <AnimatedCircle />
-      ) : !posts ? (
-        <h4> No Project Created</h4>
-      ) : (
-        <Table className="w-full border-separate border-spacing-2">
-          <thead>
-            <tr>
-              <th className="border border-slate-600 rounded-md">No</th>
-              <th className="border border-slate-600 rounded-md">Title</th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Category
-              </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                created Date
-              </th>
-              <th className="border border-slate-600 rounded-md">Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map((post, index) => (
-              <tr className="h-8" key={post._id}>
-                <td className="border border-slate-700 rounded-md text-center">
-                  {index + 1}
-                </td>
-                <td
-                  className="border border-slate-700 rounded-md text-left"
-                  onClick={() => navigate("/viewing")}
-                >
-                  {post.title}
-                </td>
-                <td className="border border-slate-700 rounded-md text-left max-md:hidden">
-                  {post.category}
-                </td>
-                <td className="border border-slate-700 rounded-md text-left max-md:hidden">
-                  {new Date(post.createdAt).toDateString()}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center">
-                  {userInfo?._id === post.author._id ? (
-                    <div className="flex justify-center gap-x-4">
-                      <Link to={`/editproject/${post._id}`}>
-                        <FiEdit className="text-2xl text-yellow" />
-                      </Link>
 
-                      <AiFillDelete
-                        className="text-2xl text-red"
-                        onClick={() => {
-                          setDelet("active"), setDeleteProjectId(post._id);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </td>
+      <Tablecontent>
+        {result.length > 0 && (
+          <h5 className="text-white mx-2 my-3 cursor-pointer">
+            <IoIosArrowBack onClick={goBack} /> {`Search Result for: ${result}`}
+          </h5>
+        )}
+        {loading ? (
+          <AnimatedCircle />
+        ) : !posts ? (
+          <h4> No Project Created</h4>
+        ) : (
+          <Table className="w-full border-separate border-spacing-2">
+            <thead>
+              <tr>
+                <th className="border border-slate-600 rounded-md">No</th>
+                <th className="border border-slate-600 rounded-md">Title</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">
+                  Category
+                </th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">
+                  created Date
+                </th>
+                <th className="border border-slate-600 rounded-md">
+                  Operations
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-    
-    </Tablecontent>
+            </thead>
+            <tbody>
+              {posts.map((post, index) => (
+                <tr className="h-8" key={post._id}>
+                  <td className="border border-slate-700 rounded-md text-center">
+                    {index + 1}
+                  </td>
+                  <td
+                    className="border border-slate-700 rounded-md text-left"
+                    onClick={() => navigate("/viewing")}
+                  >
+                    {post.title}
+                  </td>
+                  <td className="border border-slate-700 rounded-md text-left max-md:hidden">
+                    {post.category}
+                  </td>
+                  <td className="border border-slate-700 rounded-md text-left max-md:hidden">
+                    {new Date(post.createdAt).toDateString()}
+                  </td>
+                  <td className="border border-slate-700 rounded-md text-center">
+                    {userInfo?._id === post.author._id ? (
+                      <div className="flex justify-center gap-x-4">
+                        <Link to={`/editproject/${post._id}`}>
+                          <FiEdit className="text-2xl text-yellow" />
+                        </Link>
 
+                        <AiFillDelete
+                          className="text-2xl text-red"
+                          onClick={() => {
+                            setDelet("active"), setDeleteProjectId(post._id);
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+      </Tablecontent>
     </>
   );
 };
