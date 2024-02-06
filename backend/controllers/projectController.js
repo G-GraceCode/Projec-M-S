@@ -9,14 +9,6 @@ import handleUpload from "../cloudinaryUpload/cloudUpload.js";
 
 const createProject = asyncHandler(async (req, res) => {
   try {
-    // gettting the image and reanaming it parts when it is Uploaded
-    const { originalname, path } = req.file;
-    const part = originalname.split(".");
-    const ext = part[part.length - 1];
-    const newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
-
-    // req for title, content, summary, category
     const {
       title,
       category,
@@ -26,10 +18,9 @@ const createProject = asyncHandler(async (req, res) => {
       fromDate,
       comProject,
       projectUrl,
+      coverImg,
     } = req.body;
     const user = await User.findById(req.user._id);
-    const projectImage = await handleUpload(newPath);
-
     if (user) {
       const data = await Project.create({
         title,
@@ -40,7 +31,7 @@ const createProject = asyncHandler(async (req, res) => {
         fromDate,
         comProject,
         projectUrl,
-        coverImg: projectImage.secure_url,
+        coverImg,
         author: user._id,
       });
       res.status(200).json(data);
@@ -392,7 +383,7 @@ const uploadPic = asyncHandler(async (req, res) => {
       fs.renameSync(path, newPath);
       const userNewImage = await handleUpload(newPath);
       const { secure_url } = userNewImage;
-      return res.status(200).json({ width, height, secure_url });
+      return res.status(200).json({ secure_url });
     }
   } catch (e) {
     res.status(500).send(e.message);

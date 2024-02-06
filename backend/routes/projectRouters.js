@@ -19,9 +19,7 @@ const upLoadMiddleware = multer({
 });
 const router = express.Router();
 
-router
-  .route("/create")
-  .post(protect, upLoadMiddleware.single("file"), createProject);
+router.route("/create").post(protect, createProject);
 router.put("/editproject/:id", upLoadMiddleware.single("file"), editProject);
 router.route("/projects").get(protect, getUserProjects);
 router.get("/projectsearched", getProjectBySearch);

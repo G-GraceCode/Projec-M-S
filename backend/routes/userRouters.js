@@ -28,8 +28,8 @@ router.post("/logout", logOutUser);
 
 router
   .route("/profile")
-  .put(protect, uploadMiddleware.single("file"), updateUserProfile)
-  .get(protect, uploadMiddleware.single("file"), getUserProfile);
+  .put(protect, updateUserProfile)
+  .get(protect, getUserProfile);
 
 router.post("/upload", uploadMiddleware.single("file"), uploadPic);
 

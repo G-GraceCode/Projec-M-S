@@ -83,7 +83,7 @@ const CreateProject = ({ close }) => {
 
         const uploadingPromise = new Promise(async (resolve, reject) => {
           const res = await fetch(
-            "https://trrmmy-5000.csb.app/projec/user/upload",
+            "https://trrmmy-5000.csb.app/project/upload",
             {
               method: "POST",
               body: data,
@@ -167,14 +167,20 @@ const CreateProject = ({ close }) => {
             />
           </label>
 
-          <label htmlFor="file" style={{ border: "1px solid gray" }}>
+          <label
+            htmlFor="file"
+            style={{ border: "1px solid gray", padding: ".2rem .5rem" }}
+          >
             Cover Image
             <input
               type="file"
+              id="file"
               style={{ display: "none" }}
               onChange={(e) => handleFileChange(e)}
             />
-            <span>Select Project Image</span>
+            <span id="file" style={{ cursor: "pointer", padding: ".3rem" }}>
+              Project image
+            </span>
             {projectImage && <img src={projectImage} alt="img" />}
           </label>
 
