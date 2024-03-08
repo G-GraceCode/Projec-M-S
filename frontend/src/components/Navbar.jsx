@@ -38,11 +38,7 @@ const Navbar = () => {
 
         <div className="userprofile">
           <div className="userimg" onClick={() => navigate("/profile")}>
-            {profile === "" ? (
-              <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
-                <span>{`${username[0]}`}</span>
-              </div>
-            ) : (
+            {profile && (
               <img
                 className="img"
                 src={profile}
@@ -50,6 +46,12 @@ const Navbar = () => {
                 loading="lazy"
                 title="Your Avater"
               />
+            )}
+
+            {!profile && (
+              <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
+                <span>{`${username.charAt(0)}`}</span>
+              </div>
             )}
           </div>
           <div className="info">
