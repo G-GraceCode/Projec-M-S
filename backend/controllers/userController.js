@@ -5,7 +5,6 @@ import Project from "../models/projectModel.js";
 import bcrypt from "bcryptjs";
 import fs from "fs";
 import handleUpload from "../cloudinaryUpload/cloudUpload.js";
-import { v2 as cloudinary } from "cloudinary";
 // @des Auth user/set token
 // route POST /projec/users/auth
 // @access public
@@ -147,22 +146,34 @@ const diffUserprofile = asyncHandler(async (req, res) => {
 // route Get /projec/users/profile
 // @access private
 const updateUserProfile = asyncHandler(async (req, res) => {
-
   try {
+    const {
+      username,
+      email,
+      password,
+      profession,
+      profile,
+      bio,
+      linkedin,
+      behance,
+      folioLink,
+    } = req.body || req.params;
 
-    const user = await User.findById(req.user._id);
+    const { _id } = req.user;
+
+    const user = await User.findById({ _id });
 
     if (user) {
-      user.username = req.body.username;
-      user.email = req.body.email;
-      user.profession = req.body.profession;
-      user.bio = req.body.bio;
-      user.linkedin = req.body.linkedin;
-      user.behance = req.body.behance;
-      user.folioLink = req.body.folioLink;
-      user.profile = req.body.profile
+      user.username = username;
+      user.email = email;
+      user.profession = profession;
+      user.bio = bio;
+      user.linkedin = linkedin;
+      user.behance = behance;
+      user.folioLink = folioLink;
+      user.profile = profile;
 
-      if (req.body.password !== "") {
+      if (password !== "") {
         user.password = req.body.password;
       }
 

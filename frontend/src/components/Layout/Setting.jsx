@@ -47,7 +47,7 @@ const Setting = () => {
   };
 
   const handleError = () => {
-    enqueueSnackbar(`${error}`, { variant: "Error" });
+    enqueueSnackbar(`fail to save`, { variant: "Error" });
   };
 
   const handleChange = (e) => {
@@ -97,19 +97,30 @@ const Setting = () => {
 
   const HandleUpdate = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.set("username", username);
-    data.set("email", email);
-    data.set("profession", profession);
-    data.set("bio", bio);
-    data.set("folioLink", folioLink);
-    data.set("linkedin", linkedin);
-    data.set("behance", behance);
-    data.set("profile", avater);
+    // const data = new FormData();
+    // data.set("username", username);
+    // data.set("email", email);
+    // data.set("profession", profession);
+    // data.set("bio", bio);
+    // data.set("folioLink", folioLink);
+    // data.set("linkedin", linkedin);
+    // data.set("behance", behance);
+    // data.set("profile", avater);
 
-    if (password) {
-      data.set("password", password);
-    }
+    // if (password) {
+    //   data.set("password", password);
+    // }
+
+    const data = JSON.stringify({
+      username: username,
+      email: email,
+      profession: profession,
+      bio: bio,
+      folioLink: folioLink,
+      linkedin: linkedin,
+      behance: behance,
+      profile: avater,
+    });
 
     try {
       const res = await fetch(
@@ -118,11 +129,10 @@ const Setting = () => {
           method: "PUT",
           body: data,
           credentials: "include",
-          cors: "no-cors",
         },
       );
       console.log("edit", res);
-      if (res) {
+      if (res.ok) {
         res.json().then((user) => {
           setUserInfo(user);
           handleSuccess();
@@ -132,7 +142,7 @@ const Setting = () => {
         handleError();
       }
     } catch (e) {
-      console.log("bat", e.message);
+      console.log("message", e.message);
     }
   };
 

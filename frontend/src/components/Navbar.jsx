@@ -10,7 +10,7 @@ import { FiEdit } from "react-icons/fi";
 
 const Navbar = () => {
   const { userInfo } = userAuth();
-  const { username } = userInfo;
+  const { username, profile } = userInfo;
   const navigate = useNavigate();
 
   // console.log("user", user);
@@ -38,14 +38,14 @@ const Navbar = () => {
 
         <div className="userprofile">
           <div className="userimg" onClick={() => navigate("/profile")}>
-            {userInfo.profile === "" ? (
+            {profile === "" ? (
               <div className="w-100 h-100 bg-success text-uppercase font-weight-bold d-flex align-items-center justify-content-center">
-                <span>{`${!username ? "" : username[0]}`}</span>
+                <span>{`${username[0]}`}</span>
               </div>
             ) : (
               <img
                 className="img"
-                src={userInfo?.profile}
+                src={profile}
                 alt="user-photo"
                 loading="lazy"
                 title="Your Avater"
